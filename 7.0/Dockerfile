@@ -63,8 +63,8 @@ RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
     composer install && rm -rf ./.git
 
 # Install uploadprogess
-RUN wget -qO- https://s3.amazonaws.com/wodby-releases/uploadprogress/v${UPLOADPROGRESS_VER}/php7-uploadprogress.tar.gz | tar xz -C /tmp/ && \
-    cd /tmp/uploadprogress-${UPLOADPROGRESS_VER} && \
+RUN wget -qO- https://s3.amazonaws.com/wodby-releases/uploadprogress/v${PHP_UPLOADPROGRESS_VERSION}/php7-uploadprogress.tar.gz | tar xz -C /tmp/ && \
+    cd /tmp/uploadprogress-${PHP_UPLOADPROGRESS_VERSION} && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini
