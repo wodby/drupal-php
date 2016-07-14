@@ -15,6 +15,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         git \
         curl \
         tar \
+        mariadb-client \
         php7@testing \
         php7-fpm@testing \
         php7-opcache@testing \
@@ -93,22 +94,23 @@ RUN sed -i \
         -e "s/^mysqlnd.collect_memory_statistics.*/mysqlnd.collect_memory_statistics = On/" \
         /etc/php7/php.ini && \
 
-    echo "error_log = \"/var/log/php7/error.log\"" | tee -a /etc/php7/php.ini && \
+    echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini && \
 
     touch /var/log/php7/error.log && \
     touch /var/log/php7/fpm-error.log && \
     touch /var/log/php7/fpm-slow.log && \
     chown -R 82:82 /var/log/php7
 
+# Create work dir
+RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
+
+COPY index.php /var/www/html/
 RUN rm /etc/php7/conf.d/xdebug.ini
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
 
-# Create work dir
-RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
 WORKDIR /var/www/html
-
 VOLUME /var/www/html
 EXPOSE 9000
 CMD ["php-fpm"]
