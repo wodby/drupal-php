@@ -23,7 +23,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
         imagemagick \
         mariadb-client \
 
-        # Dev packages
+        # Temp packages
         build-base \
         autoconf \
         libtool \
