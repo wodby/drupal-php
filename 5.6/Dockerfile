@@ -68,8 +68,8 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
 
     # Install uploadprogress and imagick
     sed -ie 's/-n//g' /usr/bin/pecl && \
-    echo '\n' | pecl install uploadprogress && \
-    echo '\n' | pecl install imagick && \
+    yes | pecl install uploadprogress && \
+    yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php5/conf.d/imagick.ini && \
     echo 'extension=uploadprogress.so' > /etc/php5/conf.d/uploadprogress.ini && \
     rm -rf /tmp/pear && \
