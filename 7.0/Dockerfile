@@ -1,21 +1,36 @@
 FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
-ENV PHP_UPLOADPROGRESS_VERSION=0.1.0
+# Create user www-data
+RUN addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -S -G www-data www-data
 
+# Install packages
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk add --no-cache \
+
+    apk add --update \
+
+        # Base packages
         openssl \
         ca-certificates \
+        git \
+        curl \
+        wget \
+        perl \
+        pcre \
+        imap \
+        imagemagick \
+        mariadb-client \
+
+        # Dev packages
         build-base \
         autoconf \
         libtool \
+        php7-dev@testing \
         pcre-dev \
-        imagemagick \
-        git \
-        curl \
-        tar \
-        mariadb-client \
+        imagemagick-dev \
+
+        # PHP packages
         php7@testing \
         php7-fpm@testing \
         php7-opcache@testing \
@@ -42,44 +57,48 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-iconv@testing \
         php7-imap@testing \
         php7-soap@testing \
-        php7-dev@testing \
         php7-pear@testing \
         php7-redis@testing \
         php7-mbstring@testing \
         php7-xdebug@testing \
         php7-memcached@testing \
-        php7-exif@testing
+        php7-exif@testing && \
 
-# Create symlinks for backward compatibility
-RUN ln -sf /usr/bin/php7 /usr/bin/php && \
-    ln -sf /usr/sbin/php-fpm7 /usr/bin/php-fpm
+    # Create symlinks for backward compatibility
+    ln -sf /usr/bin/php7 /usr/bin/php && \
+    ln -sf /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer
+    # Install imagick
+    sed -ie 's/-n//g' /usr/bin/pecl && \
+    yes | pecl install imagick && \
+    echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
+    rm -rf /tmp/pear && \
 
-# Install drush
-RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
-    cd /usr/local/src/drush && \
-    ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
-    composer install && rm -rf ./.git
-
-# Install uploadprogess
-RUN wget -qO- https://s3.amazonaws.com/wodby-releases/uploadprogress/v${PHP_UPLOADPROGRESS_VERSION}/php7-uploadprogress.tar.gz | tar xz -C /tmp/ && \
-    cd /tmp/uploadprogress-${PHP_UPLOADPROGRESS_VERSION} && \
+    # Install uploadprogess
+    cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
+    unzip master.zip && \
+    cd uploadprogress-master/ && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
-    echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini
+    echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini && \
+    cd .. && rm -rf ./master.zip ./uploadprogress-master && \
 
-# Cleanup
-RUN apk del --no-cache --purge *-dev build-base autoconf libtool tar git && \
-    rm -rf /usr/include/php7 /usr/lib/php7/build /usr/lib/php7/modules/*.a && \
-    rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+    # Install composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
-# Create user www-data
-RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data www-data
+    # Install drush
+    git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
+    ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
+    ls -la /usr/local/src/drush && \
+    (cd /usr/local/src/drush; composer install) && \
+    rm -rf /usr/local/src/drush/.git && \
 
-# Init php config and files
+    # Cleanup
+    apk del --purge *-dev build-base autoconf libtool && \
+    rm -rf /usr/include/php /usr/lib/php/build && \
+    rm -rf /var/cache/apk/*
+
+# Configure php.ini
 RUN sed -i \
         -e "s/^expose_php.*/expose_php = Off/" \
         -e "s/^;date.timezone.*/date.timezone = UTC/" \
@@ -94,23 +113,18 @@ RUN sed -i \
         -e "s/^mysqlnd.collect_memory_statistics.*/mysqlnd.collect_memory_statistics = On/" \
         /etc/php7/php.ini && \
 
-    echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini && \
+    echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini
 
-    touch /var/log/php7/error.log && \
-    touch /var/log/php7/fpm-error.log && \
-    touch /var/log/php7/fpm-slow.log && \
-    chown -R 82:82 /var/log/php7
-
-# Create work dir
-RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
-
-COPY index.php /var/www/html/
-RUN rm /etc/php7/conf.d/xdebug.ini
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
 
+# Create work dir
+RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
 WORKDIR /var/www/html
+COPY index.php /var/www/html/
 VOLUME /var/www/html
+
 EXPOSE 9000
+
 CMD ["php-fpm"]
