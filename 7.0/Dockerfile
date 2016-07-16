@@ -115,6 +115,7 @@ RUN sed -i \
 
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini
 
+RUN rm /etc/php7/conf.d/xdebug.ini
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
