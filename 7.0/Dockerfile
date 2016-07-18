@@ -123,7 +123,6 @@ COPY php-fpm.conf /etc/php7/
 # Create work dir
 RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
 WORKDIR /var/www/html
-COPY index.php /var/www/html/
 VOLUME /var/www/html
 
 EXPOSE 9000
