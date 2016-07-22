@@ -79,6 +79,9 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
     # Install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
+    # Add composer parallel install plugin
+    composer global require "hirak/prestissimo:^0.3" && \
+
     # Install drush
     git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
     ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
