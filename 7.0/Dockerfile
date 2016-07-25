@@ -67,7 +67,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
 
     # Replace sendmail by ssmtp
     ln -sf /usr/sbin/ssmtp /usr/sbin/sendmail && \
-    echo "www-data:app:mailcatcher:1025" >> /etc/ssmtp/revaliases && \
+    echo "www-data:app:smtp:1025" >> /etc/ssmtp/revaliases && \
 
     # Create symlinks for backward compatibility
     ln -sf /usr/bin/php7 /usr/bin/php && \

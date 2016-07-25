@@ -71,7 +71,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
 
     # Replace sendmail by ssmtp
     ln -sf /usr/sbin/ssmtp /usr/sbin/sendmail && \
-    echo "www-data:app:mailcatcher:1025" >> /etc/ssmtp/revaliases && \
+    echo "www-data:app:smtp:1025" >> /etc/ssmtp/revaliases && \
 
     # Install uploadprogress and imagick
     sed -ie 's/-n//g' /usr/bin/pecl && \
