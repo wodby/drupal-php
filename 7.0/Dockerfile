@@ -21,7 +21,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         imap \
         imagemagick \
         mariadb-client \
-        msmtp \
+        ssmtp \
 
         # Temp packages
         build-base \
