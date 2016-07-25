@@ -22,6 +22,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
         imap \
         imagemagick \
         mariadb-client \
+        msmtp \
 
         # Temp packages
         build-base \
@@ -67,6 +68,10 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
         php5-memcache \
         php5-redis@testing \
         php5-xdebug@testing && \
+
+    # Replace sendmail by ssmtp
+    ln -sf /usr/sbin/ssmtp /usr/sbin/sendmail && \
+    echo "www-data:app:mailcatcher:1025" >> /etc/ssmtp/revaliases && \
 
     # Install uploadprogress and imagick
     sed -ie 's/-n//g' /usr/bin/pecl && \

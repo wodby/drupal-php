@@ -21,6 +21,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         imap \
         imagemagick \
         mariadb-client \
+        msmtp \
 
         # Temp packages
         build-base \
@@ -63,6 +64,10 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-xdebug@testing \
         php7-memcached@testing \
         php7-exif@testing && \
+
+    # Replace sendmail by ssmtp
+    ln -sf /usr/sbin/ssmtp /usr/sbin/sendmail && \
+    echo "www-data:app:mailcatcher:1025" >> /etc/ssmtp/revaliases && \
 
     # Create symlinks for backward compatibility
     ln -sf /usr/bin/php7 /usr/bin/php && \
