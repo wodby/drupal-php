@@ -21,7 +21,6 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         imap \
         imagemagick \
         mariadb-client \
-        ssmtp \
 
         # Temp packages
         build-base \
@@ -64,10 +63,6 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-xdebug@testing \
         php7-memcached@testing \
         php7-exif@testing && \
-
-    # Replace sendmail by ssmtp
-    ln -sf /usr/sbin/ssmtp /usr/sbin/sendmail && \
-    echo "www-data:app:smtp:1025" >> /etc/ssmtp/revaliases && \
 
     # Create symlinks for backward compatibility
     ln -sf /usr/bin/php7 /usr/bin/php && \
@@ -135,4 +130,5 @@ VOLUME /var/www/html
 
 EXPOSE 9000
 
-CMD ["php-fpm"]
+COPY docker-entrypoint.sh /usr/local/bin/
+CMD "docker-entrypoint.sh"
