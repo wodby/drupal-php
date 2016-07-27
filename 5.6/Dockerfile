@@ -53,6 +53,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
         php5-pcntl@edge \
         php5-mysql@edge \
         php5-mysqli@edge \
+        php5-sqlite3@edge \
         php5-bz2@edge \
         php5-pear@edge \
         php5-exif@edge \
@@ -88,6 +89,15 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
     ls -la /usr/local/src/drush && \
     (cd /usr/local/src/drush; composer install) && \
     rm -rf /usr/local/src/drush/.git && \
+
+    # Install drupal-console
+    curl https://drupalconsole.com/installer -L -o drupal.phar && \
+    mv drupal.phar /usr/local/bin/drupal && \
+    chmod +x /usr/local/bin/drupal && \
+    drupal init --override && \
+    mkdir -p /home/www-data/.console && \
+    cp /root/.console/config.yml /home/www-data/.console/ && \
+    chown -R 82:82 /home/www-data && \
 
     # Cleanup
     apk del --purge *-dev build-base autoconf libtool && \

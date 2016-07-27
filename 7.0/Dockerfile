@@ -48,6 +48,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-zlib@testing \
         php7-mcrypt@testing \
         php7-mysqli@testing \
+        php7-sqlite3@testing \
         php7-bz2@testing \
         php7-phar@testing \
         php7-openssl@testing \
@@ -95,6 +96,15 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     ls -la /usr/local/src/drush && \
     (cd /usr/local/src/drush; composer install) && \
     rm -rf /usr/local/src/drush/.git && \
+
+    # Install drupal-console
+    curl https://drupalconsole.com/installer -L -o drupal.phar && \
+    mv drupal.phar /usr/local/bin/drupal && \
+    chmod +x /usr/local/bin/drupal && \
+    drupal init --override && \
+    mkdir -p /home/www-data/.console && \
+    cp /root/.console/config.yml /home/www-data/.console/ && \
+    chown -R 82:82 /home/www-data && \
 
     # Cleanup
     apk del --purge *-dev build-base autoconf libtool && \
