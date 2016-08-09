@@ -133,6 +133,10 @@ COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
 
+# Add default drush aliases
+RUN mkdir -p /etc/drush/site-aliases
+COPY default.aliases.drushrc.php /etc/drush/site-aliases/
+
 # Create work dir
 RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
 WORKDIR /var/www/html
