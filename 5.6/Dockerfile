@@ -66,7 +66,9 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php5-soap \
         php5-memcache \
         php5-redis@testing \
-        php5-xdebug@testing && \
+        php5-xdebug@testing \
+        php5-xsl \
+        && \
 
     # Install uploadprogress and imagick
     sed -ie 's/-n//g' /usr/bin/pecl && \

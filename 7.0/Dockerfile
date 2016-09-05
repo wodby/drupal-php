@@ -63,7 +63,9 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-mbstring@testing \
         php7-xdebug@testing \
         php7-memcached@testing \
-        php7-exif@testing && \
+        php7-exif@testing \
+        php7-xsl@testing \
+        && \
 
     # Create symlinks for backward compatibility
     ln -sf /usr/bin/php7 /usr/bin/php && \
