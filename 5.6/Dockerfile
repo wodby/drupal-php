@@ -7,6 +7,7 @@ RUN addgroup -g 82 -S www-data && \
 
 # Install packages
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+    echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
 
     apk add --update \
 
@@ -66,7 +67,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php5-soap \
         php5-memcache \
         php5-redis@testing \
-        php5-xdebug@testing \
+        php5-xdebug@community \
         php5-xsl \
         && \
 

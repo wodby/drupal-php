@@ -7,6 +7,7 @@ RUN addgroup -g 82 -S www-data && \
 
 # Install packages
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+    echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
 
     apk add --update \
 
@@ -31,40 +32,40 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         imagemagick-dev \
 
         # PHP packages
-        php7@testing \
-        php7-fpm@testing \
-        php7-opcache@testing \
-        php7-xml@testing \
-        php7-ctype@testing \
-        php7-ftp@testing \
-        php7-gd@testing \
-        php7-json@testing \
-        php7-posix@testing \
-        php7-curl@testing \
-        php7-dom@testing \
-        php7-pdo@testing \
-        php7-pdo_mysql@testing \
-        php7-sockets@testing \
-        php7-zlib@testing \
-        php7-mcrypt@testing \
-        php7-mysqli@testing \
-        php7-sqlite3@testing \
-        php7-bz2@testing \
-        php7-phar@testing \
-        php7-openssl@testing \
-        php7-posix@testing \
-        php7-zip@testing \
-        php7-calendar@testing \
-        php7-iconv@testing \
-        php7-imap@testing \
-        php7-soap@testing \
-        php7-pear@testing \
+        php7@community \
+        php7-fpm@community \
+        php7-opcache@community \
+        php7-session@community \
+        php7-xml@community \
+        php7-ctype@community \
+        php7-ftp@community \
+        php7-gd@community \
+        php7-json@community \
+        php7-posix@community \
+        php7-curl@community \
+        php7-dom@community \
+        php7-pdo@community \
+        php7-pdo_mysql@community \
+        php7-sockets@community \
+        php7-zlib@community \
+        php7-mcrypt@community \
+        php7-mysqli@community \
+        php7-bz2@community \
+        php7-phar@community \
+        php7-openssl@community \
+        php7-posix@community \
+        php7-zip@community \
+        php7-calendar@community \
+        php7-iconv@community \
+        php7-imap@community \
+        php7-soap@community \
+        php7-dev@community \
+        php7-pear@community \
         php7-redis@testing \
-        php7-mbstring@testing \
+        php7-mbstring@community \
         php7-xdebug@testing \
-        php7-memcached@testing \
-        php7-exif@testing \
-        php7-xsl@testing \
+        php7-exif@community \
+        php7-xsl@community \
         && \
 
     # Create symlinks for backward compatibility
