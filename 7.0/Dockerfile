@@ -94,7 +94,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     composer global require "hirak/prestissimo:^0.3" && \
 
     # Install drush
-    git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && \
+    git clone -b 8.x https://github.com/drush-ops/drush.git /usr/local/src/drush && \
     ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
     ls -la /usr/local/src/drush && \
     (cd /usr/local/src/drush; composer install) && \
