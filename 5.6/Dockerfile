@@ -69,6 +69,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php5-redis@testing \
         php5-xdebug@community \
         php5-xsl \
+        php5-ldap \
         && \
 
     # Install uploadprogress and imagick

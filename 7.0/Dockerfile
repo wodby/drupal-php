@@ -66,6 +66,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-xdebug@testing \
         php7-exif@community \
         php7-xsl@community \
+        php7-ldap@community \
         && \
 
     # Create symlinks for backward compatibility
