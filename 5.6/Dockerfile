@@ -80,7 +80,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositorie
     rm /etc/php5/conf.d/xdebug.ini && \
 
     # Install composer
-    curl - /usr/local/bin/composer https://getcomposer.org/download/1.2.1/composer.phar && \
+    curl -o /usr/local/bin/composer https://getcomposer.org/download/1.2.1/composer.phar && \
     chmod +x /usr/local/bin/composer && \
 
     # Install drush
