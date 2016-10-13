@@ -2,12 +2,12 @@ FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
-RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositories && \
-    echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
+RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/v3.4/community' >> /etc/apk/repositories && \
     echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
-        libressl \
+        openssl \
         ca-certificates \
         git \
         curl \
@@ -80,11 +80,10 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositorie
     rm /etc/php5/conf.d/xdebug.ini && \
 
     # Install composer
-    curl -o /usr/local/bin/composer https://getcomposer.org/download/1.2.1/composer.phar && \
-    chmod +x /usr/local/bin/composer && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Install drush
-    curl -o /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && \
+    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
     chmod +x /usr/local/bin/drush && \
 
     # Cleanup
