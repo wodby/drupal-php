@@ -131,10 +131,10 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -G www-data www-data && \
-	echo '[ -f $HOME/.profile ] && . $HOME/.profile' > /etc/profile.d/profrc.sh
+	echo '[ -f $HOME/.profile ] && . $HOME/.profile' > /etc/profile.d/profrc.sh && \
+	chmod +x /etc/profile.d/profrc.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY www-data.profile /etc/profile.d/www-data
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
