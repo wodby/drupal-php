@@ -2,8 +2,9 @@ FROM alpine:edge
 MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
-RUN echo '@testing http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
-    echo '@community http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
+RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
         libressl \
@@ -21,47 +22,47 @@ RUN echo '@testing http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk
         build-base \
         autoconf \
         libtool \
-        php7-dev@community \
+        php7-dev \
         pcre-dev \
         imagemagick-dev \
 
         # PHP packages
-        php7@community \
-        php7-fpm@community \
-        php7-opcache@community \
-        php7-session@community \
-        php7-xml@community \
-        php7-ctype@community \
-        php7-ftp@community \
-        php7-gd@community \
-        php7-json@community \
-        php7-posix@community \
-        php7-curl@community \
-        php7-dom@community \
-        php7-pdo@community \
-        php7-pdo_mysql@community \
-        php7-sockets@community \
-        php7-zlib@community \
-        php7-mcrypt@community \
-        php7-mysqli@community \
-        php7-bz2@community \
-        php7-phar@community \
-        php7-openssl@community \
-        php7-posix@community \
-        php7-zip@community \
-        php7-calendar@community \
-        php7-iconv@community \
-        php7-imap@community \
-        php7-soap@community \
-        php7-dev@community \
-        php7-pear@community \
-        php7-redis@testing \
-        php7-mbstring@community \
-        php7-xdebug@testing \
-        php7-exif@community \
-        php7-xsl@community \
-        php7-ldap@community \
-        php7-bcmath@community \
+        php7 \
+        php7-fpm \
+        php7-opcache \
+        php7-session \
+        php7-xml \
+        php7-ctype \
+        php7-ftp \
+        php7-gd \
+        php7-json \
+        php7-posix \
+        php7-curl \
+        php7-dom \
+        php7-pdo \
+        php7-pdo_mysql \
+        php7-sockets \
+        php7-zlib \
+        php7-mcrypt \
+        php7-mysqli \
+        php7-bz2 \
+        php7-phar \
+        php7-openssl \
+        php7-posix \
+        php7-zip \
+        php7-calendar \
+        php7-iconv \
+        php7-imap \
+        php7-soap \
+        php7-dev \
+        php7-pear \
+        php7-redis \
+        php7-mbstring \
+        php7-xdebug \
+        php7-exif \
+        php7-xsl \
+        php7-ldap \
+        php7-bcmath \
         && \
 
     # Create symlinks for backward compatibility
