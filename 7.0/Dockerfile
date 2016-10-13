@@ -82,6 +82,9 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini && \
     cd .. && rm -rf ./master.zip ./uploadprogress-master && \
 
+    # Disable Xdebug
+    rm /etc/php7/conf.d/xdebug.ini && \
+
     # Install composer
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
@@ -121,7 +124,6 @@ RUN sed -i \
 
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini
 
-RUN rm /etc/php7/conf.d/xdebug.ini
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
@@ -150,4 +152,4 @@ RUN composer global require hirak/prestissimo:^0.3 && \
     composer global require drupal/console --optimize-autoloader && \
     rm -rf ~/.composer/.cache
 
-CMD "docker-entrypoint.sh"
+CMD docker-entrypoint.sh
