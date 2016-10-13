@@ -4,6 +4,9 @@ MAINTAINER Wodby <admin@wodby.com>
 # Install packages
 RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories && \
     echo 'http://alpine.gliderlabs.com/alpine/v3.4/community' >> /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
         openssl \
@@ -65,18 +68,17 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         php5-xsl \
         php5-ldap \
         php5-bcmath \
-        && \
 
     # Install uploadprogress and imagick
-    sed -ie 's/-n//g' /usr/bin/pecl && \
+RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install uploadprogress && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php5/conf.d/imagick.ini && \
     echo 'extension=uploadprogress.so' > /etc/php5/conf.d/uploadprogress.ini && \
-    rm -rf /tmp/pear && \
+    rm -rf /tmp/pear
 
     # Disable Xdebug
-    rm /etc/php5/conf.d/xdebug.ini && \
+RUN rm /etc/php5/conf.d/xdebug.ini && \
 
     # Install composer
     curl -sS https://getcomposer.org/installer | php5 -- --install-dir=/usr/local/bin --filename=composer && \
