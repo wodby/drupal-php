@@ -147,6 +147,8 @@ EXPOSE 9000
 USER www-data
 
 RUN chown www-data:www-data /etc/profile.d/www-data && \
+    echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
+    . ~/profile && \
 
     # Install parallel plugin
     composer global require hirak/prestissimo:^0.3 && \
