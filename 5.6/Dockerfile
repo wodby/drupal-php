@@ -65,26 +65,26 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositorie
         php5-xdebug \
         php5-xsl \
         php5-ldap \
-        php5-bcmath
+        php5-bcmath \
+        && \
 
     # Install uploadprogress and imagick
-RUN sed -ie 's/-n//g' /usr/bin/pecl && \
+    sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install uploadprogress && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php5/conf.d/imagick.ini && \
     echo 'extension=uploadprogress.so' > /etc/php5/conf.d/uploadprogress.ini && \
-    rm -rf /tmp/pear
+    rm -rf /tmp/pear && \
 
     # Disable Xdebug
-RUN rm /etc/php5/conf.d/xdebug.ini && \
+    rm /etc/php5/conf.d/xdebug.ini && \
 
     # Install composer
-    wget https://getcomposer.org/download/1.2.1/composer.phar && \
-    mv composer.phar /usr/local/bin/composer && \
+    curl - /usr/local/bin/composer https://getcomposer.org/download/1.2.1/composer.phar && \
     chmod +x /usr/local/bin/composer && \
 
     # Install drush
-    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
+    curl -o /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && \
     chmod +x /usr/local/bin/drush && \
 
     # Cleanup

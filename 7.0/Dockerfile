@@ -90,7 +90,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Install drush
-    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
+    curl -o /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && \
     chmod +x /usr/local/bin/drush && \
 
     # Cleanup
