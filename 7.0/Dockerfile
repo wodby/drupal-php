@@ -129,17 +129,17 @@ COPY php-fpm.conf /etc/php7/
 RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
-# Create work dir
-RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www
-WORKDIR /var/www/html
-VOLUME /var/www/html
-
-EXPOSE 9000
-COPY docker-entrypoint.sh /usr/local/bin/
-
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -G www-data www-data
+
+# Create work dir
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www
+
+WORKDIR /var/www/html
+VOLUME /var/www/html
+EXPOSE 9000
+COPY docker-entrypoint.sh /usr/local/bin/
 
 USER www-data
 
