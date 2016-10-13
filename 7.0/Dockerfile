@@ -143,8 +143,8 @@ COPY docker-entrypoint.sh /usr/local/bin/
 
 USER www-data
 
-RUN # Add composer parallel install plugin
-    composer global require hirak/prestissimo:^0.3 && \
+    # Add composer parallel install plugin
+RUN composer global require hirak/prestissimo:^0.3 && \
     # Install drupal-console
     composer require drupal/console --optimize-autoloader && \
     rm -rf ~/.composer/.cache
