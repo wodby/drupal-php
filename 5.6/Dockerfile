@@ -130,7 +130,7 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -G www-data www-data
+    adduser -u 82 -D -S -s /bin/ash -G www-data www-data
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
@@ -144,7 +144,7 @@ EXPOSE 9000
 
 USER www-data
 
-RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.shrc && . ~/.shrc && \
+RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.profile
 
     # Install parallel plugin
     composer global require hirak/prestissimo:^0.3 && \
@@ -156,4 +156,5 @@ RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.shrc && . ~/.shrc
     # Cleanup
     rm -rf ~/.composer/.cache
 
+ENTRYPOINT ["/bin/sh", "-lc"]
 CMD docker-entrypoint.sh
