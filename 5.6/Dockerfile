@@ -130,15 +130,15 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -G www-data www-data
+	adduser -u 82 -D -G www-data www-data && \
+	echo '[ -f $HOME/.profile ] && . $HOME/.profile' > /etc/profile.d/profrc
 
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY www-data.profile /etc/profile.d/www-data
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www && \
-    chown www-data:www-data /etc/profile.d/www-data
+    chown -R www-data:www-data /var/www
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
@@ -146,8 +146,7 @@ EXPOSE 9000
 
 USER www-data
 
-RUN chown www-data:www-data /etc/profile.d/www-data && \
-    echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
+RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
     . ~/.profile && \
 
     # Install parallel plugin
