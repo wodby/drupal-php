@@ -150,7 +150,14 @@ USER www-data
 
 # Install tools for www-data user
 RUN composer global require hirak/prestissimo:^0.3 && \
+
+    # Install Drupal Console
     composer global require drupal/console --optimize-autoloader && \
+    echo 'PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
+    . ~/.profile && \
+    drupal init --override && \
+
+    # Cleanup
     rm -rf ~/.composer/.cache
 
 CMD docker-entrypoint.sh
