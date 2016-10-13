@@ -64,7 +64,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-bcmath@community
 
     # Create symlinks for backward compatibility
-RUN ln -sf /usr/bin/php7 /usr/bin/php && \
+    ln -sf /usr/bin/php7 /usr/bin/php && \
     ln -sf /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
 
     # Install imagick
@@ -101,7 +101,7 @@ RUN ln -sf /usr/bin/php7 /usr/bin/php && \
         /usr/lib/php/build \
         /var/cache/apk/* \
         /tmp/* \
-        /root/*
+        /root/.composer
 
 # Configure php.ini
 RUN sed -i \
@@ -146,7 +146,7 @@ USER www-data
     # Add composer parallel install plugin
 RUN composer global require hirak/prestissimo:^0.3 && \
     # Install drupal-console
-    composer require drupal/console --optimize-autoloader && \
+    composer global require drupal/console --optimize-autoloader && \
     rm -rf ~/.composer/.cache
 
 CMD "docker-entrypoint.sh"
