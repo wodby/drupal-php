@@ -153,7 +153,7 @@ RUN composer global require hirak/prestissimo:^0.3 && \
 
     # Install Drupal Console
     composer global require drupal/console --optimize-autoloader && \
-    echo 'PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
+    echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
     . ~/.profile && \
     drupal init --override && \
 
