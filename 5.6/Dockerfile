@@ -1,18 +1,13 @@
-FROM alpine:3.4
+FROM alpine:edge
 MAINTAINER Wodby <admin@wodby.com>
 
-# Create user www-data
-RUN addgroup -g 82 -S www-data && \
-    adduser -u 82 -D -S -G www-data www-data
-
 # Install packages
-RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
+RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
-
-        # Base packages
-        openssl \
+        libressl \
         ca-certificates \
         git \
         curl \
@@ -67,7 +62,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php5-soap \
         php5-memcache \
         php5-redis@testing \
-        php5-xdebug@community \
+        php5-xdebug \
         php5-xsl \
         php5-ldap \
         php5-bcmath \
@@ -81,32 +76,30 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     echo 'extension=uploadprogress.so' > /etc/php5/conf.d/uploadprogress.ini && \
     rm -rf /tmp/pear && \
 
-    # Install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    # Disable Xdebug
+    rm /etc/php5/conf.d/xdebug.ini && \
 
-    # Add composer parallel install plugin
-    composer global require "hirak/prestissimo:^0.3" && \
+    # Install composer
+    curl -sS https://getcomposer.org/installer | php5 -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Install drush
-    git clone -b 7.x https://github.com/drush-ops/drush.git /usr/local/src/drush && \
-    ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
-    ls -la /usr/local/src/drush && \
-    (cd /usr/local/src/drush; composer install) && \
-    rm -rf /usr/local/src/drush/.git && \
-
-    # Install drupal-console
-    curl https://drupalconsole.com/installer -L -o drupal.phar && \
-    mv drupal.phar /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal && \
-    drupal init --override && \
-    mkdir -p /home/www-data/.console && \
-    cp /root/.console/config.yml /home/www-data/.console/ && \
-    chown -R 82:82 /home/www-data && \
+    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
+    chmod +x /usr/local/bin/drush && \
 
     # Cleanup
-    apk del --purge *-dev build-base autoconf libtool && \
-    rm -rf /usr/include/php /usr/lib/php/build && \
-    rm -rf /var/cache/apk/*
+    apk del --purge \
+        *-dev \
+        build-base \
+        autoconf \
+        libtool \
+        && \
+
+    rm -rf \
+        /usr/include/php \
+        /usr/lib/php/build \
+        /var/cache/apk/* \
+        /tmp/* \
+        /root/.composer
 
 # Configure php.ini
 RUN sed -i \
@@ -134,12 +127,24 @@ COPY php-fpm.conf /etc/php5/
 RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
+# Create user www-data
+RUN addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -G www-data www-data
+
 # Create work dir
-RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
+RUN mkdir -p /var/www/html && \
+    chown -R www-data:www-data /var/www
+
 WORKDIR /var/www/html
 VOLUME /var/www/html
-
 EXPOSE 9000
-
 COPY docker-entrypoint.sh /usr/local/bin/
-CMD "docker-entrypoint.sh"
+
+USER www-data
+
+# Install tools for www-data user
+RUN composer global require hirak/prestissimo:^0.3 && \
+    composer global require drupal/console --optimize-autoloader && \
+    rm -rf ~/.composer/.cache
+
+CMD docker-entrypoint.sh

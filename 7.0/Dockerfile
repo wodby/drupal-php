@@ -138,7 +138,8 @@ RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -G www-data www-data
 
 # Create work dir
-RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www
+RUN mkdir -p /var/www/html && \
+    chown -R www-data:www-data /var/www
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
