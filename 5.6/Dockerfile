@@ -61,7 +61,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php5-imap \
         php5-soap \
         php5-memcache \
-        php5-redis@testing \
+        php5-redis \
         php5-xdebug \
         php5-xsl \
         php5-ldap \
