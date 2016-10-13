@@ -2,14 +2,12 @@ FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
-RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories && \
-    echo 'http://alpine.gliderlabs.com/alpine/v3.4/community' >> /etc/apk/repositories && \
-    echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositories && \
+RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' >> /etc/apk/repositories && \
     echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
     echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
-        openssl \
+        libressl \
         ca-certificates \
         git \
         curl \
@@ -67,7 +65,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         php5-xdebug \
         php5-xsl \
         php5-ldap \
-        php5-bcmath \
+        php5-bcmath
 
     # Install uploadprogress and imagick
 RUN sed -ie 's/-n//g' /usr/bin/pecl && \
@@ -81,7 +79,9 @@ RUN sed -ie 's/-n//g' /usr/bin/pecl && \
 RUN rm /etc/php5/conf.d/xdebug.ini && \
 
     # Install composer
-    curl -sS https://getcomposer.org/installer | php5 -- --install-dir=/usr/local/bin --filename=composer && \
+    wget https://getcomposer.org/download/1.2.1/composer.phar && \
+    mv composer.phar /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/composer && \
 
     # Install drush
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
