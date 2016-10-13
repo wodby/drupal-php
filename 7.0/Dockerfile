@@ -148,13 +148,15 @@ COPY docker-entrypoint.sh /usr/local/bin/
 
 USER www-data
 
-# Install tools for www-data user
-RUN composer global require hirak/prestissimo:^0.3 && \
+COPY www-data.profile /etc/profile.d/www-data
+
+RUN chown www-data:www-data /etc/profile.d/www-data && \
+
+    # Install parallel plugin
+    composer global require hirak/prestissimo:^0.3 && \
 
     # Install Drupal Console
     composer global require drupal/console --optimize-autoloader && \
-    echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && \
-    . ~/.profile && \
     drupal init --override && \
 
     # Cleanup
