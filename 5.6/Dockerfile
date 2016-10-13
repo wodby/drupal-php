@@ -132,18 +132,19 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -G www-data www-data
 
+COPY docker-entrypoint.sh /usr/local/bin/
+COPY www-data.profile /etc/profile.d/www-data
+
 # Create work dir
 RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www
+    chown -R www-data:www-data /var/www && \
+    chown www-data:www-data /etc/profile.d/www-data
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
-COPY docker-entrypoint.sh /usr/local/bin/
 
 USER www-data
-
-COPY www-data.profile /etc/profile.d/www-data
 
 RUN chown www-data:www-data /etc/profile.d/www-data && \
 
