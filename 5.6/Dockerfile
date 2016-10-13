@@ -2,9 +2,8 @@ FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
-RUN echo 'http://alpine.gliderlabs.com/alpine/3.4/main' > /etc/apk/repositories && \
-    echo 'http://alpine.gliderlabs.com/alpine/3.4/community' >> /etc/apk/repositories && \
-    echo 'http://alpine.gliderlabs.com/alpine/3.4/testing' >> /etc/apk/repositories && \
+RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories && \
+    echo 'http://alpine.gliderlabs.com/alpine/v3.4/community' >> /etc/apk/repositories && \
 
     apk add --update \
         libressl \
