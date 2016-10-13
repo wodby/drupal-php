@@ -144,7 +144,7 @@ EXPOSE 9000
 
 USER www-data
 
-RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.profile
+RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.profile && \
 
     # Install parallel plugin
     composer global require hirak/prestissimo:^0.3 && \
