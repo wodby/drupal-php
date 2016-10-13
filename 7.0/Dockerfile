@@ -61,11 +61,10 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-exif@community \
         php7-xsl@community \
         php7-ldap@community \
-        php7-bcmath@community \
-        && \
+        php7-bcmath@community
 
     # Create symlinks for backward compatibility
-    ln -sf /usr/bin/php7 /usr/bin/php && \
+RUN ln -sf /usr/bin/php7 /usr/bin/php && \
     ln -sf /usr/sbin/php-fpm7 /usr/bin/php-fpm && \
 
     # Install imagick
@@ -102,7 +101,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         /usr/lib/php/build \
         /var/cache/apk/* \
         /tmp/* \
-        /root/.*
+        /root/*
 
 # Configure php.ini
 RUN sed -i \
