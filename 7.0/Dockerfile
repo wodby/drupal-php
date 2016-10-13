@@ -2,8 +2,8 @@ FROM alpine:edge
 MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
-RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
+RUN echo '@testing http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
+    echo '@community http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories && \
 
     apk add --update \
         libressl \
@@ -146,9 +146,8 @@ COPY docker-entrypoint.sh /usr/local/bin/
 
 USER www-data
 
-    # Add composer parallel install plugin
+# Install tools for www-data user
 RUN composer global require hirak/prestissimo:^0.3 && \
-    # Install drupal-console
     composer global require drupal/console --optimize-autoloader && \
     rm -rf ~/.composer/.cache
 
