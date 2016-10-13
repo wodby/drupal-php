@@ -1,18 +1,12 @@
-FROM alpine:3.4
+FROM alpine:edge
 MAINTAINER Wodby <admin@wodby.com>
-
-# Create user www-data
-RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data www-data
 
 # Install packages
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
 
     apk add --update \
-
-        # Base packages
-        openssl \
+        libressl \
         ca-certificates \
         git \
         curl \
@@ -27,7 +21,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         build-base \
         autoconf \
         libtool \
-        php7-dev@testing \
+        php7-dev@community \
         pcre-dev \
         imagemagick-dev \
 
@@ -78,7 +72,6 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
-    rm -rf /tmp/pear && \
 
     # Install uploadprogess
     cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
@@ -90,31 +83,26 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     cd .. && rm -rf ./master.zip ./uploadprogress-master && \
 
     # Install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-
-    # Add composer parallel install plugin
-    composer global require "hirak/prestissimo:^0.3" && \
+    curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Install drush
-    git clone -b 8.x https://github.com/drush-ops/drush.git /usr/local/src/drush && \
-    ln -sf /usr/local/src/drush/drush /usr/bin/drush && \
-    ls -la /usr/local/src/drush && \
-    (cd /usr/local/src/drush; composer install) && \
-    rm -rf /usr/local/src/drush/.git && \
-
-    # Install drupal-console
-    curl https://drupalconsole.com/installer -L -o drupal.phar && \
-    mv drupal.phar /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal && \
-    drupal init --override && \
-    mkdir -p /home/www-data/.console && \
-    cp /root/.console/config.yml /home/www-data/.console/ && \
-    chown -R 82:82 /home/www-data && \
+    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
+    chmod +x /usr/local/bin/drush && \
 
     # Cleanup
-    apk del --purge *-dev build-base autoconf libtool && \
-    rm -rf /usr/include/php /usr/lib/php/build && \
-    rm -rf /var/cache/apk/*
+    apk del --purge \
+        *-dev \
+        build-base \
+        autoconf \
+        libtool \
+        && \
+
+    rm -rf \
+        /usr/include/php \
+        /usr/lib/php/build \
+        /var/cache/apk/* \
+        /tmp/* \
+        /root/.*
 
 # Configure php.ini
 RUN sed -i \
@@ -128,7 +116,7 @@ RUN sed -i \
         -e "s/^display_errors.*/display_errors = On/" \
         -e "s/^display_startup_errors.*/display_startup_errors = On/" \
         -e "s/^track_errors.*/track_errors = On/" \
-        -e "s/^mysqlnd.collect_memory_statistics.*/mysqlnd.collect_memory_statistics = On/" \
+        -e "s/^mysqlnd.collect  _memory_statistics.*/mysqlnd.collect_memory_statistics = On/" \
         /etc/php7/php.ini && \
 
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini
@@ -143,11 +131,23 @@ RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create work dir
-RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www
 WORKDIR /var/www/html
 VOLUME /var/www/html
 
 EXPOSE 9000
-
 COPY docker-entrypoint.sh /usr/local/bin/
+
+# Create user www-data
+RUN addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -G www-data www-data
+
+USER www-data
+
+RUN # Add composer parallel install plugin
+    composer global require hirak/prestissimo:^0.3 && \
+    # Install drupal-console
+    composer require drupal/console --optimize-autoloader && \
+    rm -rf ~/.composer/.cache
+
 CMD "docker-entrypoint.sh"
