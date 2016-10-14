@@ -18,8 +18,10 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push wodby/drupal-php;
+      TAG=$TEST_PHP+$TRAVIS_JOB_NUMBER
+      docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      docker tag $DOCKER_PROJECT/$IMAGE_NAME:$TAG $DOCKER_PROJECT/$IMAGE_NAME:latest
+      docker push $DOCKER_PROJECT/$IMAGE_NAME:$TAG
     fi
 
 after_failure:
