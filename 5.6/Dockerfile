@@ -156,5 +156,7 @@ RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.p
     # Cleanup
     rm -rf ~/.composer/.cache
 
+USER rooot
+
 #ENTRYPOINT ["/bin/sh", "-lc"]
 CMD docker-entrypoint.sh

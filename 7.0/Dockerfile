@@ -148,7 +148,6 @@ VOLUME /var/www/html
 EXPOSE 9000
 
 USER www-data
-
 RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.profile && \
 
     # Install parallel plugin
@@ -161,5 +160,6 @@ RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.p
     # Cleanup
     rm -rf ~/.composer/.cache
 
-#ENTRYPOINT ["/bin/sh", "-lc"]
+USER root
+ENTRYPOINT ["/bin/sh", "-lc"]
 CMD docker-entrypoint.sh
