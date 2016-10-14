@@ -18,10 +18,12 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      TAG=$TEST_PHP+$TRAVIS_JOB_NUMBER
-      docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      TAG=$TEST_PHP-$TRAVIS_JOB_NUMBER
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$TAG ./$TEST_PHP
       docker tag $DOCKER_PROJECT/$IMAGE_NAME:$TAG $DOCKER_PROJECT/$IMAGE_NAME:latest
       docker push $DOCKER_PROJECT/$IMAGE_NAME:$TAG
+      docker push $DOCKER_PROJECT/$IMAGE_NAME:latest
     fi
 
 after_failure:
