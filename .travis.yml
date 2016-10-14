@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - TEST_PHP=5.6
+  - TEST_PHP=7.0
+
+install:
+  - docker build -t php ./$TEST_PHP/.
+  - docker run -d php
+
+script:
+  - docker ps | grep -q php
