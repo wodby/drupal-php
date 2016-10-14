@@ -14,8 +14,8 @@ install:
   - docker build -t php ./$TEST_PHP/.
   - docker run -d php
 
-script: ./tests/run-tests.sh
-
+script:
+  - ./tests/run-tests.sh
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
