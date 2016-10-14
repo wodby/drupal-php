@@ -87,6 +87,10 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
     chmod +x /usr/local/bin/drush && \
 
+    # Install Drupal Console
+    curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
+    chmod +x /usr/local/bin/drupal && \
+
     # Cleanup
     apk del --purge \
         *-dev \
@@ -120,6 +124,7 @@ RUN sed -i \
 
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php5/php.ini
 
+# Copy PHP configs
 COPY opcache.ini /etc/php5/conf.d/
 COPY xdebug.ini /etc/php5/conf.d/
 COPY php-fpm.conf /etc/php5/
@@ -132,8 +137,6 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 RUN addgroup -g 82 -S www-data && \
     adduser -u 82 -D -S -s /bin/ash -G www-data www-data
 
-COPY docker-entrypoint.sh /usr/local/bin/
-
 # Create work dir
 RUN mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www
@@ -142,21 +145,12 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
 
+# Init www-data user
 USER www-data
+RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
+    rm -rf ~/.composer/.cache && \
+    drupal init --override
 
-RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' > ~/.profile && . ~/.profile && \
-
-    # Install parallel plugin
-    composer global require hirak/prestissimo:^0.3 && \
-
-    # Install Drupal Console
-    composer global require drupal/console --optimize-autoloader && \
-    drupal init --override && \
-
-    # Cleanup
-    rm -rf ~/.composer/.cache
-
-USER rooot
-
-#ENTRYPOINT ["/bin/sh", "-lc"]
+USER root
+COPY docker-entrypoint.sh /usr/local/bin/
 CMD docker-entrypoint.sh
