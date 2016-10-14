@@ -140,7 +140,7 @@ COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
-    adduser -u 82 -D -S -s /bin/ash -G www-data www-data
+	adduser -u 82 -D -S -G www-data www-data
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
