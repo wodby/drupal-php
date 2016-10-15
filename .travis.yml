@@ -30,12 +30,13 @@ script:
 after_success:
   - >
     if [ "$TRAVIS_BRANCH" == "master" ]; then
-      TAG=$PHP_VER-$TRAVIS_JOB_NUMBER
       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$TAG ./$PHP_VER/.
-      docker tag $DOCKER_PROJECT/$IMAGE_NAME:$TAG $DOCKER_PROJECT/$IMAGE_NAME:latest
-      docker push $DOCKER_PROJECT/$IMAGE_NAME:$TAG
-      docker push $DOCKER_PROJECT/$IMAGE_NAME:latest
+      docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER ./$PHP_VER/.
+      docker push $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER
+      if [ "$PHP_VER" == "7.0" ]; then
+        docker tag $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER $DOCKER_PROJECT/$IMAGE_NAME:latest
+        docker push $DOCKER_PROJECT/$IMAGE_NAME:latest
+      fi
     fi
 
 after_failure:
