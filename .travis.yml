@@ -21,11 +21,11 @@ install:
 
 script:
   - docker ps | grep -q "$REPO:$COMMIT"
-  - docker run --user=82 php php -v | grep "PHP $PHP_VER"
-  - docker run --user=82 php pwd | grep "/var/www/html"
-  - docker run --user=82 php composer --version
-  - docker run --user=82 php drush version
-  - docker run --user=82 php drupal --version
+  - docker run --user=82 $REPO:$COMMIT php -v | grep "PHP $PHP_VER"
+  - docker run --user=82 $REPO:$COMMIT pwd | grep "/var/www/html"
+  - docker run --user=82 $REPO:$COMMIT composer --version
+  - docker run --user=82 $REPO:$COMMIT drush version
+  - docker run --user=82 $REPO:$COMMIT drupal --version
 
 after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
