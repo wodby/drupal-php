@@ -34,6 +34,7 @@ after_success:
   - docker tag $REPO:$COMMIT $REPO:$PHP_VER-travis-$TRAVIS_BUILD_NUMBER
   - docker tag $REPO:$COMMIT $REPO:$TAG
   - if [ "$BRANCH" == "master" ] && [ "$PHP_VER" == "7.0" ]; then docker tag $REPO:$COMMIT $REPO:latest; fi
+  - docker rmi $REPO:$COMMIT
   - docker push $REPO
 
 after_failure:
