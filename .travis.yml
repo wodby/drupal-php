@@ -35,7 +35,7 @@ after_success:
       docker tag $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER-$TRAVIS_TAG
       docker push $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER-$TRAVIS_TAG
     fi
-    if [ "$TRAVIS_BRANCH" == "master"]; then
+    if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker push $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER
       if [ "$PHP_VER" == "7.0" ]; then
         docker tag $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER $DOCKER_PROJECT/$IMAGE_NAME:latest
