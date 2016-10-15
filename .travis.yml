@@ -26,12 +26,14 @@ script:
   - docker run --user=82 php composer --version
   - docker run --user=82 php drush version
   - docker run --user=82 php drupal --version
-
-after_success:
   - >
-    if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER ./$PHP_VER/.
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER ./$PHP_VER/.
+    if [ -n "$TRAVIS_TAG" ]; then
+      docker tag $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER-$TRAVIS_TAG
+      docker push $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER-$TRAVIS_TAG
+    fi
+    if [ "$TRAVIS_BRANCH" == "master"]; then
       docker push $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER
       if [ "$PHP_VER" == "7.0" ]; then
         docker tag $DOCKER_PROJECT/$IMAGE_NAME:$PHP_VER $DOCKER_PROJECT/$IMAGE_NAME:latest
