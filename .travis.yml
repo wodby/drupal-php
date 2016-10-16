@@ -26,7 +26,7 @@ script:
   - docker run --user=82 $REPO:$COMMIT composer --version
   - docker run --user=82 $REPO:$COMMIT drush version
   - docker run --user=82 $REPO:$COMMIT drupal --version
-  - docker run --user=82 -e 'SSH_PUBLIC_KEY=testkey' $REPO:$COMMIT drupal cat /home/www-data/.ssh/authorized_keys | grep testkey
+  - docker run --user=82 -e 'SSH_PUBLIC_KEY=testkey' $REPO:$COMMIT cat /home/www-data/.ssh/authorized_keys | grep testkey
 
 after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
