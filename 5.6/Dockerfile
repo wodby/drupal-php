@@ -10,6 +10,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
     apk add --update \
         openssl \
         ca-certificates \
+        openssh-client \
         git \
         curl \
         wget \

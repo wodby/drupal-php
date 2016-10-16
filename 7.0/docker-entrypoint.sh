@@ -2,6 +2,13 @@
 
 set -eo pipefail
 
+if [ -n "$SSH_PUBLIC_KEY" ]; then
+    mkdir -p /home/www-data/.ssh
+    echo "$SSH_PUBLIC_KEY" > /home/www-data/.ssh/authorized_keys
+    chown -rf www-data:www-data /home/www-data/.ssh
+    chmod -r 0700 /home/www-data/.ssh
+fi
+
 if [ -n "$PHP_SENDMAIL_PATH" ]; then
      sed -i 's@^;sendmail_path.*@'"sendmail_path = ${PHP_SENDMAIL_PATH}"'@' /etc/php7/php.ini
 fi
