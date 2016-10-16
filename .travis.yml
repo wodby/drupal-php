@@ -26,6 +26,7 @@ script:
   - docker exec --user=82 php composer --version
   - docker exec --user=82 php drush version
   - docker exec --user=82 php drupal --version
+  - docker exec --user=82 php ssh -V
   - docker exec --user=82 php cat /home/www-data/.ssh/authorized_keys | grep testkey
 
 after_success:
