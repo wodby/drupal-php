@@ -17,16 +17,16 @@ env:
 
 install:
   - docker build -t $REPO:$COMMIT ./$PHP_VER/.
-  - docker run -d --name=php $REPO:$COMMIT
+  - docker run -d -e 'SSH_PUBLIC_KEY=testkey' --name=php $REPO:$COMMIT
 
 script:
   - docker ps | grep -q "$REPO:$COMMIT"
-  - docker run --user=82 $REPO:$COMMIT php -v | grep "PHP $PHP_VER"
-  - docker run --user=82 $REPO:$COMMIT pwd | grep "/var/www/html"
-  - docker run --user=82 $REPO:$COMMIT composer --version
-  - docker run --user=82 $REPO:$COMMIT drush version
-  - docker run --user=82 $REPO:$COMMIT drupal --version
-  - docker run --user=82 -e 'SSH_PUBLIC_KEY=testkey' $REPO:$COMMIT cat /home/www-data/.ssh/authorized_keys | grep testkey
+  - docker exec php php -v | grep "PHP $PHP_VER"
+  - docker exec --user=82 php pwd | grep "/var/www/html"
+  - docker exec --user=82 php composer --version
+  - docker exec --user=82 php drush version
+  - docker exec --user=82 php drupal --version
+  - docker exec --user=82 php cat /home/www-data/.ssh/authorized_keys | grep testkey
 
 after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
