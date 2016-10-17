@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-if [ ! -d /mnt/ssh ]; then
+if [ -d /mnt/ssh ]; then
     mkdir -p /home/www-data/.ssh
     cp /mnt/ssh/* /home/www-data/.ssh/
     chown -R www-data:www-data /home/www-data/.ssh
