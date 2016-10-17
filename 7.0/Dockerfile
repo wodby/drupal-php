@@ -10,6 +10,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         libressl \
         ca-certificates \
         openssh-client \
+        rsync \
         git \
         curl \
         wget \
