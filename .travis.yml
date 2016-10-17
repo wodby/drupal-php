@@ -17,7 +17,8 @@ env:
 
 install:
   - docker build -t $REPO:$COMMIT ./$PHP_VER/.
-  - docker run -d -e 'SSH_PUBLIC_KEY=testkey' --name=php $REPO:$COMMIT
+  - ssh-keygen -t dsa -N '' -f /root/.ssh/testkey
+  - docker run -d -v '/root/.ssh:/mnt/ssh' --name=php $REPO:$COMMIT
 
 script:
   - docker ps | grep -q "$REPO:$COMMIT"
@@ -28,7 +29,8 @@ script:
   - docker exec --user=82 php drupal --version
   - docker exec --user=82 php ssh -V
   - docker exec --user=82 php rsync --version
-  - docker exec --user=82 php cat /home/www-data/.ssh/authorized_keys | grep testkey
+  - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey ]
+  - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey.pub ]
 
 after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)

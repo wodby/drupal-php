@@ -2,9 +2,9 @@
 
 set -eo pipefail
 
-if [ -n "$SSH_PUBLIC_KEY" ]; then
+if [ ! -d /mnt/ssh ]; then
     mkdir -p /home/www-data/.ssh
-    echo "$SSH_PUBLIC_KEY" > /home/www-data/.ssh/authorized_keys
+    cp /mnt/ssh/* > /home/www-data/.ssh/
     chown -R www-data:www-data /home/www-data/.ssh
     chmod -R 700 /home/www-data/.ssh
 fi
