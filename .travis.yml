@@ -16,10 +16,10 @@ env:
     - PHP_VER=7.0
 
 install:
-  - docker build -t $REPO:$COMMIT ./$PHP_VER/.
   - mkdir -p /home/travis/.ssh
   - ssh-keygen -t dsa -N '' -f /home/travis/.ssh/testkey
   - chmod 700 /home/travis/.ssh
+  - docker build -t $REPO:$COMMIT ./$PHP_VER/.
   - docker run -d -v /home/travis/.ssh:/mnt/ssh --name=php $REPO:$COMMIT
 
 script:
