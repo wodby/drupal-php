@@ -17,8 +17,12 @@ env:
 
 install:
   - docker build -t $REPO:$COMMIT ./$PHP_VER/.
-  - ssh-keygen -t dsa -N '' -f /root/.ssh/testkey
-  - docker run -d -v '/root/.ssh:/mnt/ssh' --name=php $REPO:$COMMIT
+  - echo $HOME
+  - ls -la $HOME
+  - mkdir $HOME/.ssh
+  - ssh-keygen -t dsa -N '' -f $HOME/.ssh/testkey
+  - chmod 700 $HOME/.ssh
+  - docker run -d -v "$HOME/.ssh:/mnt/ssh" --name=php $REPO:$COMMIT
 
 script:
   - docker ps | grep -q "$REPO:$COMMIT"
