@@ -47,6 +47,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-zlib \
         php7-mcrypt \
         php7-mysqli \
+        php7-sqlite3 \
         php7-bz2 \
         php7-phar \
         php7-openssl \
