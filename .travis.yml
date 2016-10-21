@@ -36,7 +36,7 @@ after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - export TAG=`if [ "$BRANCH" == "master" ]; then echo $PHP_VER; else echo $PHP_VER-$BRANCH ; fi`
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker tag $REPO:$COMMIT $REPO:$PHP_VER-travis-$TRAVIS_BUILD_NUMBER
+  - docker tag $REPO:$COMMIT $REPO:$PHP_VER-build-$TRAVIS_BUILD_NUMBER
   - docker tag $REPO:$COMMIT $REPO:$TAG
   - if [ "$BRANCH" == "master" ] && [ "$PHP_VER" == "7.0" ]; then docker tag $REPO:$COMMIT $REPO:latest; fi
   - docker rmi $REPO:$COMMIT
