@@ -92,6 +92,9 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     # Install composer
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
+    # Add composer parallel install plugin
+    composer global require "hirak/prestissimo:^0.3" && \
+    
     # Install drush
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
     chmod +x /usr/local/bin/drush && \
