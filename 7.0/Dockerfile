@@ -66,6 +66,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-xsl \
         php7-ldap \
         php7-bcmath \
+        php7-memcached \
         && \
 
     # Create symlinks for backward compatibility
