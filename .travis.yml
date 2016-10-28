@@ -9,6 +9,7 @@ env:
   global:
     - REPO=wodby/drupal-php
     - COMMIT=${TRAVIS_COMMIT::8}
+    - BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   matrix:
     - PHP_VER=5.6
     - PHP_VER=7.0
@@ -32,15 +33,16 @@ script:
   - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey ]
   - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey.pub ]
 
-after_success:
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - export TAG=`if [ "$BRANCH" == "master" ]; then echo $PHP_VER; else echo $PHP_VER-$BRANCH ; fi`
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker tag $REPO:$COMMIT $REPO:$PHP_VER-travis-$TRAVIS_BUILD_NUMBER
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - if [ "$BRANCH" == "master" ] && [ "$PHP_VER" == "7.0" ]; then docker tag $REPO:$COMMIT $REPO:latest; fi
-  - docker rmi $REPO:$COMMIT
-  - docker push $REPO
+after_success: |
+  if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    export TAG=`if [ "$BRANCH" == "master" ]; then echo $PHP_VER; else echo $PHP_VER-$BRANCH ; fi`
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    docker tag $REPO:$COMMIT $REPO:$PHP_VER-travis-$TRAVIS_BUILD_NUMBER
+    docker tag $REPO:$COMMIT $REPO:$TAG
+    if [ "$BRANCH" == "master" ] && [ "$PHP_VER" == "7.0" ]; then docker tag $REPO:$COMMIT $REPO:latest; fi
+    docker rmi $REPO:$COMMIT
+    docker push $REPO
+  fi
 
 after_failure:
   - docker logs php
