@@ -15,6 +15,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         git \
         curl \
         wget \
+        gzip \
         perl \
         pcre \
         imap \
