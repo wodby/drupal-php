@@ -15,6 +15,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         curl \
         wget \
         gzip \
+        patch \
         perl \
         pcre \
         imap \
