@@ -95,6 +95,11 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     # Install composer
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
+    # Install PHPUnit
+    curl -sSL https://phar.phpunit.de/phpunit.phar -o phpunit.phar && \
+        chmod +x phpunit.phar && \
+        mv phpunit.phar /usr/local/bin/phpunit && \
+
     # Install drush
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
     chmod +x /usr/local/bin/drush && \
