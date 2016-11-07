@@ -35,14 +35,15 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-fpm \
         php7-opcache \
         php7-session \
+        php7-dom \
         php7-xml \
+        php7-xmlreader \
         php7-ctype \
         php7-ftp \
         php7-gd \
         php7-json \
         php7-posix \
         php7-curl \
-        php7-dom \
         php7-pdo \
         php7-pdo_mysql \
         php7-sockets \
@@ -69,6 +70,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-ldap \
         php7-bcmath \
         php7-memcached \
+
         && \
 
     # Create symlinks for backward compatibility

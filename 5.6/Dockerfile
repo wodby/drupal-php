@@ -37,14 +37,15 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         php5-cli \
         php5-fpm \
         php5-opcache \
+        php5-dom \
         php5-xml \
+        php5-xmlreader \
         php5-ctype \
         php5-ftp \
         php5-gd \
         php5-json \
         php5-posix \
         php5-curl \
-        php5-dom \
         php5-pdo \
         php5-pdo_mysql \
         php5-sockets \
