@@ -15,6 +15,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         curl \
         wget \
         gzip \
+        tar \
         patch \
         perl \
         pcre \
@@ -70,7 +71,6 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-ldap \
         php7-bcmath \
         php7-memcached \
-
         && \
 
     # Create symlinks for backward compatibility
