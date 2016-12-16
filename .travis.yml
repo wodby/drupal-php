@@ -34,12 +34,16 @@ script:
   - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey.pub ]
 
 after_success: |
-  if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    export TAG=`if [ "$BRANCH" == "master" ]; then echo $PHP_VER; else echo $PHP_VER-$BRANCH ; fi`
+  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$BRANCH" == "master" ]; then
     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    docker tag $REPO:$COMMIT $REPO:$PHP_VER-build-$TRAVIS_BUILD_NUMBER
-    docker tag $REPO:$COMMIT $REPO:$TAG
-    if [ "$BRANCH" == "master" ] && [ "$PHP_VER" == "7.0" ]; then docker tag $REPO:$COMMIT $REPO:latest; fi
+    docker tag $REPO:$COMMIT $REPO:$PHP_VER
+
+    if [ -n "$TRAVIS_TAG" ]; then docker tag $REPO:$COMMIT $REPO:$PHP_VER-$TRAVIS_TAG; fi
+
+    if [ "$PHP_VER" == "7.0" ]; then
+      docker tag $REPO:$COMMIT $REPO:latest;
+    fi
+
     docker rmi $REPO:$COMMIT
     docker push $REPO
   fi
