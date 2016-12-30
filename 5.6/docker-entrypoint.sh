@@ -1,5 +1,7 @@
 #!/bin/sh
 
+umask 000
+
 set -eo pipefail
 
 if [ -d /mnt/ssh ]; then
