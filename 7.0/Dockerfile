@@ -73,6 +73,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-memcached \
         php7-oauth \
         php7-apcu \
+        php7-intl \
         && \
 
     # Create symlinks for backward compatibility
