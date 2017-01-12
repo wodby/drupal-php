@@ -74,6 +74,8 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-oauth \
         php7-apcu \
         php7-intl \
+        php7-pgsql \
+        php7-pdo_pgsql \
         && \
 
     # Create symlinks for backward compatibility

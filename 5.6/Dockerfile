@@ -75,6 +75,8 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         php5-bcmath \
         php5-memcached \
         php5-apcu \
+        php5-pgsql \
+        php5-pdo_pgsql \
         && \
 
     # Install uploadprogress and imagick
