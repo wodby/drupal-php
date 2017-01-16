@@ -23,6 +23,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         imap \
         imagemagick \
         mariadb-client \
+        postgresql-client\
 
         # Temp packages
         build-base \
