@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eo pipefail
+set -e
+
+if [[ $DEBUG ]]; then
+  set -x
+fi
 
 if [ -d /mnt/ssh ]; then
     mkdir -p /home/www-data/.ssh

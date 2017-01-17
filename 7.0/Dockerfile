@@ -7,6 +7,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     echo 'http://alpine.gliderlabs.com/alpine/edge/testing' >> /etc/apk/repositories && \
 
     apk add --update \
+        bash \
         libressl \
         ca-certificates \
         openssh-client \
@@ -159,8 +160,8 @@ RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create user www-data
-RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data www-data
+RUN addgroup -g 82 www-data && \
+	adduser -u 82 -s /bin/bash -D -G www-data www-data
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
