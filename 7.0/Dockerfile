@@ -10,6 +10,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         ca-certificates \
         openssh-client \
         rsync \
+        yaml \
         git \
         curl \
         wget \
@@ -86,6 +87,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
     sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
+    yes | pecl install yaml-2.0.0 && \
+    echo 'extension=yaml.so' > /etc/php7/conf.d/yaml.ini && \
 
     # Install uploadprogess
     cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
