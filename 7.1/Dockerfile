@@ -8,6 +8,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/3.5/testing' >> /etc/apk/reposito
     apk add --update \
         bash \
         bzip2 \
+        openssh-client \
         rsync \
         git \
         curl \
