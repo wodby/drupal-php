@@ -10,7 +10,6 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         ca-certificates \
         openssh-client \
         rsync \
-        yaml \
         git \
         curl \
         wget \
@@ -31,6 +30,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         php7-dev \
         pcre-dev \
         imagemagick-dev \
+        yaml-dev \
 
         # PHP packages
         php7 \
