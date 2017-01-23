@@ -21,7 +21,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         imap \
         imagemagick \
         mariadb-client \
-        postgresql-client\
+        postgresql-client \
+        yaml \
 
         # Temp packages
         build-base \
