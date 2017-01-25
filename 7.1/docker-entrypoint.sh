@@ -13,6 +13,10 @@ if [ -d /mnt/ssh ]; then
     chmod -R 700 /home/www-data/.ssh
 fi
 
+if [[ -n "$PHP_DRUSH_MEMORY_LIMIT" ]]; then
+     sed -i 's/^memory_limit.*/'"memory_limit = ${PHP_DRUSH_MEMORY_LIMIT}"'/' "$PHP_INI_DIR/php.ini"
+fi
+
 if [ -n "$PHP_SENDMAIL_PATH" ]; then
      sed -i 's@^;sendmail_path.*@'"sendmail_path = ${PHP_SENDMAIL_PATH}"'@' "$PHP_INI_DIR/php.ini"
 fi
