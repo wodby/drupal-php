@@ -12,6 +12,7 @@ env:
   matrix:
     - PHP_VER=5.6
     - PHP_VER=7.0
+    - PHP_VER=7.1
 
 install:
   - mkdir -p /home/travis/.ssh
@@ -39,7 +40,7 @@ after_success: |
 
     if [ -n "$TRAVIS_TAG" ]; then docker tag $REPO:$COMMIT $REPO:$PHP_VER-$TRAVIS_TAG; fi
 
-    if [ "$PHP_VER" == "7.0" ]; then
+    if [ "$PHP_VER" == "7.1" ]; then
       docker tag $REPO:$COMMIT $REPO:latest;
     fi
 
