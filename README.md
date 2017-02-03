@@ -1,6 +1,6 @@
 # Drupal PHP 5.6/7.x
 
-[![Build Status](https://travis-ci.org/Wodby/drupal-php.svg?branch=master)](https://travis-ci.org/Wodby/drupal-php)
+[![Build Status](https://travis-ci.org/Wodby/drupal-php.svg?branch=master)](https://travis-ci.org/wodby/drupal-php)
 
 Configurations for PHP 5.6 and PHP 7.0 are based on Wodby's [Drupal PHP](https://github.com/wodby/drupal-php) docker images.
 
