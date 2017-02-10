@@ -179,5 +179,9 @@ RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
     drupal init --override
 
 USER root
-COPY docker-entrypoint.sh /usr/local/bin/
-CMD docker-entrypoint.sh
+
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["php-fpm"]
