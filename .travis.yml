@@ -8,48 +8,32 @@ services:
 env:
   global:
     - REPO=wodby/drupal-php
-    - COMMIT=${TRAVIS_COMMIT::8}
   matrix:
     - PHP_VER=5.6
     - PHP_VER=7.0
     - PHP_VER=7.1
 
 install:
-  - mkdir -p /home/travis/.ssh
-  - ssh-keygen -t dsa -N '' -f /home/travis/.ssh/testkey
-  - chmod 700 /home/travis/.ssh
-  - docker build -t $REPO:$COMMIT ./$PHP_VER/.
-  - docker run -d -v /home/travis/.ssh:/mnt/ssh --name=php $REPO:$COMMIT
+  - cd ./$VERSION
+  - make
 
-script:
-  - docker ps | grep -q "$REPO:$COMMIT"
-  - docker exec php php -v | grep "PHP $PHP_VER"
-  - docker exec --user=82 php pwd | grep "/var/www/html"
-  - docker exec --user=82 php composer --version
-  - docker exec --user=82 php drush version
-  - docker exec --user=82 php drupal --version
-  - docker exec --user=82 php ssh -V
-  - docker exec --user=82 php rsync --version
-  - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey ]
-  - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey.pub ]
+script: make test
 
 after_success: |
   if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    docker tag $REPO:$COMMIT $REPO:$PHP_VER
+    make release
 
-    if [ -n "$TRAVIS_TAG" ]; then docker tag $REPO:$COMMIT $REPO:$PHP_VER-$TRAVIS_TAG; fi
-
-    if [ "$PHP_VER" == "7.1" ]; then
-      docker tag $REPO:$COMMIT $REPO:latest;
+    if [ -n "$TRAVIS_TAG" ]; then
+      make VERSION="$VERSION-$TRAVIS_TAG" release
     fi
 
-    docker rmi $REPO:$COMMIT
-    docker push $REPO
+    if [ "$VERSION" == "7.0" ]; then
+      make VERSION=latest release
+    fi
   fi
 
-after_failure:
-  - docker logs php
+after_failure: make logs
 
 notifications:
   email:

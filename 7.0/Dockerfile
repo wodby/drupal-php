@@ -1,5 +1,4 @@
 FROM alpine:3.5
-MAINTAINER Wodby <admin@wodby.com>
 
 # Install packages
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
@@ -92,9 +91,9 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
     echo 'extension=yaml.so' > /etc/php7/conf.d/yaml.ini && \
 
     # Install uploadprogess
-    cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
-    unzip master.zip && \
-    cd uploadprogress-master/ && \
+    cd /tmp/ && wget -O /tmp/uploadprogress.zip https://github.com/php/pecl-php-uploadprogress/archive/master.zip && \
+    unzip /tmp/uploadprogress.zip && \
+    cd /tmp/pecl-php-uploadprogress-master/ && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini && \
