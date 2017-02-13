@@ -194,6 +194,9 @@ RUN set -xe \
     pecl config-set php_ini "$PHP_INI_DIR/php.ini" && \
     yes | pecl install xdebug && \
 
+    # Install APCu
+    yes | pecl install apcu && \
+
     # Install uploadprogess
     cd /tmp/ && wget -O /tmp/uploadprogress.zip https://github.com/php/pecl-php-uploadprogress/archive/master.zip && \
     unzip /tmp/uploadprogress.zip && \
@@ -250,7 +253,8 @@ RUN sed -i \
         -e "s/^mysqlnd.collect  _memory_statistics.*/mysqlnd.collect_memory_statistics = On/" \
         "$PHP_INI_DIR/php.ini" && \
 
-    echo "error_log = \"/proc/self/fd/2\"" | tee -a "$PHP_INI_DIR/php.ini"
+    echo "error_log = \"/proc/self/fd/2\"" | tee -a "$PHP_INI_DIR/php.ini" && \
+    echo "extension=apcu.so" | tee -a "$PHP_INI_DIR/php.ini"
 
 # Copy PHP configs
 COPY 00_opcache.ini "$PHP_INI_DIR/conf.d/"
