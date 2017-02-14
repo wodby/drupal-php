@@ -97,8 +97,8 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories
         mv phpunit.phar /usr/local/bin/phpunit && \
 
     # Install drush
-    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
-    chmod +x /usr/local/bin/drush && \
+    # php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
+    # chmod +x /usr/local/bin/drush && \
 
     # Install Drupal Console
     curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
@@ -159,8 +159,10 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
 
-# Init www-data user
+# Init root user
 USER www-data
+RUN composer global config bin-dir /usr/local/bin && \
+    composer global require drush/drush:8.*
 RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
     rm -rf ~/.composer/.cache && \
     drupal init --override
