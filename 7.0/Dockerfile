@@ -22,6 +22,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         mariadb-client \
         postgresql-client \
         yaml \
+        openldap \
+        openldap-dev \
 
         # Temp packages
         build-base \
@@ -77,6 +79,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         php7-intl \
         php7-pgsql \
         php7-pdo_pgsql \
+        php7-ldap \
         && \
 
     # Create symlinks for backward compatibility

@@ -21,6 +21,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         imagemagick \
         mariadb-client \
         postgresql-client\
+        openldap \
+        openldap-dev \
 
         # Temp packages
         build-base \
@@ -75,6 +77,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         php5-apcu \
         php5-pgsql \
         php5-pdo_pgsql \
+        php5-ldap \
         && \
 
     # Install uploadprogress and imagick
