@@ -21,6 +21,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/3.5/testing' >> /etc/apk/reposito
         mariadb-client \
         postgresql-client \
         postgresql-dev \
+        openldap \
+        openldap-dev \
 
         # Temp packages
         build-base \
@@ -166,6 +168,7 @@ RUN set -xe \
 		--with-xmlrpc \
 		--with-xsl=/usr \
 		--with-zlib \
+		--with-ldap \
 		\
 		$PHP_EXTRA_CONFIGURE_ARGS \
 	&& make -j "$(getconf _NPROCESSORS_ONLN)" \
