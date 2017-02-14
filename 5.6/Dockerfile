@@ -153,14 +153,14 @@ RUN addgroup -g 82 -S www-data && \
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www
+    chown -R root:root /var/www
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
 
 # Init root user
-USER www-data
+USER root
 RUN composer global config bin-dir /usr/local/bin && \
     composer global require drush/drush:8.*
 RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
