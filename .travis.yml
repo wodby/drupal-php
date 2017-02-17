@@ -9,6 +9,7 @@ env:
   global:
     - REPO=wodby/drupal-php
   matrix:
+    - VERSION=5.3
     - VERSION=5.6
     - VERSION=7.0
     - VERSION=7.1
