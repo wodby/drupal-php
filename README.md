@@ -1,4 +1,4 @@
-# PHP container for Drupal
+# PHP docker container for Drupal
 
 See [Docker4Drupal](http://docker4drupal.org)
 
