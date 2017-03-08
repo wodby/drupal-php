@@ -1,4 +1,4 @@
-FROM wodby/php:7.1
+FROM wodby/php:7.1-2.0.0
 
     # Install Drupal Console
 RUN su-exec www-data composer global require drupal/console && \
