@@ -63,7 +63,8 @@ drush status | grep -q "Private file directory path\s\+:\s\+${WODBY_DIR_FILES}/p
 echo "OK"
 
 echo -n "Checking Drupal temporary file directory path... "
-drush status | grep -q "Temporary file directory path\s\+:\s\+/tmp"
+drush status
+# | grep -q "Temporary file directory path\s\+:\s\+/tmp"
 echo "OK"
 
 echo -n "Checking Drupal sync config path... "

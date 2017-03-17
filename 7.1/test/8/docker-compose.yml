@@ -29,6 +29,7 @@ services:
   php:
     image: $IMAGE
     environment:
+      DEBUG: 1
       DOCROOT_SUBDIR: ""
       DRUPAL_VERSION: 8
       DRUPAL_SITE: default
