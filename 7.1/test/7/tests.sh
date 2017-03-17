@@ -77,7 +77,7 @@ drush rq | grep -q "File system\s\+Info\s\+Writable (public download method)"
 echo "OK"
 
 echo -n "Checking settings.php permissions... "
-drush rq | grep -q "Configuration files\s\+Info\s\+Protected"
+drush rq | grep -q "Configuration file\s\+Info\s\+Protected"
 echo "OK"
 
 echo -n "Checking imported files... "
