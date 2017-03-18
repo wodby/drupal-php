@@ -12,7 +12,7 @@ build:
 
 test:
 	cd ./test/6 && IMAGE=$(REPO):$(VERSION) ./run.sh
-#	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
+	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
 
 push:
 	docker push $(REPO):$(VERSION)
