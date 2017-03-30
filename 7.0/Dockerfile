@@ -4,7 +4,7 @@ ENV WODBY_DIR_FILES /mnt/files
 ENV WODBY_DIR_CONF /var/www/conf
 
 RUN su-exec www-data composer global config minimum-stability rc && \
-    su-exec www-data composer global require drupal/console:~1.0.0 && \
+    su-exec www-data composer global require drupal/console:1.* && \
     su-exec www-data drupal init && \
     su-exec www-data composer global require drush/drush && \
     su-exec www-data composer clear-cache && \
