@@ -49,7 +49,8 @@ fi
 
 # Cleanup "drush arr" artifacts.
 if [[ -f "${DRUPAL_SITE_DIR}/settings.php" ]]; then
-    chmod 644 "${DRUPAL_SITE_DIR}/settings.php"
+    chmod 755 "${DRUPAL_SITE_DIR}"
+    chmod 755 "${DRUPAL_SITE_DIR}/settings.php"
     sed -i -e '/Appended by drush archive-restore command/,$d' "${DRUPAL_SITE_DIR}/settings.php"
 fi
 
