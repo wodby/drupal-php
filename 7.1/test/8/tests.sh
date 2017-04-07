@@ -25,7 +25,7 @@ fi
 DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
 
 echo -n "Checking drupal console launcher... "
-drupal -V | grep -q "Drupal Console Launcher"
+drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
 echo "OK"
 
 echo -n "Checking environment variables... "
