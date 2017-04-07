@@ -27,10 +27,6 @@ DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
 drush dl varnish --quiet
 drush en varnish -y --quiet
 
-echo -n "Checking drupal console... "
-drupal -V 2>&1 | grep -q "DrupalConsole"
-echo "OK"
-
 echo -n "Checking environment variables... "
 env | grep -q ^WODBY_DIR_CONF=
 env | grep -q ^WODBY_DIR_FILES=
