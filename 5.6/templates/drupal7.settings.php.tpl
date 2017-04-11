@@ -17,7 +17,7 @@ $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
 
 $wodby['varnish']['host'] = '{{ getenv "VARNISH_HOST" "" }}';
-$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_TERMINAL_PORT" "6082" }}';
+$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_SERVICE_PORT_6082" "6082" }}';
 $wodby['varnish']['secret'] = '{{ getenv "VARNISH_SECRET" "" }}';
 $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
