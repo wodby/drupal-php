@@ -22,7 +22,7 @@ $wodby['varnish']['secret'] = '{{ getenv "VARNISH_SECRET" "" }}';
 $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
-$wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
+$wodby['redis']['port'] = '{{ getenv "REDIS_SERVICE_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
 
 if (isset($_SERVER['HTTP_X_REAL_IP'])) {

@@ -20,7 +20,7 @@ $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
-$wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
+$wodby['redis']['port'] = '{{ getenv "REDIS_SERVICE_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
 
 if (isset($_SERVER['HTTP_X_REAL_IP'])) {

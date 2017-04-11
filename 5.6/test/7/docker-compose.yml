@@ -60,7 +60,7 @@ services:
       VARNISH_SECRET: secret
       VARNISH_VERSION: 4
       REDIS_HOST: redis
-      REDIS_PORT: 6379
+      REDIS_SERVICE_PORT: 6379
       REDIS_PASSWORD: redis
       PHP_SENDMAIL_PATH: /bin/true
       SSH_PRIVATE_KEY: |-
