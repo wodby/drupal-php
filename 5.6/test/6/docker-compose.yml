@@ -46,7 +46,7 @@ services:
       DB_NAME: drupal
       DB_DRIVER: mysql
       MEMCACHED_HOST: memcached
-      MEMCACHED_PORT: 11211
+      MEMCACHED_SERVICE_PORT: 11211
       PHP_SENDMAIL_PATH: /bin/true
       SSH_PRIVATE_KEY: |-
         -----BEGIN RSA PRIVATE KEY-----

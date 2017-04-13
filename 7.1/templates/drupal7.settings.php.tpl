@@ -17,12 +17,12 @@ $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
 
 $wodby['varnish']['host'] = '{{ getenv "VARNISH_HOST" "" }}';
-$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_TERMINAL_PORT" "6082" }}';
+$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_SERVICE_PORT_6082" "6082" }}';
 $wodby['varnish']['secret'] = '{{ getenv "VARNISH_SECRET" "" }}';
 $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
-$wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
+$wodby['redis']['port'] = '{{ getenv "REDIS_SERVICE_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
 
 if (isset($_SERVER['HTTP_X_REAL_IP'])) {
