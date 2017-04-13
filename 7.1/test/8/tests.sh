@@ -58,7 +58,7 @@ echo -n "Checking Drupal temporary file directory path... "
 checkStatus "temp" "/tmp"
 
 echo -n "Checking Drupal sync config path... "
-checkStatus "config-sync" "${WODBY_DIR_FILES}/public/sync_${DRUPAL_FILES_SYNC_SALT}"
+checkStatus "config-sync" "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
 echo -n "Checking redis connection... "
 checkRq "Redis" "Connected, using the PhpRedis client"
