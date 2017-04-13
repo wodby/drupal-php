@@ -7,8 +7,5 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 rm -f "${DRUPAL_SITE_DIR}/files"
+mkdir -p "${WODBY_DIR_FILES}/public"
 ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_DIR}/files"
-
-if [[ "${DRUPAL_VERSION}" == "8" ]]; then
-    mkdir -p "${WODBY_DIR_FILES}/public/sync_${DRUPAL_FILES_SYNC_SALT}"
-fi
