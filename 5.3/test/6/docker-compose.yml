@@ -41,7 +41,7 @@ services:
       WODBY_HOSTS: drupal6.com/drupal6.wodby.wod.by/test.drupal6.wodby.wod.by
       WODBY_HOST_PRIMARY: http://drupal6.com
       DB_HOST: mariadb
-      DB_USERNAME: drupal
+      DB_USER: drupal
       DB_PASSWORD: drupal
       DB_NAME: drupal
       DB_DRIVER: mysql

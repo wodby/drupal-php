@@ -8,7 +8,7 @@ fi
 
 source=$1
 
-DB_URL="mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+DB_URL="mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 tmp_source_dir="/tmp/source"
 tmp_dir="/tmp/drush_import"
 tmp_dir_site="${tmp_dir}/sites/${DRUPAL_SITE}"

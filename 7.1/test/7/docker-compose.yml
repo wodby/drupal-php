@@ -51,7 +51,7 @@ services:
       WODBY_HOSTS: drupal7.com/drupal7.wodby.wod.by/test.drupal7.wodby.wod.by
       WODBY_HOST_PRIMARY: http://drupal7.com
       DB_HOST: mariadb
-      DB_USERNAME: drupal
+      DB_USER: drupal
       DB_PASSWORD: drupal
       DB_NAME: drupal
       DB_DRIVER: mysql
