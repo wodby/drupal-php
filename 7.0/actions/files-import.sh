@@ -25,7 +25,9 @@ archive_file=$(find "${tmp_dir}" -type f)
 if [[ "${archive_file}" =~ \.zip$ ]]; then
     unzip "${archive_file}" -d "${tmp_dir}"
 elif [[ "${archive_file}" =~ \.tgz$ ]] || [[ "${archive_file}" =~ \.tar.gz$ ]]; then
-    tar -zxf "${archive_file}" -C "${tmp_dir}"
+    tar zxf "${archive_file}" -C "${tmp_dir}"
+elif [[ "${archive_file}" =~ \.tar$ ]]; then
+    tar xf "${archive_file}" -C "${tmp_dir}"
 else
     echo >&2 'Unsupported file format. Expecting .zip .tar.gz .tgz archive'
     exit 1
