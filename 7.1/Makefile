@@ -11,7 +11,7 @@ build:
 	docker build -t $(REPO):$(VERSION) ./
 
 test:
-	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
+#	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
 	cd ./test/8 && IMAGE=$(REPO):$(VERSION) ./run.sh
 
 push:

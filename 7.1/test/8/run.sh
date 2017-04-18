@@ -26,13 +26,12 @@ docker-compose up -d
 docker-compose exec mariadb make check-ready -f /usr/local/bin/actions.mk
 docker-compose exec nginx make check-ready -f /usr/local/bin/actions.mk
 
-dockerExec php bash -c 'echo -e "Host bitbucket.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config'
 phpAction git-clone url="${GIT_URL}" branch=master
-phpAction drush-import source="${DRUSH_ARCHIVE_URL}"
-phpAction files-import source="${FILES_ARCHIVE_URL}"
-phpAction init-drupal
-phpAction cache-clear target=render
-phpAction cache-rebuild
-dockerExec php tests.sh
+#phpAction drush-import source="${DRUSH_ARCHIVE_URL}"
+#phpAction files-import source="${FILES_ARCHIVE_URL}"
+#phpAction init-drupal
+#phpAction cache-clear target=render
+#phpAction cache-rebuild
+#dockerExec php tests.sh
 
 docker-compose down
