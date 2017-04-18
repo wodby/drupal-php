@@ -7,11 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 source=$1
-
-DB_URL="mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 tmp_source_dir="/tmp/source"
-tmp_dir="/tmp/drush_import"
-tmp_dir_files="${tmp_dir}/sites/${DRUPAL_SITE}/files"
 
 [[ -d "${tmp_source_dir}" ]] && rm -rf "${tmp_source_dir}"
 
@@ -23,7 +19,8 @@ else
     mv "${source}" "${tmp_source_dir}"
 fi
 
-archive_file=$(find "${tmp_source_dir}" -type f)
+cd "${tmp_source_dir}"
+archive_file=$(find -type f)
 
 if [[ ! "${archive_file}" =~ \.tar.gz$ ]]; then
     echo >&2 'Unsupported file format. Expecting .tar.gz drush archive'
@@ -31,7 +28,16 @@ if [[ ! "${archive_file}" =~ \.tar.gz$ ]]; then
 fi
 
 # Import db.
-drush -y arr "${archive_file}" "${DRUPAL_SITE}" --destination="${tmp_dir}" --db-url="${DB_URL}"
+tar -zxf "${archive_file}"
+sql_file=$(find -type f -name "*.sql" -maxdepth 1)
+
+mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" -e "DROP DATABASE IF EXISTS ${DB_NAME};"
+mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" -e "CREATE DATABASE ${DB_NAME};"
+mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "${sql_file}"
+
+tmp_dir_codebase=$(find -type d ! -path . -maxdepth 1)
+tmp_dir_files="${tmp_dir_codebase}/sites/${DRUPAL_SITE}/files"
+chmod -f 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}"
 
 # Import files.
 if [[ -d "${tmp_dir_files}/private" ]]; then
@@ -45,4 +51,3 @@ elif [[ -d "${tmp_dir_files}" ]]; then
 fi
 
 rm -rf "${tmp_source_dir}"
-rm -rf "${tmp_dir}"

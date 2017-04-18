@@ -16,10 +16,10 @@ chmod -f 755 "${DRUPAL_SITE_DIR}"
 # Include wodby.settings.php
 if [[ ! -f "${settings_php}" ]]; then
     echo -e "<?php\n\n" > "${settings_php}"
-    chmod 644 "${settings_php}"
 fi
 
 if [[ $( grep -ic "wodby.settings.php" "${settings_php}" ) -eq 0 ]]; then
+    chmod 644 "${settings_php}"
     echo -e "${disclaimer}" >> "${settings_php}"
     echo -e "include '${WODBY_DIR_CONF}/wodby.settings.php';" >> "${settings_php}"
 fi

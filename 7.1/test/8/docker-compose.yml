@@ -5,8 +5,8 @@ services:
     image: $NGINX_DRUPAL8
     environment:
       NGINX_BACKEND_HOST: php
-      NGINX_SERVER_ROOT: /var/www/html
-      NGINX_SERVER_NAME: drupal8.com
+      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_SERVER_NAME: drupal8.test
     volumes:
       - codebase:/var/www/html
       - files:/mnt/files
@@ -29,13 +29,13 @@ services:
   php:
     image: $IMAGE
     environment:
-      DOCROOT_SUBDIR: ""
+      DOCROOT_SUBDIR: web
       DRUPAL_VERSION: 8
       DRUPAL_SITE: default
       DRUPAL_HASH_SALT: drupal-bad-hash-salt
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
-      WODBY_HOSTS: drupal8.com/drupal8.wodby.wod.by/test.drupal8.wodby.wod.by
-      WODBY_HOST_PRIMARY: http://drupal8.com
+      WODBY_HOSTS: drupal8.test/drupal8.wodby.wod.by/test.drupal8.wodby.wod.by
+      WODBY_HOST_PRIMARY: http://drupal8.test
       DB_HOST: mariadb
       DB_USER: drupal
       DB_PASSWORD: drupal

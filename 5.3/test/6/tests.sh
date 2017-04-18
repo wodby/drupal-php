@@ -16,13 +16,9 @@ checkStatus() {
     echo "OK"
 }
 
-if [[ "${DOCROOT_SUBDIR}" == "" ]]; then
-	DRUPAL_ROOT="${DOCROOT_SUBDIR}"
-else
-	DRUPAL_ROOT="${APP_ROOT}/${DOCROOT_SUBDIR}"
-fi
-
-DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
+runAction() {
+    make "${@}" -f /usr/local/bin/actions.mk
+}
 
 echo -n "Checking environment variables... "
 env | grep -q ^WODBY_DIR_CONF=
@@ -31,6 +27,27 @@ env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=
 echo "OK"
+
+if [[ "${DOCROOT_SUBDIR}" == "" ]]; then
+	DRUPAL_ROOT="${DOCROOT_SUBDIR}"
+else
+	DRUPAL_ROOT="${APP_ROOT}/${DOCROOT_SUBDIR}"
+fi
+
+DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
+FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import-test/files.tar.gz"
+
+drush make make.yml -y
+drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+drush archive-dump -y --destination=/tmp/drush-archive.tar.gz
+drush sql-drop -y
+
+runAction drush-import source=/tmp/drush-archive.tar.gz
+runAction files-import source="${FILES_ARCHIVE_URL}"
+runAction init-drupal
+runAction cache-clear
+
+drush en memcache -y
 
 echo -n "Checking drush version... "
 checkStatus "drush-version" "7.*"
@@ -50,9 +67,6 @@ checkStatus "temp" "/tmp"
 echo -n "Checking memcached connection... "
 checkRq "Memcache" "2.*"
 
-echo -n "Checking memcached admin... "
-checkRq "Memcache admin" "Memcache included"
-
 echo -n "Checking Drupal file system permissions... "
 checkRq "File system" "Writable (public download method)"
 
@@ -64,5 +78,5 @@ curl -s -I -H "host: ${DRUPAL_DOMAIN}" "nginx/sites/default/files/logo.png" | gr
 echo "OK"
 
 echo -n "Checking Drupal homepage... "
-curl -s -H "host: ${DRUPAL_DOMAIN}" "nginx" | grep -q "Welcome to your new Pressflow website!"
+curl -s -H "host: ${DRUPAL_DOMAIN}" "nginx" | grep -q "Welcome to your new Drupal website!"
 echo "OK"

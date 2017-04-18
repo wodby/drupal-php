@@ -5,8 +5,8 @@ services:
     image: $NGINX_DRUPAL7
     environment:
       NGINX_BACKEND_HOST: php
-      NGINX_SERVER_ROOT: /var/www/html
-      NGINX_SERVER_NAME: drupal7.com
+      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_SERVER_NAME: drupal7.test
     volumes:
       - codebase:/var/www/html
       - files:/mnt/files
@@ -43,13 +43,13 @@ services:
       PHP_SESSION_COOKIE_LIFETIME: 2000000
       PHP_SESSION_GC_DIVISOR: 100
       PHP_SESSION_GC_MAXLIFETIME: 200000
-      DOCROOT_SUBDIR: ""
+      DOCROOT_SUBDIR: web
       DRUPAL_VERSION: 7
       DRUPAL_SITE: default
       DRUPAL_HASH_SALT: drupal-bad-hash-salt
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
-      WODBY_HOSTS: drupal7.com/drupal7.wodby.wod.by/test.drupal7.wodby.wod.by
-      WODBY_HOST_PRIMARY: http://drupal7.com
+      WODBY_HOSTS: drupal7.test/drupal7.wodby.wod.by/test.drupal7.wodby.wod.by
+      WODBY_HOST_PRIMARY: http://drupal7.test
       DB_HOST: mariadb
       DB_USER: drupal
       DB_PASSWORD: drupal
