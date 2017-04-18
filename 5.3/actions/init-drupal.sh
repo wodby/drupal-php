@@ -34,4 +34,7 @@ if [[ "${DRUPAL_SITE}" != "default" ]]; then
     fi
 fi
 
-exec init-files.sh
+# Init files.
+rm -rf "${DRUPAL_SITE_DIR}/files"
+mkdir -p "${WODBY_DIR_FILES}/public"
+ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_DIR}/files"

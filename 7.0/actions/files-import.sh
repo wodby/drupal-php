@@ -46,5 +46,3 @@ else
 fi
 
 rm -rf "${tmp_dir}"
-
-exec init-files.sh

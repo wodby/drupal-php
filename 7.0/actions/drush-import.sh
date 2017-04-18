@@ -57,4 +57,3 @@ fi
 rm -rf "${tmp_source_dir}"
 rm -rf "${tmp_dir}"
 
-exec init-drupal.sh
