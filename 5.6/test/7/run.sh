@@ -30,6 +30,7 @@ dockerExec php bash -c 'echo -e "Host bitbucket.org\n\tStrictHostKeyChecking no\
 phpAction git-clone url="${GIT_URL}" branch=master
 phpAction drush-import source="${DRUSH_ARCHIVE_URL}"
 phpAction files-import source="${FILES_ARCHIVE_URL}"
+phpAction init-drupal
 phpAction cache-clear
 dockerExec php tests.sh
 
