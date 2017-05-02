@@ -49,15 +49,17 @@ if (!isset($conf['404_fast_html'])) {
   $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 }
 
-$args = array(
-  'host' => $wodby['db']['host'],
-  'database' => $wodby['db']['name'],
-  'username' => $wodby['db']['username'],
-  'password' => $wodby['db']['password'],
-  'driver' => $wodby['db']['driver'],
-);
+if (!empty($wodby['db']['host'])) {
+  $args = array(
+    'host' => $wodby['db']['host'],
+    'database' => $wodby['db']['name'],
+    'username' => $wodby['db']['username'],
+    'password' => $wodby['db']['password'],
+    'driver' => $wodby['db']['driver'],
+  );
 
-$db_url = strtr('driver://username:password@host/database', $args);
+  $db_url = strtr('driver://username:password@host/database', $args);
+}
 
 $conf['file_directory_path'] = "sites/{$wodby['site']}/files";
 $conf['file_directory_temp'] = '/tmp';

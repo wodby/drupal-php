@@ -51,20 +51,22 @@ if (!isset($conf['404_fast_html'])) {
   $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 }
 
-if (!isset($databases['default']['default'])) {
-  $databases['default']['default'] = array();
-}
+if (!empty($wodby['db']['host'])) {
+  if (!isset($databases['default']['default'])) {
+    $databases['default']['default'] = [];
+  }
 
-$databases['default']['default'] = array_merge(
-  $databases['default']['default'],
-  [
-    'host' => $wodby['db']['host'],
-    'database' => $wodby['db']['name'],
-    'username' => $wodby['db']['username'],
-    'password' => $wodby['db']['password'],
-    'driver' => $wodby['db']['driver'],
-  ]
-);
+  $databases['default']['default'] = array_merge(
+    $databases['default']['default'],
+    [
+      'host' => $wodby['db']['host'],
+      'database' => $wodby['db']['name'],
+      'username' => $wodby['db']['username'],
+      'password' => $wodby['db']['password'],
+      'driver' => $wodby['db']['driver'],
+    ]
+  );
+}
 
 $conf['file_public_path'] = "sites/{$wodby['site']}/files";
 $conf['file_private_path'] = $wodby['files_dir'] . '/private';

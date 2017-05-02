@@ -50,20 +50,22 @@ if (!array_key_exists('file_scan_ignore_directories', $settings)) {
   ];
 }
 
-if (empty($databases['default']['default'])) {
-  $databases['default']['default'] = [];
-}
+if (!empty($wodby['db']['host'])) {
+  if (!isset($databases['default']['default'])) {
+    $databases['default']['default'] = [];
+  }
 
-$databases['default']['default'] = array_merge(
-  $databases['default']['default'],
-  [
-    'host' => $wodby['db']['host'],
-    'database' => $wodby['db']['name'],
-    'username' => $wodby['db']['username'],
-    'password' => $wodby['db']['password'],
-    'driver' => $wodby['db']['driver'],
-  ]
-);
+  $databases['default']['default'] = array_merge(
+    $databases['default']['default'],
+    [
+      'host' => $wodby['db']['host'],
+      'database' => $wodby['db']['name'],
+      'username' => $wodby['db']['username'],
+      'password' => $wodby['db']['password'],
+      'driver' => $wodby['db']['driver'],
+    ]
+  );
+}
 
 $settings['file_public_path'] = "sites/{$wodby['site']}/files";
 $settings['file_private_path'] = $wodby['files_dir'] . '/private';
