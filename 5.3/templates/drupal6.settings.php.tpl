@@ -85,6 +85,8 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $memcache_module_path = "$contrib_path_site/memcache";
   }
 
+  var_dump($memcache_module_path); die;
+
   if (!empty($wodby['memcached']['host']) && $memcache_module_path) {
     $conf['memcache_extension'] = 'memcached';
     $conf['cache_inc'] = "$memcache_module_path/memcache.inc";
