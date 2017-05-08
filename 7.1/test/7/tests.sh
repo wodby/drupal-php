@@ -7,7 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 checkRq() {
-    drush rq --format=json | jq ".\"${1}\".value" | grep -q $2
+    drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
     echo "OK"
 }
 
