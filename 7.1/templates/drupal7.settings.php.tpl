@@ -72,25 +72,37 @@ $conf['file_public_path'] = "sites/{$wodby['site']}/files";
 $conf['file_private_path'] = $wodby['files_dir'] . '/private';
 $conf['file_temporary_path'] = '/tmp';
 
-$contrib_path = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
-
 if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
-  if (!empty($wodby['varnish']['host']) && file_exists("$contrib_path/varnish")) {
+  $site_mods_dir = "sites/{$wodby['site']}/modules";
+  $contrib_path_all = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
+  $contrib_path_site = is_dir("$site_mods_dir/contrib") ? "$site_mods_dir/contrib" : $site_mods_dir;
+
+  $varnish_module_exists = file_exists("$contrib_path_all/varnish") || file_exists("$contrib_path_site/varnish");
+
+  if (!empty($wodby['varnish']['host']) && $varnish_module_exists) {
     $conf['varnish_version'] = $wodby['varnish']['version'];
     $conf['varnish_control_terminal'] = $wodby['varnish']['host'] . ':' . $wodby['varnish']['terminal_port'];
     $conf['varnish_control_key'] = $wodby['varnish']['secret'];
   }
 
-  if (!empty($wodby['redis']['host']) && file_exists("$contrib_path/redis")) {
+  $redis_module_path = NULL;
+
+  if (file_exists("$contrib_path_all/redis")) {
+    $redis_module_path = "$contrib_path_all/redis";
+  } elseif (file_exists("$contrib_path_site/redis")) {
+    $redis_module_path = "$contrib_path_site/redis";
+  }
+
+  if (!empty($wodby['redis']['host']) && $redis_module_path) {
     $conf['redis_client_host'] = $wodby['redis']['host'];
     $conf['redis_client_port'] = $wodby['redis']['port'];
     $conf['redis_client_password'] = $wodby['redis']['password'];
     $conf['redis_client_base'] = 0;
     $conf['redis_client_interface'] = 'PhpRedis';
-    $conf['cache_backends'][] = "$contrib_path/redis/redis.autoload.inc";
+    $conf['cache_backends'][] = "$redis_module_path/redis.autoload.inc";
     $conf['cache_default_class'] = 'Redis_Cache';
     $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
-    $conf['lock_inc'] = "$contrib_path/redis/redis.lock.inc";
-    $conf['path_inc'] = "$contrib_path/redis/redis.path.inc";
+    $conf['lock_inc'] = "$redis_module_path/redis.lock.inc";
+    $conf['path_inc'] = "$redis_module_path/redis.path.inc";
   }
 }

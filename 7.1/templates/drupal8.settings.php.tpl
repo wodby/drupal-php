@@ -79,10 +79,20 @@ if (!empty($wodby['hosts'])) {
   }
 }
 
-$contrib_path = is_dir('modules/contrib') ? 'modules/contrib' : 'modules';
-
 if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
-  if (!empty($wodby['redis']['host']) && file_exists("$contrib_path/redis")) {
+  $site_mods_dir = "sites/{$wodby['site']}/modules";
+  $contrib_path = is_dir('modules/contrib') ? 'modules/contrib' : 'modules';
+  $contrib_path_site = is_dir("$site_mods_dir/contrib") ? "$site_mods_dir/contrib" : $site_mods_dir;
+
+  $redis_module_path = NULL;
+
+  if (file_exists("$contrib_path/redis")) {
+    $redis_module_path = "$contrib_path/redis";
+  } elseif (file_exists("$contrib_path_site/redis")) {
+    $redis_module_path = "$contrib_path_site/redis";
+  }
+
+  if (!empty($wodby['redis']['host']) && $redis_module_path) {
     $settings['redis.connection']['host'] = $wodby['redis']['host'];
     $settings['redis.connection']['port'] = $wodby['redis']['port'];
     $settings['redis.connection']['password'] = $wodby['redis']['password'];
@@ -93,6 +103,6 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $settings['cache']['bins']['discovery'] = 'cache.backend.chainedfast';
     $settings['cache']['bins']['config'] = 'cache.backend.chainedfast';
 
-    $settings['container_yamls'][] = "$contrib_path/redis/example.services.yml";
+    $settings['container_yamls'][] = "$redis_module_path/example.services.yml";
   }
 }
