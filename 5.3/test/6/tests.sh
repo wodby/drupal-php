@@ -7,7 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 checkRq() {
-    drush rq --fields=title,description | grep "${1}\s\+${2}"
+    drush rq --fields=title,description | grep -q "${1}\s\+${2}"
     echo "OK"
 }
 
@@ -65,6 +65,7 @@ echo -n "Checking Drupal temporary file directory path... "
 checkStatus "temp" "/tmp"
 
 echo -n "Checking memcached connection... "
+drush rq --fields=title,description
 checkRq "Memcache" "2.*"
 
 echo -n "Checking Drupal file system permissions... "
