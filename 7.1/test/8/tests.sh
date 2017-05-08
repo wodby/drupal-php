@@ -2,7 +2,9 @@
 
 set -e
 
+if [[ -n "${DEBUG}" ]]; then
   set -x
+fi
 
 checkRq() {
     drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
@@ -34,6 +36,22 @@ fi
 
 DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
 FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import-test/files.tar.gz"
+
+composer create-project "drupal-composer/drupal-project:${DRUPAL_VERSION}.x-dev" "${APP_ROOT}" --stability dev --no-interaction
+composer require drupal/redis
+
+cd "${DRUPAL_ROOT}"
+
+drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+drush en redis -y --quiet
+drush archive-dump -y --destination=/tmp/drush-archive.tar.gz
+drush sql-drop -y
+
+runAction drush-import source=/tmp/drush-archive.tar.gz
+runAction files-import source="${FILES_ARCHIVE_URL}"
+runAction init-drupal
+runAction cache-clear target=render
+runAction cache-rebuild
 
 echo -n "Checking drupal console launcher... "
 drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
