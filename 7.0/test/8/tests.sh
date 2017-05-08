@@ -7,7 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 checkRq() {
-    drush rq --fields=title,description | grep -q "${1}\s\+${2}"
+    drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
     echo "OK"
 }
 
@@ -82,16 +82,16 @@ echo -n "Checking Drupal sync config path... "
 checkStatus "config-sync" "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
 echo -n "Checking redis connection... "
-checkRq "Redis" "Connected, using the PhpRedis client"
+checkRq "redis" "Connected, using the \u003cem\u003ePhpRedis\u003c\/em\u003e client"
 
 echo -n "Checking trusted host settings... "
-checkRq "Trusted Host Settings" "Enabled"
+checkRq "trusted_host_patterns" "Enabled"
 
 echo -n "Checking Drupal file system permissions... "
-checkRq "File system" "Writable (public download method)"
+checkRq "file system" "Writable (<em>public</em> download method)"
 
 echo -n "Checking settings.php permissions... "
-checkRq "Configuration files" "Protected"
+checkRq "configuration_files" "Protected"
 
 echo -n "Checking trusted hosts... "
 drush rq --format=yaml | grep "trusted_host_patterns setting" | \

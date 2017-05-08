@@ -66,10 +66,10 @@ $conf['file_directory_temp'] = '/tmp';
 
 if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
   $site_mods_dir = "sites/{$wodby['site']}/modules";
-  $contrib_path_all = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
+  $contrib_path = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
   $contrib_path_site = is_dir("$site_mods_dir/contrib") ? "$site_mods_dir/contrib" : $site_mods_dir;
 
-  $varnish_module_exists = file_exists("$contrib_path_all/varnish") || file_exists("$contrib_path_site/varnish");
+  $varnish_module_exists = file_exists("$contrib_path/varnish") || file_exists("$contrib_path_site/varnish");
 
   if (!empty($wodby['varnish']['host']) && $varnish_module_exists) {
     $conf['varnish_version'] = $wodby['varnish']['version'];
@@ -79,8 +79,8 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
 
   $memcache_module_path = NULL;
 
-  if (file_exists("$contrib_path_all/memcache")) {
-    $memcache_module_path = "$contrib_path_all/memcache";
+  if (file_exists("$contrib_path/memcache")) {
+    $memcache_module_path = "$contrib_path/memcache";
   } elseif (file_exists("$contrib_path_site/memcache")) {
     $memcache_module_path = "$contrib_path_site/memcache";
   }

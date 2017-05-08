@@ -7,7 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 checkRq() {
-    drush rq --fields=title,description | grep -q "${1}\s\+${2}"
+    drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
     echo "OK"
 }
 
@@ -68,13 +68,13 @@ echo -n "Checking Drupal temporary file directory path... "
 checkStatus "temp" "/tmp"
 
 echo -n "Checking memcached connection... "
-checkRq "Memcache" "2.*"
+checkRq "memcache_extension" "2.*"
 
 echo -n "Checking Drupal file system permissions... "
-checkRq "File system" "Writable (public download method)"
+checkRq "file system" "Writable (<em>public</em> download method)"
 
 echo -n "Checking settings.php permissions... "
-checkRq "Configuration file" "Protected"
+checkRq "settings.php" "Protected"
 
 echo -n "Checking imported files... "
 curl -s -I -H "host: ${DRUPAL_DOMAIN}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"

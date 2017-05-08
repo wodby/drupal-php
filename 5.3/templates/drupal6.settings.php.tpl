@@ -64,18 +64,30 @@ if (!empty($wodby['db']['host'])) {
 $conf['file_directory_path'] = "sites/{$wodby['site']}/files";
 $conf['file_directory_temp'] = '/tmp';
 
-$contrib_path = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
-
 if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
-  if (!empty($wodby['varnish']['host']) && file_exists("$contrib_path/varnish")) {
+  $site_mods_dir = "sites/{$wodby['site']}/modules";
+  $contrib_path = is_dir('sites/all/modules/contrib') ? 'sites/all/modules/contrib' : 'sites/all/modules';
+  $contrib_path_site = is_dir("$site_mods_dir/contrib") ? "$site_mods_dir/contrib" : $site_mods_dir;
+
+  $varnish_module_exists = file_exists("$contrib_path/varnish") || file_exists("$contrib_path_site/varnish");
+
+  if (!empty($wodby['varnish']['host']) && $varnish_module_exists) {
     $conf['varnish_version'] = $wodby['varnish']['version'];
     $conf['varnish_control_terminal'] = $wodby['varnish']['host'] . ':' . $wodby['varnish']['terminal_port'];
     $conf['varnish_control_key'] = $wodby['varnish']['secret'];
   }
 
-  if (!empty($wodby['memcached']['host']) && file_exists("$contrib_path/memcache")) {
+  $memcache_module_path = NULL;
+
+  if (file_exists("$contrib_path/memcache")) {
+    $memcache_module_path = "$contrib_path/memcache";
+  } elseif (file_exists("$contrib_path_site/memcache")) {
+    $memcache_module_path = "$contrib_path_site/memcache";
+  }
+
+  if (!empty($wodby['memcached']['host']) && $memcache_module_path) {
     $conf['memcache_extension'] = 'memcached';
-    $conf['cache_inc'] = "$contrib_path/memcache/memcache.inc";
+    $conf['cache_inc'] = "$memcache_module_path/memcache.inc";
     $conf['memcache_servers'] = array($wodby['memcached']['host'] . ':' . $wodby['memcached']['port'] => 'default');
     $conf['memcache_key_prefix'] = substr($drupal_hash_salt, -10);
     $conf['memcache_bins'] = array(
