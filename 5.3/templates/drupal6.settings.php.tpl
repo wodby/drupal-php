@@ -85,11 +85,10 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $memcache_module_path = "$contrib_path_site/memcache";
   }
 
-  var_dump($memcache_module_path); die;
-
   if (!empty($wodby['memcached']['host']) && $memcache_module_path) {
     $conf['memcache_extension'] = 'memcached';
     $conf['cache_inc'] = "$memcache_module_path/memcache.inc";
+    var_dump($conf['cache_inc']);
     $conf['memcache_servers'] = array($wodby['memcached']['host'] . ':' . $wodby['memcached']['port'] => 'default');
     $conf['memcache_key_prefix'] = substr($drupal_hash_salt, -10);
     $conf['memcache_bins'] = array(

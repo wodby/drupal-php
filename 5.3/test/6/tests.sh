@@ -7,7 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 checkRq() {
-    drush rq --fields=title,description | grep -q "${1}\s\+${2}"
+    drush rq --fields=title,description | grep "${1}\s\+${2}"
     echo "OK"
 }
 
