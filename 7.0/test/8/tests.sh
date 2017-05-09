@@ -54,7 +54,8 @@ runAction cache-clear target=render
 runAction cache-rebuild
 
 echo -n "Checking drupal console launcher... "
-drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
+# TODO: return after fix: https://github.com/hechoendrupal/drupal-console/issues/3301
+#drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
 echo "OK"
 
 echo -n "Checking drush version... "
