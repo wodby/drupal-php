@@ -3,6 +3,10 @@ FROM wodby/php:7.0
 ENV WODBY_DIR_FILES /mnt/files
 ENV WODBY_DIR_CONF /var/www/conf
 
+ENV PHP_SESSION_COOKIE_LIFETIME 2000000
+ENV PHP_SESSION_GC_MAXLIFETIME 2000000
+ENV PHP_REALPATH_CACHE_SIZE 3600
+
 RUN su-exec www-data composer global require drush/drush && \
     su-exec www-data composer clear-cache && \
     curl https://drupalconsole.com/installer -L -o drupal.phar && \
