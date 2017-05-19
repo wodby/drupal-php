@@ -20,10 +20,10 @@ runAction() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
-if [[ "${DOCROOT_SUBDIR}" == "" ]]; then
-	DRUPAL_ROOT="${DOCROOT_SUBDIR}"
-else
+if [[ -n "${DOCROOT_SUBDIR}" ]]; then
 	DRUPAL_ROOT="${APP_ROOT}/${DOCROOT_SUBDIR}"
+else
+	DRUPAL_ROOT="${APP_ROOT}"
 fi
 
 echo -n "Checking environment variables... "
@@ -54,8 +54,7 @@ runAction cache-clear target=render
 runAction cache-rebuild
 
 echo -n "Checking drupal console launcher... "
-# TODO: return after fix: https://github.com/hechoendrupal/drupal-console/issues/3301
-#drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
+drupal -V --root=/var/www | grep -q "Launcher"
 echo "OK"
 
 echo -n "Checking drush version... "

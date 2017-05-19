@@ -28,10 +28,10 @@ env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=
 echo "OK"
 
-if [[ "${DOCROOT_SUBDIR}" == "" ]]; then
-	DRUPAL_ROOT="${DOCROOT_SUBDIR}"
-else
+if [[ -n "${DOCROOT_SUBDIR}" ]]; then
 	DRUPAL_ROOT="${APP_ROOT}/${DOCROOT_SUBDIR}"
+else
+	DRUPAL_ROOT="${APP_ROOT}"
 fi
 
 DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
@@ -54,8 +54,7 @@ runAction cache-clear target=render
 runAction cache-rebuild
 
 echo -n "Checking drupal console launcher... "
-# TODO: return after fix: https://github.com/hechoendrupal/drupal-console/issues/3301
-#drupal -V --root=/var/www | grep -q "Drupal Console Launcher"
+drupal -V --root=/var/www | grep -q "Launcher"
 echo "OK"
 
 echo -n "Checking drush version... "

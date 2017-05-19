@@ -28,10 +28,10 @@ env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=
 echo "OK"
 
-if [[ "${DOCROOT_SUBDIR}" == "" ]]; then
-	DRUPAL_ROOT="${DOCROOT_SUBDIR}"
-else
+if [[ -n "${DOCROOT_SUBDIR}" ]]; then
 	DRUPAL_ROOT="${APP_ROOT}/${DOCROOT_SUBDIR}"
+else
+	DRUPAL_ROOT="${APP_ROOT}"
 fi
 
 DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
