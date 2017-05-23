@@ -18,13 +18,14 @@ To get full docker-based environment for Drupal see [Docker4Drupal](http://docke
 
 | Environment Variable | Default Value | Description |
 | -------------------- | ------------- | ----------- |
-| PHP_SESSION_COOKIE_LIFETIME | 2000000 | |
-| PHP_SESSION_GC_MAXLIFETIME  | 2000000 | |
-| PHP_REALPATH_CACHE_SIZE     | 64k     | <= 5.6 |
-| PHP_REALPATH_CACHE_TTL      | 3600    | |
-| PHP_OUTPUT_BUFFERING        | 16384   | |
-| PHP_MBSTRING_HTTP_INPUT     | pass    | 5.6 |
-| PHP_MBSTRING_HTTP_OUTPUT    | pass    | 5.6 |
+| PHP_ALWAYS_POPULATE_RAW_POST_DATA | -1    | <= 5.6 |
+| PHP_MBSTRING_ENCODING_TRANSLATION | Off   | <= 5.6 |
+| PHP_MBSTRING_HTTP_INPUT           | pass  | <= 5.6 |
+| PHP_MBSTRING_HTTP_OUTPUT          | pass  | <= 5.6 |
+| PHP_OUTPUT_BUFFERING              | 16384 | |
+| PHP_REALPATH_CACHE_SIZE           | 64k   | <= 5.6 |
+| PHP_REALPATH_CACHE_TTL            | 3600  | |
+| PHP_SESSION_AUTO_START            | 0     | <= 5.6 |
 
 See more at [wodby/php](https://github.com/wodby/php)
 
