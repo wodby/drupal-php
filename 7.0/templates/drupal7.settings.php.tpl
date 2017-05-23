@@ -106,3 +106,10 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $conf['path_inc'] = "$redis_module_path/redis.path.inc";
   }
 }
+
+ini_set('session.gc_probability', 1);
+ini_set('session.gc_divisor', 100);
+ini_set('session.gc_maxlifetime', 200000);
+ini_set('session.cookie_lifetime', 2000000);
+ini_set('pcre.backtrack_limit', 200000);
+ini_set('pcre.recursion_limit', 200000);
