@@ -16,7 +16,17 @@ To get full docker-based environment for Drupal see [Docker4Drupal](http://docke
 
 ## Environment variables available for customization
 
-See at [wodby/php](https://github.com/wodby/php)
+| Environment Variable | Default Value | Description |
+| -------------------- | ------------- | ----------- |
+| PHP_SESSION_COOKIE_LIFETIME | 2000000 | |
+| PHP_SESSION_GC_MAXLIFETIME  | 2000000 | |
+| PHP_REALPATH_CACHE_SIZE     | 64k     | <= 5.6 |
+| PHP_REALPATH_CACHE_TTL      | 3600    | |
+| PHP_OUTPUT_BUFFERING        | 16384   | |
+| PHP_MBSTRING_HTTP_INPUT     | pass    | 5.6 |
+| PHP_MBSTRING_HTTP_OUTPUT    | pass    | 5.6 |
+
+See more at [wodby/php](https://github.com/wodby/php)
 
 ## Using in production
 
