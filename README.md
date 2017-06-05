@@ -5,8 +5,6 @@
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
 [![Wodby Slack](http://slack.wodby.com/badge.svg)](http://slack.wodby.com)
 
-To get full docker-based environment for Drupal see [Docker4Drupal](http://docker4drupal.org)
-
 ## Supported tags and respective `Dockerfile` links
 
 - [`7.1-2.4.0`, `7.1`, `latest` (*7.1/Dockerfile*)](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile)
