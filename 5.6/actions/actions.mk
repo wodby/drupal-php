@@ -9,6 +9,9 @@ __check_defined = \
     $(if $(value $1),, \
       $(error Required parameter is missing: $1$(if $2, ($2))))
 
+is_hash ?= 0
+target ?= all
+
 ifeq ("$(DOCROOT_SUBDIR)", "")
 	DRUPAL_ROOT=$(APP_ROOT)
 else
@@ -20,7 +23,6 @@ DRUPAL_SITE_DIR="$(DRUPAL_ROOT)/sites/$(DRUPAL_SITE)"
 default: cache-clear
 
 git-checkout:
-	is_hash ?= 0
 	$(call check_defined, target)
 	rm -f $(DRUPAL_SITE_DIR)/files
 	chmod 755 $(DRUPAL_SITE_DIR) || true
@@ -38,7 +40,6 @@ init-drupal:
 	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) init-drupal.sh
 
 cache-clear:
-	target ?= all
 	drush -r $(DRUPAL_ROOT) cache-clear $(target)
 
 cache-rebuild:
