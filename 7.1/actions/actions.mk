@@ -10,7 +10,6 @@ __check_defined = \
       $(error Required parameter is missing: $1$(if $2, ($2))))
 
 is_hash ?= 0
-target ?= all
 
 ifeq ("$(DOCROOT_SUBDIR)", "")
 	DRUPAL_ROOT=$(APP_ROOT)
@@ -40,6 +39,7 @@ init-drupal:
 	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) init-drupal.sh
 
 cache-clear:
+	target ?= all
 	drush -r $(DRUPAL_ROOT) cache-clear $(target)
 
 cache-rebuild:
