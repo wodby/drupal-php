@@ -37,7 +37,12 @@ echo "OK"
 DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
 FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import-test/files.tar.gz"
 
-composer create-project "drupal-composer/drupal-project:${DRUPAL_VERSION}.x-dev" "${APP_ROOT}" --stability dev --no-interaction
+GIT_URL="https://github.com/drupal-composer/drupal-project.git"
+
+make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
+make git-checkout target=8.x -f /usr/local/bin/actions.mk
+
+composer install
 composer require drupal/redis
 
 cd "${DRUPAL_ROOT}"

@@ -7,6 +7,7 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 source=$1
+
 tmp_source_dir="/tmp/source"
 
 [[ -d "${tmp_source_dir}" ]] && rm -rf "${tmp_source_dir}"
@@ -37,7 +38,7 @@ mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "${sql_fil
 
 tmp_dir_codebase=$(find -type d ! -path . -maxdepth 1)
 tmp_dir_files="${tmp_dir_codebase}/sites/${DRUPAL_SITE}/files"
-chmod -f 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}"
+chmod 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}" || true
 
 # Import files.
 if [[ -d "${tmp_dir_files}/private" ]]; then

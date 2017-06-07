@@ -12,6 +12,8 @@ RUN su-exec www-data composer global require drush/drush && \
     mv drupal.phar /usr/local/bin/drupal && \
     chmod +x /usr/local/bin/drupal && \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk && \
+    # Change overridden target name to avoid warnings.
+    sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk && \
     mkdir -p $WODBY_DIR_FILES $WODBY_DIR_CONF && \
     chown -R www-data:www-data $WODBY_DIR_CONF
 

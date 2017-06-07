@@ -36,13 +36,13 @@ fi
 rm "${archive_file}"
 
 if [[ -d "${tmp_dir}/private" ]]; then
-    rsync -rlt --delete --force "${tmp_dir}/private/" "${WODBY_DIR_FILES}/private/"
+    rsync -rlt --force "${tmp_dir}/private/" "${WODBY_DIR_FILES}/private/"
 fi
 
 if [[ -d "${tmp_dir}/public" ]]; then
-    rsync -rlt --delete --force "${tmp_dir}/public/" "${WODBY_DIR_FILES}/public/"
+    rsync -rlt --force "${tmp_dir}/public/" "${WODBY_DIR_FILES}/public/"
 else
-    rsync -rlt --delete --force "${tmp_dir}/" "${WODBY_DIR_FILES}/public/"
+    rsync -rlt --force "${tmp_dir}/" "${WODBY_DIR_FILES}/public/"
 fi
 
 rm -rf "${tmp_dir}"

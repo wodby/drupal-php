@@ -9,6 +9,7 @@ __check_defined = \
     $(if $(value $1),, \
       $(error Required parameter is missing: $1$(if $2, ($2))))
 
+is_hash ?= 0
 target ?= all
 
 ifeq ("$(DOCROOT_SUBDIR)", "")
@@ -20,6 +21,12 @@ endif
 DRUPAL_SITE_DIR="$(DRUPAL_ROOT)/sites/$(DRUPAL_SITE)"
 
 default: cache-clear
+
+git-checkout:
+	$(call check_defined, target)
+	rm -f $(DRUPAL_SITE_DIR)/files
+	chmod 755 $(DRUPAL_SITE_DIR) || true
+	git-checkout.sh $(target) $(is_hash)
 
 drush-import:
 	$(call check_defined, source)

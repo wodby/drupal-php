@@ -37,17 +37,17 @@ mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "${sql_fil
 
 tmp_dir_codebase=$(find -type d ! -path . -maxdepth 1)
 tmp_dir_files="${tmp_dir_codebase}/sites/${DRUPAL_SITE}/files"
-chmod -f 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}"
+chmod 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}" || true
 
 # Import files.
 if [[ -d "${tmp_dir_files}/private" ]]; then
-    rsync -rlt --delete --force "${tmp_dir_files}/private/" "${WODBY_DIR_FILES}/private/"
+    rsync -rlt --force "${tmp_dir_files}/private/" "${WODBY_DIR_FILES}/private/"
 fi
 
 if [[ -d "${tmp_dir_files}/public" ]]; then
-    rsync -rlt --delete --force "${tmp_dir_files}/public/" "${WODBY_DIR_FILES}/public/"
+    rsync -rlt --force "${tmp_dir_files}/public/" "${WODBY_DIR_FILES}/public/"
 elif [[ -d "${tmp_dir_files}" ]]; then
-    rsync -rlt --delete --force "${tmp_dir_files}/" "${WODBY_DIR_FILES}/public/"
+    rsync -rlt --force "${tmp_dir_files}/" "${WODBY_DIR_FILES}/public/"
 fi
 
 rm -rf "${tmp_source_dir}"
