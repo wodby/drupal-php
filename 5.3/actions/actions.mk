@@ -24,8 +24,8 @@ default: cache-clear
 
 git-checkout:
 	$(call check_defined, target)
-	rm -f $(DRUPAL_SITE_DIR)/files
 	chmod 755 $(DRUPAL_SITE_DIR) || true
+	rm -f $(DRUPAL_SITE_DIR)/files
 	git-checkout.sh $(target) $(is_hash)
 
 drush-import:
