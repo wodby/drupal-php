@@ -27,8 +27,15 @@ if [[ ! "${archive_file}" =~ \.tar.gz$ ]]; then
     exit 1
 fi
 
+tar -zxf "${archive_file}" --delay-directory-restore
+
+# Enter parent directory.
+if [[ ! -f "MANIFEST.ini" ]]; then
+    subdir=$(find -type d ! -path . -maxdepth 1)
+    cd "${subdir}"
+fi
+
 # Import db.
-tar -zxf "${archive_file}"
 sql_file=$(find -type f -name "*.sql" -maxdepth 1)
 
 mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" -e "DROP DATABASE IF EXISTS ${DB_NAME};"
