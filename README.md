@@ -11,7 +11,14 @@ Images are built via [Travis CI](https://travis-ci.org/wodby/drupal-php) and pub
 
 ## Versions
 
-See [wodby/php versions](https://github.com/wodby/php#versions)
+| PHP | Alpine Linux |
+| --- | ------------ |
+| [7.1](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 3.6 |  
+| [7.0](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile) | 3.6 |  
+| [5.6](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile) | 3.6 |  
+| [5.3](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile) | 3.4 |  
+
+See exact PHP version at [wodby/php](https://github.com/wodby/php#versions)
 
 ## Environment Variables
 
