@@ -1,10 +1,10 @@
 FROM wodby/php:7.0
 
-ENV WODBY_DIR_FILES /mnt/files
-ENV WODBY_DIR_CONF /var/www/conf
+ENV WODBY_DIR_FILES="/mnt/files" \
+    WODBY_DIR_CONF="/var/www/conf" \
 
-ENV PHP_REALPATH_CACHE_TTL 3600
-ENV PHP_OUTPUT_BUFFERING 16384
+    PHP_REALPATH_CACHE_TTL="3600" \
+    PHP_OUTPUT_BUFFERING="16384"
 
 RUN su-exec www-data composer global require drush/drush && \
     su-exec www-data composer clear-cache && \
