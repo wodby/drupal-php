@@ -15,10 +15,10 @@ target ?= all
 ifeq ("$(DOCROOT_SUBDIR)", "")
 	DRUPAL_ROOT=$(APP_ROOT)
 else
-	DRUPAL_ROOT="$(APP_ROOT)/$(DOCROOT_SUBDIR)"
+	DRUPAL_ROOT=$(APP_ROOT)/$(DOCROOT_SUBDIR)
 endif
 
-DRUPAL_SITE_DIR="$(DRUPAL_ROOT)/sites/$(DRUPAL_SITE)"
+DRUPAL_SITE_DIR=$(DRUPAL_ROOT)/sites/$(DRUPAL_SITE)
 
 default: cache-clear
 
