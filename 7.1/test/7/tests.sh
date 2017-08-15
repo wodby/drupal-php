@@ -25,8 +25,7 @@ drupal | grep -q "Drupal Console"
 echo "OK"
 
 echo -n "Checking drush... "
-drush version
-drush version | grep -q "Drush Version"
+drush version --format=yaml | grep -q "8.*"
 echo "OK"
 
 echo -n "Checking drush patchfile... "

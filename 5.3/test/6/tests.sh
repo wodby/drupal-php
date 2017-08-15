@@ -21,7 +21,7 @@ runAction() {
 }
 
 echo -n "Checking drush... "
-drush version | grep -q "7.4.0"
+drush version --format=yaml | grep -q "7.4.0"
 echo "OK"
 
 echo -n "Checking drush patchfile... "
