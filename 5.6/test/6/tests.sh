@@ -20,6 +20,18 @@ runAction() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
+echo -n "Checking drush... "
+drush version | grep -q "Drush Version"
+echo "OK"
+
+echo -n "Checking drush patchfile... "
+drush patch-add --help | grep -q "Aliases: pa"
+echo "OK"
+
+echo -n "Checking drush registry rebuild... "
+drush registry-rebuild --help | grep -q "Aliases: rr"
+echo "OK"
+
 echo -n "Checking environment variables... "
 env | grep -q ^WODBY_DIR_CONF=
 env | grep -q ^WODBY_DIR_FILES=
@@ -42,6 +54,9 @@ drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_N
 drush archive-dump -y --destination=/tmp/drush-archive.tar.gz
 drush sql-drop -y
 
+# Normally drupal installation can't happen before drupal-init, we don't expect files dir here.
+chmod 755 "sites/${DRUPAL_SITE}"
+rm -rf "sites/${DRUPAL_SITE}/files"
 runAction drush-import source=/tmp/drush-archive.tar.gz
 runAction files-import source="${FILES_ARCHIVE_URL}"
 runAction init-drupal

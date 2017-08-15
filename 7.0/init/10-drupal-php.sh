@@ -12,7 +12,8 @@ execTpl() {
     fi
 }
 
-chown www-data:www-data "${WODBY_DIR_FILES}"
+mkdir -p "${WODBY_DIR_FILES}/private" "${WODBY_DIR_FILES}/public"
+chown www-data:www-data "${WODBY_DIR_FILES}" "${WODBY_DIR_FILES}/private" "${WODBY_DIR_FILES}/public"
 
 if [[ -n "${DRUPAL_VERSION}" ]]; then
     if [[ "${DRUPAL_VERSION}" == "7" ]] || [[ "${DRUPAL_VERSION}" == "8" ]]; then

@@ -35,12 +35,10 @@ if [[ "${DRUPAL_SITE}" != "default" ]]; then
 fi
 
 DRUPAL_SITE_FILES="${DRUPAL_SITE_DIR}/files"
-mkdir -p "${DRUPAL_SITE_FILES}"
 
-# Sync and symlink files dir if it's not symlink already.
-if [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
-    mkdir -p "${WODBY_DIR_FILES}/public"
-    rsync -rlt --force "${DRUPAL_SITE_FILES}/" "${WODBY_DIR_FILES}/public/"
-    rm -rf "${DRUPAL_SITE_DIR}/files"
-    ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_DIR}/files"
+if [[ ! -d "${DRUPAL_SITE_FILES}" ]]; then
+    ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_FILES}"
+elif [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
+    echo "Error: directory ${DRUPAL_SITE_FILES} can not be under version control and must not exists"
+    exit 1
 fi
