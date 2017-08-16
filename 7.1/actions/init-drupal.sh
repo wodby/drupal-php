@@ -36,14 +36,21 @@ fi
 
 DRUPAL_SITE_FILES="${DRUPAL_SITE_DIR}/files"
 
-if [[ ! -d "${DRUPAL_SITE_FILES}" ]]; then
+if [[ -d "${DRUPAL_SITE_FILES}" ]]; then
+    if [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
+        if find "${DRUPAL_SITE_FILES}" -mindepth 1 -print -quit | grep -q .; then
+            echo "Error: directory ${DRUPAL_SITE_FILES} can not be under version control and must not exists"
+            exit 1
+        # If dir is not symlink and empty, remove it and link.
+        else
+            rm -rf "${DRUPAL_SITE_FILES}"
+            ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_FILES}"
+        fi
+    fi
+else
     ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_FILES}"
-elif [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
-    echo "Error: directory ${DRUPAL_SITE_FILES} can not be under version control and must not exists"
-    exit 1
 fi
 
 if [[ "${DRUPAL_VERSION}" == "8" ]]; then
     mkdir -p "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 fi
-
