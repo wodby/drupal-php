@@ -39,7 +39,7 @@ DRUPAL_SITE_FILES="${DRUPAL_SITE_DIR}/files"
 if [[ -d "${DRUPAL_SITE_FILES}" ]]; then
     if [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
         if [[ "$(ls -A "${DRUPAL_SITE_FILES}")" ]]; then
-            echo "Error: directory ${DRUPAL_SITE_FILES} is not empty. Files directory can not be under version control and must not exists"
+            echo "Error: directory ${DRUPAL_SITE_FILES} exists and is not empty. The files directory can not be under version control or must be empty."
             exit 1
         # If dir is not symlink and empty, remove it and link.
         else
