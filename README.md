@@ -22,10 +22,10 @@ See [wodby/php](https://github.com/wodby/php#versions) for exact PHP version
 
 ## Tools
 
-[Drupal Console Launcher](https://drupalconsole.com)
-[Drush](https://packagist.org/packages/drush/drush)
-[Drush Registry Rebuild](https://www.drupal.org/project/registry_rebuild)
-[Drush Patchfile](https://bitbucket.org/davereid/drush-patchfile)
+[Drupal Console Launcher]: https://drupalconsole.com
+[Drush]: https://packagist.org/packages/drush/drush
+[Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
+[Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
 
 | Tool                       | 7.1     | 7.0     | 5.6     | 5.3     |
 | -------------------------- | ------- | ------- | ------- | ------- |
