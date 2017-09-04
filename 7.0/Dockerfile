@@ -1,4 +1,4 @@
-FROM wodby/php:7.0-2.4.7
+FROM wodby/php:7.0-2.4.8
 
 ENV WODBY_DIR_FILES="/mnt/files" \
     WODBY_DIR_CONF="/var/www/conf" \
