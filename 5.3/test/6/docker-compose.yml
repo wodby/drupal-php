@@ -38,7 +38,8 @@ services:
       DRUPAL_SITE: default
       DRUPAL_HASH_SALT: drupal-bad-hash-salt
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
-      WODBY_HOSTS: drupal6.test/drupal6.wodby.wod.by/test.drupal6.wodby.wod.by
+      WODBY_HOSTS: |-
+        ["drupal6.test", "drupal6.wodby.wod.by", "test.drupal6.wodby.wod.by"]
       WODBY_HOST_PRIMARY: http://drupal6.test
       DB_HOST: mariadb
       DB_USER: drupal
