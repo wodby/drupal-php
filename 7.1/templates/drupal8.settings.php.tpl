@@ -4,7 +4,7 @@
  * Wodby environment configuration for Drupal 8.
  */
 
-{{ $hosts := split (getenv "WODBY_HOSTS" "" ) "/" }}{{ range $hosts }}
+{{ range jsonArray (getenv "WODBY_HOSTS") }}
 $wodby['hosts'][] = '{{ . }}';
 {{ end }}
 
