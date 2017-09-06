@@ -2,6 +2,6 @@
 
 $site = {{ getenv "DRUPAL_SITE" "default" }};
 
-{{ range jsonArray (getenv "WODBY_HOSTS") }}
+{{ if getenv "WODBY_HOSTS" }}{{ range jsonArray (getenv "WODBY_HOSTS") }}
 $sites['{{ . }}'] = $site;
-{{ end }}
+{{ end }}{{ end }}

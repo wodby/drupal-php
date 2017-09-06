@@ -4,9 +4,9 @@
  * Wodby environment configuration for Drupal 8.
  */
 
-{{ range jsonArray (getenv "WODBY_HOSTS") }}
+{{ if getenv "WODBY_HOSTS" }}{{ range jsonArray (getenv "WODBY_HOSTS") }}
 $wodby['hosts'][] = '{{ . }}';
-{{ end }}
+{{ end }}{{ end }}
 
 $wodby['files_dir'] = '{{ getenv "WODBY_DIR_FILES" }}';
 $wodby['site'] = '{{ getenv "DRUPAL_SITE" }}';
