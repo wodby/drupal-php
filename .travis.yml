@@ -9,14 +9,21 @@ env:
   global:
     - LATEST_VERSION=7.1
   matrix:
-    - VERSION=5.3
-    - VERSION=5.6
-    - VERSION=7.0
-    - VERSION=7.1
+    - VERSION=7.1 DEBUG=0
+    - VERSION=7.0 DEBUG=0
+    - VERSION=5.6 DEBUG=0
+    - VERSION=5.3 DEBUG=0
+    - VERSION=7.1 DEBUG=1
+    - VERSION=7.0 DEBUG=1
+    - VERSION=5.6 DEBUG=1
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce=17.06.2~ce-0~ubuntu
 
 script:
   - cd ./$VERSION
-  - make && make test
+  - make DEBUG=$DEBUG && make test DEBUG=$DEBUG
 
 after_success: |
   if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
@@ -24,12 +31,10 @@ after_success: |
     make release
 
     if [ -n "$TRAVIS_TAG" ]; then
-      make VERSION="$VERSION-$TRAVIS_TAG" release
+      make release VERSION="$VERSION-$TRAVIS_TAG" DEBUG=$DEBUG
     fi
 
-    if [ "$VERSION" == "$LATEST_VERSION" ]; then
-      make VERSION=latest release
+    if [ "$VERSION" == "$LATEST_VERSION" && $DEBUG != 1 ]; then
+      make release VERSION=latest
     fi
   fi
-
-after_failure: make logs

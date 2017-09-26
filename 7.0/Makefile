@@ -4,11 +4,21 @@ VERSION ?= 7.0
 
 REPO = wodby/drupal-php
 NAME = drupal-php-$(VERSION)
+DEBUG = 0
+FROM_TAG = 7.0
+
+ifeq ($(DEBUG), 1)
+    override VERSION := $(VERSION)-debug
+    FROM_TAG := $(FROM_TAG)-debug
+    NAME := $(NAME)-debug
+endif
 
 .PHONY: build test push shell run start stop logs clean release
 
+default: build
+
 build:
-	docker build -t $(REPO):$(VERSION) ./
+	docker build -t $(REPO):$(VERSION) --build-arg FROM_TAG=$(FROM_TAG) ./
 
 test:
 	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
@@ -35,7 +45,4 @@ logs:
 clean:
 	-docker rm -f $(NAME)
 
-release: build
-	make push -e VERSION=$(VERSION)
-
-default: build
+release: build push

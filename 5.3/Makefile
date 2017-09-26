@@ -7,6 +7,8 @@ NAME = drupal-php-$(VERSION)
 
 .PHONY: build test push shell run start stop logs clean release
 
+default: build
+
 build:
 	docker build -t $(REPO):$(VERSION) ./
 
@@ -34,7 +36,4 @@ logs:
 clean:
 	-docker rm -f $(NAME)
 
-release: build
-	make push -e VERSION=$(VERSION)
-
-default: build
+release: build push
