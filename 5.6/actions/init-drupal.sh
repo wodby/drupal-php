@@ -26,10 +26,14 @@ fi
 
 # Include wodby.sites.php for Drupal 7 and 8.
 if [[ "${DRUPAL_SITE}" != "default" ]]; then
-    if [[ "${DRUPAL_VERSION}" == "8" ]] || [[ "${DRUPAL_VERSION}" == "7" ]]; then
+    if [[ "${DRUPAL_VERSION}" == "8" || "${DRUPAL_VERSION}" == "7" ]]; then
+        if [[ ! -f "${sites_php}" ]]; then
+            echo -e "<?php\n\n" > "${sites_php}"
+        fi
+
         if [[ $( grep -ic "wodby.sites.php" "${sites_php}" ) -eq 0 ]]; then
             echo -e "${disclaimer}" >> "${sites_php}"
-            echo -e "include '${WODBY_DIR_CONF}/wodby.settings.php';" >> "${sites_php}"
+            echo -e "include '${WODBY_DIR_CONF}/wodby.sites.php';" >> "${sites_php}"
         fi
     fi
 fi

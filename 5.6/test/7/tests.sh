@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: test sites.php entries
+
 set -e
 
 if [[ -n "${DEBUG}" ]]; then
