@@ -35,11 +35,24 @@ fi
 
 rm "${archive_file}"
 
+if [[ ! -d "${tmp_dir}/.wodby" ]]; then
+    warning=1
+fi
+
+# TODO: deprecate /private /public import from non-wodby backups.
 if [[ -d "${tmp_dir}/private" ]]; then
+    if [[ -n "${warning}" ]]; then
+        "Directory /private detected. We consider it for drupal private files dir."
+    fi
+
     rsync -rlt --force "${tmp_dir}/private/" "${WODBY_DIR_FILES}/private/"
 fi
 
 if [[ -d "${tmp_dir}/public" ]]; then
+    if [[ -n "${warning}" ]]; then
+        "Directory /public detected. We consider it for drupal public files dir."
+    fi
+
     rsync -rlt --force "${tmp_dir}/public/" "${WODBY_DIR_FILES}/public/"
 else
     rsync -rlt --force "${tmp_dir}/" "${WODBY_DIR_FILES}/public/"
