@@ -38,6 +38,7 @@ if [[ "${DRUPAL_SITE}" != "default" ]]; then
     fi
 fi
 
+# Set up symlink for files dir.
 DRUPAL_SITE_FILES="${DRUPAL_SITE_DIR}/files"
 
 if [[ -d "${DRUPAL_SITE_FILES}" ]]; then

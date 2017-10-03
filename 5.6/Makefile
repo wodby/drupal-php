@@ -3,11 +3,11 @@
 VERSION ?= 5.6
 
 REPO = wodby/drupal-php
-NAME = drupal-php-$(VERSION)
-DEBUG = 0
+NAME = drupal-php-5.6
+PHP_DEBUG = 0
 FROM_TAG = 5.6
 
-ifeq ($(DEBUG), 1)
+ifeq ($(PHP_DEBUG), 1)
     override VERSION := $(VERSION)-debug
     FROM_TAG := $(FROM_TAG)-debug
     NAME := $(NAME)-debug

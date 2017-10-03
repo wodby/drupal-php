@@ -8,9 +8,16 @@ fi
 
 . ../../../test-images.env
 
+check_ready() {
+    docker-compose exec "${1}" make check-ready "${@:2}" -f /usr/local/bin/actions.mk
+}
+
 docker-compose up -d
-docker-compose exec mariadb make check-ready max_try=12 wait_seconds=5 -f /usr/local/bin/actions.mk
-docker-compose exec nginx make check-ready -f /usr/local/bin/actions.mk
-docker-compose exec php apk add --update jq
-docker-compose exec --user=82 php tests.sh
+
+check_ready nginx max_try=10
+check_ready php max_try=10
+check_ready mariadb max_try=12 wait_seconds=5
+
+docker-compose exec -u 0 php apk add --update jq
+docker-compose exec php tests.sh
 docker-compose down

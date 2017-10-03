@@ -16,7 +16,10 @@ ENV WODBY_DIR_FILES="/mnt/files" \
 
     DRUSH_PATCHFILE_URL="https://bitbucket.org/davereid/drush-patchfile.git"
 
-RUN su-exec www-data composer global require drush/drush && \
+USER root
+
+RUN set -ex && \
+    su-exec www-data composer global require drush/drush && \
     su-exec www-data composer clear-cache && \
     su-exec www-data drush @none dl registry_rebuild-7.x && \
     su-exec www-data git clone ${DRUSH_PATCHFILE_URL} /home/www-data/.drush/drush-patchfile && \
@@ -25,7 +28,9 @@ RUN su-exec www-data composer global require drush/drush && \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk && \
     mkdir -p $WODBY_DIR_FILES $WODBY_DIR_CONF && \
-    chown -R www-data:www-data $WODBY_DIR_CONF
+    chown www-data:www-data $WODBY_DIR_CONF
+
+USER www-data
 
 COPY templates /etc/gotpl/
 COPY actions /usr/local/bin

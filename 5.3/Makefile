@@ -3,7 +3,7 @@
 VERSION ?= 5.3
 
 REPO = wodby/drupal-php
-NAME = drupal-php-$(VERSION)
+NAME = drupal-php-5.3
 
 .PHONY: build test push shell run start stop logs clean release
 
