@@ -18,6 +18,6 @@ check_ready nginx max_try=10
 check_ready php max_try=10
 check_ready mariadb max_try=12 wait_seconds=5
 
-docker-compose exec -u 0 php apk add --update jq
+docker-compose exec --user=0 php apk add --update jq
 docker-compose exec php tests.sh
 docker-compose down
