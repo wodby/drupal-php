@@ -40,6 +40,7 @@ services:
   php:
     image: $IMAGE
     environment:
+      DEBUG: 1
       PHP_SESSION_COOKIE_LIFETIME: 2000000
       PHP_SESSION_GC_DIVISOR: 100
       PHP_SESSION_GC_MAXLIFETIME: 200000

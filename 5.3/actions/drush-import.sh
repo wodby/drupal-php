@@ -13,7 +13,7 @@ get-archive.sh "${source}" "${tmp_dir}" "tar.gz"
 
 # Check for root directory.
 if [[ ! -f "${tmp_dir}/MANIFEST.ini" ]]; then
-    subdir=$(find "${tmp_dir}" -type d ! -path . -maxdepth 1)
+    subdir=$(find "${tmp_dir}" -type d ! -path "${tmp_dir}" -maxdepth 1)
     tmp_dir="${tmp_dir}/${subdir}"
 fi
 
@@ -25,7 +25,7 @@ mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" -e "CREATE DATABASE ${DB_
 mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "${sql_file}"
 
 # Import files.
-tmp_dir_codebase=$(find "${tmp_dir}" -type d ! -path . -maxdepth 1)
+tmp_dir_codebase=$(find "${tmp_dir}" -type d ! -path "${tmp_dir}" -maxdepth 1)
 tmp_dir_files="${tmp_dir_codebase}/sites/${DRUPAL_SITE}/files"
 chmod 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}" || true
 
