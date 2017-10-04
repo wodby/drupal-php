@@ -7,23 +7,23 @@ services:
 
 env:
   global:
-    - LATEST_VERSION=7.1
+    - LATEST_PHP_VERSION=7.1
     - DOCKER_VERSION=17.06.2
   matrix:
-    - VERSION=7.1 PHP_DEBUG=0
-    - VERSION=7.0 PHP_DEBUG=0
-    - VERSION=5.6 PHP_DEBUG=0
-    - VERSION=5.3 PHP_DEBUG=0
-    - VERSION=7.1 PHP_DEBUG=1
-    - VERSION=7.0 PHP_DEBUG=1
-    - VERSION=5.6 PHP_DEBUG=1
+    - PHP_VER=7.1 PHP_DEBUG=0
+    - PHP_VER=7.0 PHP_DEBUG=0
+    - PHP_VER=5.6 PHP_DEBUG=0
+    - PHP_VER=5.3 PHP_DEBUG=0
+    - PHP_VER=7.1 PHP_DEBUG=1
+    - PHP_VER=7.0 PHP_DEBUG=1
+    - PHP_VER=5.6 PHP_DEBUG=1
 
 before_install:
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce="${DOCKER_VERSION}~ce-0~ubuntu"
 
 script:
-  - cd ./$VERSION
+  - cd ./$PHP_VER
   - make && make test
 
 after_success: |
@@ -32,10 +32,10 @@ after_success: |
     make release
 
     if [ -n "$TRAVIS_TAG" ]; then
-      make release VERSION="$VERSION-$TRAVIS_TAG"
+      make release TAG="$PHP_VER-$TRAVIS_TAG"
     fi
 
-    if [ "$VERSION" == "$LATEST_VERSION" && $PHP_DEBUG != 1 ]; then
-      make release VERSION=latest
+    if [ "$PHP_VER" == "$LATEST_PHP_VERSION" && $PHP_DEBUG != 1 ]; then
+      make release TAG=latest
     fi
   fi

@@ -1,14 +1,16 @@
 -include env_make
 
-VERSION ?= 5.6
+PHP_VER = 5.6
+FROM_TAG = $(PHP_VER)
+
+TAG ?= $(PHP_VER)
+PHP_DEBUG ?= 0
 
 REPO = wodby/drupal-php
-NAME = drupal-php-5.6
-PHP_DEBUG = 0
-FROM_TAG = 5.6
+NAME = drupal-php-$(PHP_VER)
 
 ifeq ($(PHP_DEBUG), 1)
-    override VERSION := $(VERSION)-debug
+    override TAG := $(TAG)-debug
     FROM_TAG := $(FROM_TAG)-debug
     NAME := $(NAME)-debug
 endif
@@ -18,23 +20,23 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(VERSION) --build-arg FROM_TAG=$(FROM_TAG) ./
+	docker build -t $(REPO):$(TAG) --build-arg FROM_TAG=$(FROM_TAG) ./
 
 test:
-	cd ./test/6 && IMAGE=$(REPO):$(VERSION) ./run.sh
-	cd ./test/7 && IMAGE=$(REPO):$(VERSION) ./run.sh
+	cd ./test/6 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./test/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
-	docker push $(REPO):$(VERSION)
+	docker push $(REPO):$(TAG)
 
 shell:
-	docker run --rm --name $(NAME) -i -t $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(VERSION) /bin/bash
+	docker run --rm --name $(NAME) -i -t $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(TAG) /bin/bash
 
 run:
-	docker run --rm --name $(NAME) $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(VERSION) $(CMD)
+	docker run --rm --name $(NAME) $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(TAG) $(CMD)
 
 start:
-	docker run -d --name $(NAME) $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(VERSION)
+	docker run -d --name $(NAME) $(PORTS) $(VOLUMES) $(ENV) $(REPO):$(TAG)
 
 stop:
 	docker stop $(NAME)
