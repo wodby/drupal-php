@@ -8,18 +8,19 @@
 
 ## Docker Images
 
-Images are based on [wodby/php](https://github.com/wodby/php), built via [Travis CI](https://travis-ci.org/wodby/drupal-php) and published on [Docker Hub](https://hub.docker.com/r/wodby/drupal-php). 
+* All images are based on Alpine Linux
+* Base image: [wodby/php](https://github.com/wodby/php)
+* [Travis CI builds](https://travis-ci.org/wodby/drupal-php) 
+* [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
 
-## Versions
+| Image tag (Dockerfile)                                                | PHP |
+| --------------------------------------------------------------------- | --- |
+| [7.1](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 7.1 |
+| [7.0](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile) | 7.0 |
+| [5.6](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile) | 5.6 |
+| [5.3](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile) | 5.3 |
 
-| PHP                                                                   | Alpine Linux |
-| --------------------------------------------------------------------- | ------------ |
-| [7.1](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 3.6          |
-| [7.0](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile) | 3.6          |
-| [5.6](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile) | 3.6          |
-| [5.3](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile) | 3.4          |
-
-See [wodby/php](https://github.com/wodby/php#versions) for exact PHP version
+See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 ## Tools
 
