@@ -13,6 +13,8 @@
 * [Travis CI builds](https://travis-ci.org/wodby/drupal-php) 
 * [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
 
+For better reliability we release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. Below listed basic tags:
+
 | Image tag (Dockerfile)                                                | PHP |
 | --------------------------------------------------------------------- | --- |
 | [7.1](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 7.1 |
