@@ -7,7 +7,7 @@ services:
 
 env:
   global:
-    - LATEST_PHP_VERSION=7.1
+    - LATEST_PHP_VER=7.1
     - DOCKER_VERSION=17.06.2
   matrix:
     - PHP_VER=7.1 PHP_DEBUG=0
@@ -35,7 +35,7 @@ after_success: |
       make release TAG="$PHP_VER-$TRAVIS_TAG"
     fi
 
-    if [ "$PHP_VER" == "$LATEST_PHP_VERSION" && $PHP_DEBUG != 1 ]; then
+    if [ "$PHP_VER" == "$LATEST_PHP_VER" && $PHP_DEBUG != 1 ]; then
       make release TAG=latest
     fi
   fi

@@ -15,15 +15,15 @@
 
 For better reliability we release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. Below listed basic tags:
 
-| Image tag (Dockerfile)                                                      | PHP |
-| --------------------------------------------------------------------------- | --- |
-| [7.1](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile)       | 7.1 |
-| [7.0](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)       | 7.0 |
-| [5.6](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)       | 5.6 |
-| [5.3](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)       | 5.3 |
-| [7.1-debug](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 7.1 |
-| [7.0-debug](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile) | 7.0 |
-| [5.6-debug](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile) | 5.6 |
+| Image tag (Dockerfile)                                                         | PHP |
+| ------------------------------------------------------------------------------ | --- |
+| [7.1 (latest)](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile) | 7.1 |
+| [7.0](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)          | 7.0 |
+| [5.6](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)          | 5.6 |
+| [5.3](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)          | 5.3 |
+| [7.1-debug](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile)    | 7.1 |
+| [7.0-debug](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)    | 7.0 |
+| [5.6-debug](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)    | 5.6 |
 
 > Images with -debug tag run php compiled with --enable-debug flag  
 
