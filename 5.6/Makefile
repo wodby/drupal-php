@@ -9,14 +9,14 @@ PHP_DEBUG ?= 0
 REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
+ifneq ($(FROM_STABILITY_TAG),)
+    FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
+endif
+
 ifeq ($(PHP_DEBUG), 1)
     override TAG := $(TAG)-debug
     FROM_TAG := $(FROM_TAG)-debug
     NAME := $(NAME)-debug
-endif
-
-ifneq ($(FROM_STABILITY_TAG),)
-    FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
 endif
 
 .PHONY: build test push shell run start stop logs clean release
