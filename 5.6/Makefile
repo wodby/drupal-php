@@ -15,6 +15,10 @@ ifeq ($(PHP_DEBUG), 1)
     NAME := $(NAME)-debug
 endif
 
+ifneq ($(FROM_STABILITY_TAG),)
+    FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
+endif
+
 .PHONY: build test push shell run start stop logs clean release
 
 default: build

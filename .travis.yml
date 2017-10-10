@@ -9,6 +9,7 @@ env:
   global:
     - LATEST_PHP_VER=7.1
     - DOCKER_VERSION=17.06.2
+    - FROM_STABILITY_TAG=""
   matrix:
     - PHP_VER=7.1 PHP_DEBUG=0
     - PHP_VER=7.0 PHP_DEBUG=0
