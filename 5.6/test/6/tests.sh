@@ -6,17 +6,19 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-checkRq() {
+check_rq() {
+    echo "Checking requirement: ${1} must be ${2}"
     drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
     echo "OK"
 }
 
-checkStatus() {
+check_status() {
+    echo "Checking status: ${1} must be ${2}"
     drush status --format=yaml | grep -q "${1}: ${2}"
     echo "OK"
 }
 
-runAction() {
+run_action() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
@@ -57,39 +59,23 @@ drush sql-drop -y
 # Normally drupal installation can't happen before drupal-init, we don't expect files dir here.
 chmod 755 "sites/${DRUPAL_SITE}"
 rm -rf "sites/${DRUPAL_SITE}/files"
-runAction drush-import source=/tmp/drush-archive.tar.gz
-runAction files-import source="${FILES_ARCHIVE_URL}"
-runAction init-drupal
-runAction cache-clear
+run_action drush-import source=/tmp/drush-archive.tar.gz
+run_action files-import source="${FILES_ARCHIVE_URL}"
+run_action init-drupal
+run_action cache-clear
 
 drush en memcache -y
 
-echo -n "Checking drush version... "
-checkStatus "drush-version" "8.*"
+check_status "drush-version" "8.*"
+check_status "root" "${DRUPAL_ROOT}"
+check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
+check_status "site" "sites/${DRUPAL_SITE}"
+check_status "files" "sites/${DRUPAL_SITE}/files"
+check_status "temp" "/tmp"
 
-echo -n "Checking Drupal root... "
-checkStatus "root" "${DRUPAL_ROOT}"
-
-echo -n "Checking settings file... "
-checkStatus "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
-
-echo -n "Checking Drupal site path... "
-checkStatus "site" "sites/${DRUPAL_SITE}"
-
-echo -n "Checking Drupal file directory path... "
-checkStatus "files" "sites/${DRUPAL_SITE}/files"
-
-echo -n "Checking Drupal temporary file directory path... "
-checkStatus "temp" "/tmp"
-
-echo -n "Checking memcached connection... "
-checkRq "memcache_extension" "2.*"
-
-echo -n "Checking Drupal file system permissions... "
-checkRq "file system" "Writable (<em>public</em> download method)"
-
-echo -n "Checking settings.php permissions... "
-checkRq "settings.php" "Protected"
+check_rq "memcache_extension" "2.*"
+check_rq "file system" "Writable (<em>public</em> download method)"
+check_rq "settings.php" "Protected"
 
 echo -n "Checking imported files... "
 curl -s -I -H "host: ${DRUPAL_DOMAIN}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"

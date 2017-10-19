@@ -8,17 +8,19 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-checkRq() {
+check_rq() {
+    echo "Checking requirement: ${1} must be ${2}"
     drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
     echo "OK"
 }
 
-checkStatus() {
+check_status() {
+    echo "Checking status: ${1} must be ${2}"
     drush status --format=yaml | grep -q "${1}: ${2}"
     echo "OK"
 }
 
-runAction() {
+run_action() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
@@ -72,51 +74,29 @@ drush sql-drop -y
 # Normally drupal installation can't happen before drupal-init, we don't expect files dir here.
 chmod 755 "sites/${DRUPAL_SITE}"
 rm -rf "sites/${DRUPAL_SITE}/files"
-runAction drush-import source=/tmp/drush-archive.tar.gz
-runAction files-import source="${FILES_ARCHIVE_URL}"
-runAction init-drupal
-runAction cache-clear target=render
-runAction cache-rebuild
+run_action drush-import source=/tmp/drush-archive.tar.gz
+run_action files-import source="${FILES_ARCHIVE_URL}"
+run_action init-drupal
+run_action cache-clear target=render
+run_action cache-rebuild
 
 echo -n "Checking drupal console launcher... "
 drupal -V --root=/var/www | grep -q "Launcher"
 echo "OK"
 
-echo -n "Checking drush version... "
-checkStatus "drush-version" "8.*"
+check_status "drush-version" "8.*"
+check_status "root" "${DRUPAL_ROOT}"
+check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
+check_status "site" "sites/${DRUPAL_SITE}"
+check_status "files" "sites/${DRUPAL_SITE}/files"
+check_status "private" "${WODBY_DIR_FILES}/private"
+check_status "temp" "/tmp"
+check_status "config-sync" "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
-echo -n "Checking Drupal root... "
-checkStatus "root" "${DRUPAL_ROOT}"
-
-echo -n "Checking settings file... "
-checkStatus "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
-
-echo -n "Checking Drupal site path... "
-checkStatus "site" "sites/${DRUPAL_SITE}"
-
-echo -n "Checking Drupal file directory path... "
-checkStatus "files" "sites/${DRUPAL_SITE}/files"
-
-echo -n "Checking Drupal private file directory path... "
-checkStatus "private" "${WODBY_DIR_FILES}/private"
-
-echo -n "Checking Drupal temporary file directory path... "
-checkStatus "temp" "/tmp"
-
-echo -n "Checking Drupal sync config path... "
-checkStatus "config-sync" "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
-
-echo -n "Checking redis connection... "
-checkRq "redis" "Connected, using the <em>PhpRedis</em> client"
-
-echo -n "Checking trusted host settings... "
-checkRq "trusted_host_patterns" "Enabled"
-
-echo -n "Checking Drupal file system permissions... "
-checkRq "file system" "Writable (<em>public</em> download method)"
-
-echo -n "Checking settings.php permissions... "
-checkRq "configuration_files" "Protected"
+check_rq "redis" "Connected, using the <em>PhpRedis</em> client"
+check_rq "trusted_host_patterns" "Enabled"
+check_rq "file system" "Writable (<em>public</em> download method)"
+check_rq "configuration_files" "Protected"
 
 echo -n "Checking trusted hosts... "
 drush rq --format=yaml | grep "trusted_host_patterns setting" | \
