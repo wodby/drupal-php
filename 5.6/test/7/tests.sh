@@ -24,10 +24,6 @@ run_action() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
-echo -n "Checking Drupal Console... "
-drupal | grep -q "Drupal Console"
-echo "OK"
-
 echo -n "Checking drush... "
 drush version --format=yaml | grep -q "8.*"
 echo "OK"
