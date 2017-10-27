@@ -43,7 +43,7 @@ services:
       DB_NAME: drupal
       DB_DRIVER: mysql
       REDIS_HOST: redis
-      REDIS_SERVICE_PORT: 6379
+      REDIS_PORT: 6379
       REDIS_PASSWORD: redis
       PHP_SENDMAIL_PATH: /bin/true
       SSH_PRIVATE_KEY: |-
