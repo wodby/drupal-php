@@ -71,7 +71,9 @@ $settings['file_public_path'] = "sites/{$wodby['site']}/files";
 $settings['file_private_path'] = $wodby['files_dir'] . '/private';
 $settings['file_temporary_path'] = '/tmp';
 
-$config_directories['sync'] = $wodby['files_dir'] . '/config/sync_' . $wodby['sync_salt'];
+if (empty($config_directories['sync'])) {
+    $config_directories['sync'] = $wodby['files_dir'] . '/config/sync_' . $wodby['sync_salt'];
+}
 
 if (!empty($wodby['hosts'])) {
   foreach ($wodby['hosts'] as $host) {
