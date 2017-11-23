@@ -51,7 +51,8 @@ services:
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
       WODBY_HOSTS: |-
         ["drupal7.test","drupal7.wodby.wod.by","test.drupal7.wodby.wod.by"]
-      WODBY_HOST_PRIMARY: http://drupal7.test
+      WODBY_HOST_PRIMARY: drupal7.test
+      WODBY_URL_PRIMARY: http://drupal7.test
       DB_HOST: mariadb
       DB_USER: drupal
       DB_PASSWORD: drupal

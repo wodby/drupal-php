@@ -36,7 +36,8 @@ services:
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
       WODBY_HOSTS: |-
         ["drupal8.test", "drupal8.wodby.wod.by", "test.drupal8.wodby.wod.by"]
-      WODBY_HOST_PRIMARY: http://drupal8.test
+      WODBY_HOST_PRIMARY: drupal8.test
+      WODBY_URL_PRIMARY: http://drupal8.test
       DB_HOST: mariadb
       DB_USER: drupal
       DB_PASSWORD: drupal

@@ -50,7 +50,6 @@ else
 	DRUPAL_ROOT="${APP_ROOT}"
 fi
 
-DRUPAL_DOMAIN="$( echo "${WODBY_HOST_PRIMARY}" | sed 's/https\?:\/\///' )"
 FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import-test/files.tar.gz"
 GIT_URL="https://github.com/drupal-composer/drupal-project.git"
 
@@ -89,9 +88,9 @@ check_rq "file system" "Writable (<em>public</em> download method)"
 check_rq "settings.php" "Protected"
 
 echo -n "Checking imported files... "
-curl -s -I -H "host: ${DRUPAL_DOMAIN}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"
+curl -s -I -H "host: ${WODBY_HOST_PRIMARY}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"
 echo "OK"
 
 echo -n "Checking Drupal homepage... "
-curl -s -H "host: ${DRUPAL_DOMAIN}" "nginx" | grep -q "Drupal ${DRUPAL_VERSION} (http://drupal.org)"
+curl -s -H "host: ${WODBY_HOST_PRIMARY}" "nginx" | grep -q "Drupal ${DRUPAL_VERSION} (http://drupal.org)"
 echo "OK"
