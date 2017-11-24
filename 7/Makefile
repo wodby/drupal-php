@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER = 7.1
+PHP_VER ?= 7.1
 FROM_TAG = $(PHP_VER)
 
 TAG ?= $(PHP_VER)
