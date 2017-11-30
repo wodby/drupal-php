@@ -1,18 +1,29 @@
 -include env_make
 
 PHP_VER = 5.3
+FROM_TAG = $(PHP_VER)
 
 TAG ?= $(PHP_VER)
 
 REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
+ifneq ($(FROM_STABILITY_TAG),)
+    FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
+endif
+
+ifneq ($(STABILITY_TAG),)
+ifneq ($(TAG),latest)
+    override TAG := $(TAG)-$(STABILITY_TAG)
+endif
+endif
+
 .PHONY: build test push shell run start stop logs clean release
 
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) ./
+	docker build -t $(REPO):$(TAG) --build-arg FROM_TAG=$(FROM_TAG) ./
 
 test:
 	cd ./test/6 && IMAGE=$(REPO):$(TAG) ./run.sh
