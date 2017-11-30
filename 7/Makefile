@@ -19,6 +19,12 @@ ifneq ($(PHP_DEBUG), 0)
     NAME := $(NAME)-debug
 endif
 
+ifneq ($(STABILITY_TAG),)
+ifneq ($(TAG),latest)
+    override TAG := $(TAG)-$(STABILITY_TAG)
+endif
+endif
+
 .PHONY: build test push shell run start stop logs clean release
 
 default: build
