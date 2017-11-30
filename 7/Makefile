@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER = 7.1
+PHP_VER ?= 7.1
 FROM_TAG = $(PHP_VER)
 
 TAG ?= $(PHP_VER)
@@ -13,10 +13,16 @@ ifneq ($(FROM_STABILITY_TAG),)
     FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
 endif
 
-ifeq ($(PHP_DEBUG), 1)
+ifneq ($(PHP_DEBUG), 0)
     override TAG := $(TAG)-debug
     FROM_TAG := $(FROM_TAG)-debug
     NAME := $(NAME)-debug
+endif
+
+ifneq ($(STABILITY_TAG),)
+ifneq ($(TAG),latest)
+    override TAG := $(TAG)-$(STABILITY_TAG)
+endif
 endif
 
 .PHONY: build test push shell run start stop logs clean release

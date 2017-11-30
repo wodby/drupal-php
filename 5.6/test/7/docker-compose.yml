@@ -50,7 +50,8 @@ services:
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
       WODBY_HOSTS: |-
         ["drupal7.test","drupal7.wodby.wod.by","test.drupal7.wodby.wod.by"]
-      WODBY_HOST_PRIMARY: http://drupal7.test
+      WODBY_HOST_PRIMARY: drupal7.test
+      WODBY_URL_PRIMARY: http://drupal7.test
       DB_HOST: mariadb
       DB_USER: drupal
       DB_PASSWORD: drupal
@@ -61,7 +62,7 @@ services:
       VARNISH_SECRET: secret
       VARNISH_VERSION: 4
       REDIS_HOST: redis
-      REDIS_SERVICE_PORT: 6379
+      REDIS_PORT: 6379
       REDIS_PASSWORD: redis
       PHP_SENDMAIL_PATH: /bin/true
       SSH_PRIVATE_KEY: |-
