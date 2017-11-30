@@ -23,7 +23,7 @@ Supported tags and respective `Dockerfile` links:
 * `7.0-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)
 * `5.6-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 
-For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. 
+For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/release). We **strongly recommend** using images only with stability tags. 
 
 > Images with -debug tag run php compiled with --enable-debug flag  
 
