@@ -4,12 +4,11 @@ PHP_VER = 5.6
 FROM_TAG = $(PHP_VER)
 
 TAG ?= $(PHP_VER)
-PHP_DEBUG ?= 0
 
 REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
-ifneq ($(PHP_DEBUG), 0)
+ifneq ($(PHP_DEBUG),)
     override TAG := $(TAG)-debug
     FROM_TAG := $(FROM_TAG)-debug
     NAME := $(NAME)-debug

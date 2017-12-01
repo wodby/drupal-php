@@ -15,12 +15,14 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.1`, `latest` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile)
-* `7.0` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)
+* `7.2`, `latest` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
+* `7.1` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
+* `7.0` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `5.6` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 * `5.3` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
-* `7.1-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7.1/Dockerfile)
-* `7.0-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7.0/Dockerfile)
+* `7.2-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
+* `7.1-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
+* `7.0-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `5.6-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 
 For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/release). We **strongly recommend** using images only with stability tags. 
@@ -38,12 +40,12 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 [Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
 [Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
 
-| Tool                       | 7.1     | 7.0     | 5.6     | 5.3     |
-| -------------------------- | ------- | ------- | ------- | ------- |
-| [Drush]                    | latest  | latest  | latest  | 7.4.0   |
-| [Drupal Console Launcher]  | latest  | latest  | -       | -       |
-| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 7.x     |
-| [Drush Patchfile]          | latest  | latest  | latest  | latest  |
+| Tool                       | 7.2     | 7.1     | 7.0     | 5.6     | 5.3     |
+| -------------------------- | ------- | ------- | ------- | ------- | ------- |
+| [Drush]                    | latest  | latest  | latest  | latest  | 7.4.0   |
+| [Drupal Console Launcher]  | latest  | latest  | latest  | -       | -       |
+| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 7.x     | 7.x     |
+| [Drush Patchfile]          | latest  | latest  | latest  | latest  | latest  |
 
 ## Environment Variables
 
