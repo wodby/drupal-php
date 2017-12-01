@@ -10,12 +10,14 @@ env:
     - LATEST_TAG=7.2
     - DOCKER_VERSION=17.06.2
   matrix:
-    - TAG=7.2 PHP_VER=7.2
+#  Does not work well so far
+#    - TAG=7.2 PHP_VER=7.2
     - TAG=7.1 PHP_VER=7.1
     - TAG=7.0 PHP_VER=7.0
     - TAG=5.6 PHP_VER=5.6
     - TAG=5.3 PHP_VER=5.3
-    - TAG=7.2-debug PHP_VER=7.2 PHP_DEBUG=1
+#  Does not work well so far
+#    - TAG=7.2-debug PHP_VER=7.2 PHP_DEBUG=1
     - TAG=7.1-debug PHP_VER=7.1 PHP_DEBUG=1
     - TAG=7.0-debug PHP_VER=7.0 PHP_DEBUG=1
     - TAG=5.6-debug PHP_VER=5.6 PHP_DEBUG=1

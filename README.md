@@ -15,12 +15,10 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.2`, `latest` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.1` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
+* `7.1`, `latest`  [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `7.0` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `5.6` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 * `5.3` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
-* `7.2-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `7.1-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `7.0-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `5.6-debug` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
