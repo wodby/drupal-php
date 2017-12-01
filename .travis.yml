@@ -7,7 +7,8 @@ services:
 
 env:
   global:
-    - LATEST_TAG=7.2
+# TODO: Update to 7.2
+    - LATEST_TAG=7.1
     - DOCKER_VERSION=17.06.2
   matrix:
 #  Does not work well so far
