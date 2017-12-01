@@ -10,6 +10,7 @@ env:
 # TODO: Update to 7.2
     - LATEST_TAG=7.1
     - DOCKER_VERSION=17.06.2
+    - FROM_STABILITY_TAGS=3.2.1
   matrix:
 #  Does not work well so far
 #    - TAG=7.2 PHP_VER=7.2
