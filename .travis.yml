@@ -9,7 +9,7 @@ env:
   global:
     - LATEST_TAG=7.1
     - DOCKER_VERSION=17.06.2
-    - FROM_STABILITY_TAGS=3.3.0
+    - FROM_STABILITY_TAGS=3.3.1
   matrix:
     - TAG=7.1 PHP_VER=7.1
     - TAG=7.0 PHP_VER=7.0
