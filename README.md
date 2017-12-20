@@ -47,16 +47,16 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 ## Environment Variables
 
-| Variable                          | Default Value | Description |
-| --------------------------------- | ------------- | ----------- |
-| PHP_ALWAYS_POPULATE_RAW_POST_DATA | -1            | <= 5.6      |
-| PHP_MBSTRING_ENCODING_TRANSLATION | Off           | <= 5.6      |
-| PHP_MBSTRING_HTTP_INPUT           | pass          | <= 5.6      |
-| PHP_MBSTRING_HTTP_OUTPUT          | pass          | <= 5.6      |
-| PHP_OUTPUT_BUFFERING              | 16384         |             |
-| PHP_REALPATH_CACHE_SIZE           | 64k           | <= 5.6      |
-| PHP_REALPATH_CACHE_TTL            | 3600          |             |
-| PHP_SESSION_AUTO_START            | 0             | <= 5.6      |
+| Variable                            | Default Value | Description |
+| ----------------------------------- | ------------- | ----------- |
+| `PHP_ALWAYS_POPULATE_RAW_POST_DATA` | `-1`          | <= 5.6      |
+| `PHP_MBSTRING_ENCODING_TRANSLATION` | `Off`         | <= 5.6      |
+| `PHP_MBSTRING_HTTP_INPUT`           | `pass`        | <= 5.6      |
+| `PHP_MBSTRING_HTTP_OUTPUT`          | `pass`        | <= 5.6      |
+| `PHP_OUTPUT_BUFFERING`              | `16384`       |             |
+| `PHP_REALPATH_CACHE_SIZE`           | `64k`         | <= 5.6      |
+| `PHP_REALPATH_CACHE_TTL`            | `3600`        |             |
+| `PHP_SESSION_AUTO_START`            | `0`           | <= 5.6      |
 
 See [wodby/php](https://github.com/wodby/php) for more variables
 
