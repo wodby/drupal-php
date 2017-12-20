@@ -1,14 +1,11 @@
 language: bash
 
-sudo: required
-
 services:
   - docker
 
 env:
   global:
     - LATEST_TAG=7.1
-    - DOCKER_VERSION=17.06.2
   matrix:
     - TAG=7.1 PHP_VER=7.1
     - TAG=7.0 PHP_VER=7.0
@@ -17,10 +14,6 @@ env:
     - TAG=7.1-dev PHP_VER=7.1 PHP_DEV=1
     - TAG=7.0-dev PHP_VER=7.0 PHP_DEV=1
     - TAG=5.6-dev PHP_VER=5.6 PHP_DEV=1
-
-install:
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce="${DOCKER_VERSION}~ce-0~ubuntu"
 
 script:
   - cd "${PHP_VER}" || cd "${PHP_VER:0:1}"
