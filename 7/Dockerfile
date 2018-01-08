@@ -2,7 +2,7 @@ ARG FROM_TAG
 
 FROM wodby/php:${FROM_TAG}
 
-ENV DRUSH_LAUNCHER_VER="0.4.3" \
+ENV DRUSH_LAUNCHER_VER="0.5.1" \
     \
     WODBY_DIR_FILES="/mnt/files" \
     WODBY_DIR_CONF="/var/www/conf" \
