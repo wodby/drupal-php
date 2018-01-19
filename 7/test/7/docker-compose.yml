@@ -59,7 +59,7 @@ services:
       DB_NAME: drupal
       DB_DRIVER: mysql
       VARNISH_HOST: varnish
-      VARNISH_SERVICE_PORT_6082: 6082
+      VARNISH_TERMINAL_PORT: 6082
       VARNISH_SECRET: secret
       VARNISH_VERSION: 4
       REDIS_HOST: redis

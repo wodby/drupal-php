@@ -4,9 +4,6 @@ FROM wodby/php:${FROM_TAG}
 
 ENV DRUSH_LAUNCHER_VER="0.4.3" \
     \
-    WODBY_DIR_FILES="/mnt/files" \
-    WODBY_DIR_CONF="/var/www/conf" \
-    \
     PHP_REALPATH_CACHE_TTL="3600" \
     PHP_OUTPUT_BUFFERING="16384" \
     \
@@ -37,9 +34,6 @@ RUN set -ex; \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
-    \
-    mkdir -p "${WODBY_DIR_FILES}" "${WODBY_DIR_CONF}"; \
-    chown www-data:www-data "${WODBY_DIR_CONF}"; \
     \
     # Clean up
     su-exec www-data composer clear-cache; \

@@ -35,8 +35,6 @@ drush registry-rebuild --help | grep -q "Aliases: rr"
 echo "OK"
 
 echo -n "Checking environment variables... "
-env | grep -q ^WODBY_DIR_CONF=
-env | grep -q ^WODBY_DIR_FILES=
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=

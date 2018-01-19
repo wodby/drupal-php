@@ -2,10 +2,7 @@ ARG FROM_TAG
 
 FROM wodby/php:${FROM_TAG}
 
-ENV WODBY_DIR_FILES="/mnt/files" \
-    WODBY_DIR_CONF="/var/www/conf" \
-    \
-    DRUSH_VER="7.4.0" \
+ENV DRUSH_VER="7.4.0" \
     \
     PHP_ALWAYS_POPULATE_RAW_POST_DATA="-1" \
     PHP_MBSTRING_ENCODING_TRANSLATION="Off" \
@@ -32,9 +29,6 @@ RUN set -ex; \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
-    \
-    mkdir -p "${WODBY_DIR_FILES}" "${WODBY_DIR_CONF}"; \
-    chown www-data:www-data "${WODBY_DIR_CONF}"; \
     \
     # Clean up
     su-exec www-data composer clear-cache; \

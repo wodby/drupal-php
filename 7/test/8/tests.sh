@@ -41,8 +41,6 @@ drush registry-rebuild --help | grep -q "Aliases: rr"
 echo "OK"
 
 echo -n "Checking environment variables... "
-env | grep -q ^WODBY_DIR_CONF=
-env | grep -q ^WODBY_DIR_FILES=
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=
@@ -88,9 +86,9 @@ check_status "root" "${DRUPAL_ROOT}"
 check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
 check_status "site" "sites/${DRUPAL_SITE}"
 check_status "files" "sites/${DRUPAL_SITE}/files"
-check_status "private" "${WODBY_DIR_FILES}/private"
+check_status "private" "${FILES_DIR}/private"
 check_status "temp" "/tmp"
-check_status "config-sync" "${WODBY_DIR_FILES}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
+check_status "config-sync" "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
 check_rq "redis" "Connected, using the <em>PhpRedis</em> client"
 check_rq "trusted_host_patterns" "Enabled"
