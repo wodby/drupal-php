@@ -1,6 +1,6 @@
-ARG FROM_TAG
+ARG BASE_IMAGE_TAG
 
-FROM wodby/php:${FROM_TAG}
+FROM wodby/php:${BASE_IMAGE_TAG}
 
 ENV DRUSH_LAUNCHER_VER="0.5.1" \
     \

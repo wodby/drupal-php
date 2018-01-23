@@ -37,13 +37,13 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 [Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
 [Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
 
-| Tool                       | 7.1     | 7.0     | 5.6     | 5.3     |
-| -------------------------- | ------- | ------- | ------- | ------- |
-| [Drupal Console Launcher]  | latest  | latest  | -       | -       |
-| [Drush]                    | latest  | latest  | latest  | 7.4.0   |
-| [Drush Launcher]           | 0.5.1   | 0.5.1   | 0.5.1   | -       |
-| [Drush Patchfile]          | latest  | latest  | latest  | latest  |
-| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 7.x     |
+| Tool                       | 7.1     | 7.0     | 5.6     | 
+| -------------------------- | ------- | ------- | ------- | 
+| [Drupal Console Launcher]  | latest  | latest  | -       | 
+| [Drush]                    | latest  | latest  | latest  | 
+| [Drush Launcher]           | 0.5.1   | 0.5.1   | 0.5.1   | 
+| [Drush Patchfile]          | latest  | latest  | latest  | 
+| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 
 
 ## Environment Variables
 
@@ -58,7 +58,7 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 | `PHP_REALPATH_CACHE_TTL`            | `3600`        |             |
 | `PHP_SESSION_AUTO_START`            | `0`           | <= 5.6      |
 
-See [wodby/php](https://github.com/wodby/php) for more variables
+See [wodby/php](https://github.com/wodby/php) for all variables
 
 ## Orchestration Actions
 
@@ -69,7 +69,6 @@ make COMMAND [params ...]
 commands:
     git-checkout target [ is_hash]
     drush-import source
-    files-import source   
     init-drupal   
     cache-clear target
     cache-rebuild
@@ -78,6 +77,8 @@ default params values:
     target all
     is_hash 0 
 ```
+
+See [wodby/php](https://github.com/wodby/php) for all actions
 
 ## Complete Drupal Stack
 
