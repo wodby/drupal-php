@@ -53,10 +53,11 @@ cd "${DRUPAL_ROOT}"
 
 run_action files-import source="${FILES_ARCHIVE_URL}"
 run_action init-drupal
-run_action cache-clear
 
 drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 drush en varnish redis -y --quiet
+
+run_action cache-clear
 
 check_status "root" "${DRUPAL_ROOT}"
 check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"

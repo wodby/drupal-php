@@ -57,11 +57,12 @@ cd "${DRUPAL_ROOT}"
 
 run_action files-import source="${FILES_ARCHIVE_URL}"
 run_action init-drupal
-run_action cache-clear target=render
-run_action cache-rebuild
 
 drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 drush en redis -y --quiet
+
+run_action cache-clear target=render
+run_action cache-rebuild
 
 echo -n "Checking drupal console launcher... "
 drupal -V --root=/var/www | grep -q "Launcher"
