@@ -13,7 +13,8 @@ ENV DRUSH_VER="7.4.0" \
     PHP_REALPATH_CACHE_TTL="3600" \
     PHP_SESSION_AUTO_START="0" \
     \
-    DRUSH_PATCHFILE_URL="https://bitbucket.org/davereid/drush-patchfile.git"
+    DRUSH_PATCHFILE_URL="https://bitbucket.org/davereid/drush-patchfile.git" \
+    DRUSH_REGISTRY_REBUILD_URL="https://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.5.tar.gz"
 
 USER root
 
@@ -23,8 +24,9 @@ RUN set -ex; \
     su-exec www-data composer global require drush/drush:"${DRUSH_VER}"; \
     \
     # Drush extensions
-    su-exec www-data drush @none dl registry_rebuild-7.x; \
+    su-exec www-data mkdir -p /home/www-data/.drush; \
     su-exec www-data git clone "${DRUSH_PATCHFILE_URL}" /home/www-data/.drush/drush-patchfile; \
+    wget -qO- "${DRUSH_REGISTRY_REBUILD_URL}" | su-exec www-data tar zx -C /home/www-data/.drush; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
     # Change overridden target name to avoid warnings.
