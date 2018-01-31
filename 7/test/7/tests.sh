@@ -55,20 +55,13 @@ composer require drupal/varnish drupal/redis
 
 cd "${DRUPAL_ROOT}"
 
-drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
-drush en varnish redis -y --quiet
-drush archive-dump -y --destination=/tmp/drush-archive.tar.gz
-drush sql-drop -y
-
-# Normally drupal installation can't happen before drupal-init, we don't expect files dir here.
-chmod 755 "sites/${DRUPAL_SITE}"
-rm -rf "sites/${DRUPAL_SITE}/files"
-run_action drush-import source=/tmp/drush-archive.tar.gz
 run_action files-import source="${FILES_ARCHIVE_URL}"
 run_action init-drupal
 run_action cache-clear
 
-check_status "drush-version" "8.*"
+drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+drush en varnish redis -y --quiet
+
 check_status "root" "${DRUPAL_ROOT}"
 check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
 check_status "site" "sites/${DRUPAL_SITE}"
