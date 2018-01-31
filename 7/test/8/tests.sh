@@ -29,7 +29,7 @@ drupal | grep -q "Drupal Console"
 echo "OK"
 
 echo -n "Checking drush... "
-drush version --format=yaml | grep -q "Drush Version"
+drush version --format=yaml | grep -q "Core Drush commands"
 echo "OK"
 
 echo -n "Checking drush patchfile... "
