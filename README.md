@@ -23,7 +23,7 @@ Supported tags and respective `Dockerfile` links:
 * `5.6-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 * `5.3` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
 
-For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/release). We **strongly recommend** using images only with stability tags. 
+For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We **strongly recommend** using images only with stability tags. 
 
 > The 5.3 version is no longer supported by PHP team, we highly encourage switching to 5.6 
 
