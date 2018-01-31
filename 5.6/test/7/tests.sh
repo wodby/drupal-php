@@ -25,7 +25,7 @@ run_action() {
 }
 
 echo -n "Checking drush... "
-drush version --format=yaml | grep -q "Core Drush commands"
+drush --format=yaml | grep -q "Core Drush commands"
 echo "OK"
 
 echo -n "Checking drush patchfile... "
