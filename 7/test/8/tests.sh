@@ -10,7 +10,7 @@ fi
 
 check_rq() {
     echo "Checking requirement: ${1} must be ${2}"
-    drush rq --format=json | jq ".\"${1}\".value" | grep -q "${2}"
+    drush rq --format=json | jq '.[] | select(.title=="'"${1}"'") | .value' | grep -q "${2}"
     echo "OK"
 }
 
@@ -73,22 +73,24 @@ drupal -V --root=/var/www | grep -q "Launcher"
 echo "OK"
 
 check_status "root" "${DRUPAL_ROOT}"
-check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
 check_status "site" "sites/${DRUPAL_SITE}"
 check_status "files" "sites/${DRUPAL_SITE}/files"
 check_status "private" "${FILES_DIR}/private"
 check_status "temp" "/tmp"
-check_status "config-sync" "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
+# Drush 9 no longer provides this info.
+#check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
+#check_status "config-sync" "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
-check_rq "redis" "Connected, using the <em>PhpRedis</em> client"
-check_rq "trusted_host_patterns" "Enabled"
-check_rq "file system" "Writable (<em>public</em> download method)"
-check_rq "configuration_files" "Protected"
+check_rq "Redis" "Connected, using the <em>PhpRedis</em> client"
+check_rq "Trusted Host Settings" "Enabled"
+check_rq "File system" "Writable (<em>public</em> download method)"
+check_rq "Configuration files" "Protected"
 
-echo -n "Checking trusted hosts... "
-drush rq --format=yaml | grep "trusted_host_patterns setting" | \
-    sed 's/\\n//g; s/\\\\//g; s/\^//g; s/\$//g; s/, /\//g' | grep -q "${WODBY_HOSTS}"
-echo "OK"
+# Drush 9 no longer provides this info.
+#echo -n "Checking trusted hosts... "
+#drush rq --format=yaml | grep "trusted_host_patterns setting" | \
+#    sed 's/\\n//g; s/\\\\//g; s/\^//g; s/\$//g; s/, /\//g' | grep -q "${WODBY_HOSTS}"
+#echo "OK"
 
 echo -n "Checking imported files... "
 curl -s -I -H "host: ${WODBY_HOST_PRIMARY}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"
