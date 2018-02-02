@@ -4,9 +4,12 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/drupal-php.svg)](https://microbadger.com/images/wodby/drupal-php)
-[![Wodby Slack](http://slack.wodby.com/badge.svg)](http://slack.wodby.com)
 
 ## Docker Images
+
+!!! For better reliability we release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We **STRONGLY RECOMMEND** using images only with stability tags. 
+
+Overview:
 
 * All images are based on Alpine Linux
 * Base image: [wodby/php](https://github.com/wodby/php)
@@ -22,8 +25,6 @@ Supported tags and respective `Dockerfile` links:
 * `7.0-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
 * `5.6-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
 * `5.3` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
-
-For better reliability we additionally release images with stability tags (`wodby/drupal-php:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We **strongly recommend** using images only with stability tags. 
 
 > The 5.3 version is no longer supported by PHP team, we highly encourage switching to 5.6 
 
