@@ -16,12 +16,12 @@ $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysqli" }}';
 
 $wodby['varnish']['host'] = '{{ getenv "VARNISH_HOST" "" }}';
-$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_SERVICE_PORT_6082" "6082" }}';
+$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_TERMINAL_PORT" "6082" }}';
 $wodby['varnish']['secret'] = '{{ getenv "VARNISH_SECRET" "" }}';
 $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
 $wodby['memcached']['host'] = '{{ getenv "MEMCACHED_HOST" "" }}';
-$wodby['memcached']['port'] = '{{ getenv "MEMCACHED_SERVICE_PORT" "11211" }}';
+$wodby['memcached']['port'] = '{{ getenv "MEMCACHED_PORT" "11211" }}';
 
 if (isset($_SERVER['HTTP_X_REAL_IP'])) {
   $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_REAL_IP'];

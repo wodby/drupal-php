@@ -40,13 +40,13 @@ if [[ -n "${tmp_dir_files}" ]]; then
     chmod 755 "${tmp_dir_codebase}/sites/${DRUPAL_SITE}" || true
 
     if [[ -d "${tmp_dir_files}/private" ]]; then
-        rsync -rlt --force "${tmp_dir_files}/private/" "${WODBY_DIR_FILES}/private/"
+        rsync -rlt --force "${tmp_dir_files}/private/" "${FILES_DIR}/private/"
     fi
 
     if [[ -d "${tmp_dir_files}/public" ]]; then
-        rsync -rlt --force "${tmp_dir_files}/public/" "${WODBY_DIR_FILES}/public/"
+        rsync -rlt --force "${tmp_dir_files}/public/" "${FILES_DIR}/public/"
     elif [[ -d "${tmp_dir_files}" ]]; then
-        rsync -rlt --force "${tmp_dir_files}/" "${WODBY_DIR_FILES}/public/"
+        rsync -rlt --force "${tmp_dir_files}/" "${FILES_DIR}/public/"
     fi
 else
     echo "No files directory found for import"

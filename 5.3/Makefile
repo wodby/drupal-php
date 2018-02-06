@@ -1,15 +1,15 @@
 -include env_make
 
 PHP_VER = 5.3
-FROM_TAG = $(PHP_VER)
+BASE_IMAGE_TAG = $(PHP_VER)
 
 TAG ?= $(PHP_VER)
 
 REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
-ifneq ($(FROM_STABILITY_TAG),)
-    FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
+ifneq ($(BASE_IMAGE_STABILITY_TAG),)
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
 endif
 
 ifneq ($(STABILITY_TAG),)
@@ -23,7 +23,7 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg FROM_TAG=$(FROM_TAG) ./
+	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
 
 test:
 	cd ./test/6 && IMAGE=$(REPO):$(TAG) ./run.sh

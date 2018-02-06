@@ -21,7 +21,7 @@ fi
 if [[ $( grep -ic "wodby.settings.php" "${settings_php}" ) -eq 0 ]]; then
     chmod 644 "${settings_php}"
     echo -e "${disclaimer}" >> "${settings_php}"
-    echo -e "include '${WODBY_DIR_CONF}/wodby.settings.php';" >> "${settings_php}"
+    echo -e "include '${CONF_DIR}/wodby.settings.php';" >> "${settings_php}"
 fi
 
 # Include wodby.sites.php for Drupal 7 and 8.
@@ -33,25 +33,10 @@ if [[ "${DRUPAL_SITE}" != "default" ]]; then
 
         if [[ $( grep -ic "wodby.sites.php" "${sites_php}" ) -eq 0 ]]; then
             echo -e "${disclaimer}" >> "${sites_php}"
-            echo -e "include '${WODBY_DIR_CONF}/wodby.sites.php';" >> "${sites_php}"
+            echo -e "include '${CONF_DIR}/wodby.sites.php';" >> "${sites_php}"
         fi
     fi
 fi
 
 # Set up symlink for files dir.
-DRUPAL_SITE_FILES="${DRUPAL_SITE_DIR}/files"
-
-if [[ -d "${DRUPAL_SITE_FILES}" ]]; then
-    if [[ ! -L "${DRUPAL_SITE_FILES}" ]]; then
-        if [[ "$(ls -A "${DRUPAL_SITE_FILES}")" ]]; then
-            echo "Error: directory ${DRUPAL_SITE_FILES} exists and is not empty. The files directory can not be under version control or must be empty."
-            exit 1
-        # If dir is not symlink and empty, remove it and link.
-        else
-            rm -rf "${DRUPAL_SITE_FILES}"
-            ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_FILES}"
-        fi
-    fi
-else
-    ln -sf "${WODBY_DIR_FILES}/public" "${DRUPAL_SITE_FILES}"
-fi
+init-public-storage.sh "${DRUPAL_SITE_DIR}/files"

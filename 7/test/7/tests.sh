@@ -29,20 +29,10 @@ drupal | grep -q "Drupal Console"
 echo "OK"
 
 echo -n "Checking drush... "
-drush version --format=yaml | grep -q "8.*"
-echo "OK"
-
-echo -n "Checking drush patchfile... "
-drush patch-add --help | grep -q "Aliases: pa"
-echo "OK"
-
-echo -n "Checking drush registry rebuild... "
-drush registry-rebuild --help | grep -q "Aliases: rr"
+drush version --format=yaml
 echo "OK"
 
 echo -n "Checking environment variables... "
-env | grep -q ^WODBY_DIR_CONF=
-env | grep -q ^WODBY_DIR_FILES=
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
 env | grep -q ^DRUPAL_SITE=
@@ -65,25 +55,19 @@ composer require drupal/varnish drupal/redis
 
 cd "${DRUPAL_ROOT}"
 
-drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
-drush en varnish redis -y --quiet
-drush archive-dump -y --destination=/tmp/drush-archive.tar.gz
-drush sql-drop -y
-
-# Normally drupal installation can't happen before drupal-init, we don't expect files dir here.
-chmod 755 "sites/${DRUPAL_SITE}"
-rm -rf "sites/${DRUPAL_SITE}/files"
-run_action drush-import source=/tmp/drush-archive.tar.gz
 run_action files-import source="${FILES_ARCHIVE_URL}"
 run_action init-drupal
+
+drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+drush en varnish redis -y --quiet
+
 run_action cache-clear
 
-check_status "drush-version" "8.*"
 check_status "root" "${DRUPAL_ROOT}"
 check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
 check_status "site" "sites/${DRUPAL_SITE}"
 check_status "files" "sites/${DRUPAL_SITE}/files"
-check_status "private" "${WODBY_DIR_FILES}/private"
+check_status "private" "${FILES_DIR}/private"
 check_status "temp" "/tmp"
 
 check_rq "redis" "Connected, using the <em>PhpRedis</em> client"

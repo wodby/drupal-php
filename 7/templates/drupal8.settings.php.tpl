@@ -8,7 +8,7 @@
 $wodby['hosts'][] = '{{ . }}';
 {{ end }}{{ end }}
 
-$wodby['files_dir'] = '{{ getenv "WODBY_DIR_FILES" }}';
+$wodby['files_dir'] = '{{ getenv "FILES_DIR" }}';
 $wodby['site'] = '{{ getenv "DRUPAL_SITE" }}';
 $wodby['hash_salt'] = '{{ getenv "DRUPAL_HASH_SALT" "" }}';
 $wodby['sync_salt'] = '{{ getenv "DRUPAL_FILES_SYNC_SALT" "" }}';

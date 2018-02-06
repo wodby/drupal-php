@@ -4,7 +4,7 @@
  * Wodby environment configuration for Drupal 7.
  */
 
-$wodby['files_dir'] = '{{ getenv "WODBY_DIR_FILES" }}';
+$wodby['files_dir'] = '{{ getenv "FILES_DIR" }}';
 $wodby['base_url'] = '{{ getenv "WODBY_URL_PRIMARY" "" }}';
 
 $wodby['site'] = '{{ getenv "DRUPAL_SITE" }}';
@@ -17,7 +17,7 @@ $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
 
 $wodby['varnish']['host'] = '{{ getenv "VARNISH_HOST" "" }}';
-$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_SERVICE_PORT_6082" "6082" }}';
+$wodby['varnish']['terminal_port'] = '{{ getenv "VARNISH_TERMINAL_PORT" "6082" }}';
 $wodby['varnish']['secret'] = '{{ getenv "VARNISH_SECRET" "" }}';
 $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
