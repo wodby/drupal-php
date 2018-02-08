@@ -37,6 +37,10 @@ RUN set -ex; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
     \
+    mkdir -p "${FILES_DIR}/config"; \
+    chown www-data:www-data "${FILES_DIR}/config"; \
+    chmod 775 "${FILES_DIR}/config"; \
+    \
     # Clean up
     su-exec www-data composer clear-cache; \
     su-exec www-data drush cc drush
