@@ -14,7 +14,7 @@ if [[ -n "${DRUPAL_VERSION}" ]]; then
     gotpl "/etc/gotpl/drupal${DRUPAL_VERSION}.settings.php.tpl" > "${CONF_DIR}/wodby.settings.php"
 
     if [[ "${DRUPAL_VERSION}" == 8 ]]; then
-        mkdir "${FILES_DIR}/config"
+        mkdir -p "${FILES_DIR}/config"
         chmod 775 "${FILES_DIR}/config"
     fi
 fi
