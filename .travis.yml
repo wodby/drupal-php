@@ -7,19 +7,21 @@ env:
   global:
     - LATEST_TAG=7.1
   matrix:
-    - TAG=7.1 PHP_VER=7.1
+    - TAG=7.1 PHP_VER=7.1 EXTRA_TAG=7
     - TAG=7.0 PHP_VER=7.0
-    - TAG=5.6 PHP_VER=5.6
+    - TAG=5.6 PHP_VER=5.6 EXTRA_TAG=5
     - TAG=5.3 PHP_VER=5.3
-    - TAG=7.1-dev PHP_VER=7.1 PHP_DEV=1
+    - TAG=7.1-dev PHP_VER=7.1 PHP_DEV=1 EXTRA_TAG=7-dev
     - TAG=7.0-dev PHP_VER=7.0 PHP_DEV=1
-    - TAG=5.6-dev PHP_VER=5.6 PHP_DEV=1
+    - TAG=5.6-dev PHP_VER=5.6 PHP_DEV=1 EXTRA_TAG=5-dev
+    - TAG=5.3-dev PHP_VER=5.3 PHP_DEV=1
 
-script:
-  - cd "${PHP_VER}" || cd "${PHP_VER:0:1}"
-  - make && make test
+script: |
+  cd "${PHP_VER}" || cd "${PHP_VER:0:1}"
 
-after_success: |
+  make
+  make test
+
   if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
     docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
@@ -28,6 +30,10 @@ after_success: |
     fi
 
     make release
+
+    if [[ -n "${EXTRA_TAG}" ]]; then
+      make release TAG="${EXTRA_TAG}"
+    fi
 
     if [[ "${TAG}" == "${LATEST_TAG}" ]]; then
       make release TAG="latest"
