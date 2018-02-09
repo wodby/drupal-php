@@ -11,38 +11,36 @@ ENV DRUSH_LAUNCHER_VER="0.5.1" \
     PHP_OUTPUT_BUFFERING="16384" \
     PHP_REALPATH_CACHE_SIZE="64k" \
     PHP_REALPATH_CACHE_TTL="3600" \
-    PHP_SESSION_AUTO_START="0" \
-    \
-    DRUSH_PATCHFILE_URL="https://bitbucket.org/davereid/drush-patchfile.git" \
-    DRUSH_REGISTRY_REBUILD_URL="https://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.5.tar.gz"
+    PHP_SESSION_AUTO_START="0"
 
 USER root
 
 RUN set -ex; \
     \
-    # Drush
-    su-exec www-data composer global require drush/drush; \
+    su-exec wodby composer global require drush/drush; \
     \
     # Drush launcher
-    wget -O drush.phar \
-        "https://github.com/drush-ops/drush-launcher/releases/download/${DRUSH_LAUNCHER_VER}/drush.phar"; \
+    drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/${DRUSH_LAUNCHER_VER}/drush.phar"; \
+    wget -O drush.phar "${drush_launcher_url}"; \
     chmod +x drush.phar; \
     mv drush.phar /usr/local/bin/drush; \
     \
     # Drush extensions
-    su-exec www-data mkdir -p /home/www-data/.drush; \
-    su-exec www-data git clone "${DRUSH_PATCHFILE_URL}" /home/www-data/.drush/drush-patchfile; \
-    wget -qO- "${DRUSH_REGISTRY_REBUILD_URL}" | su-exec www-data tar zx -C /home/www-data/.drush; \
+    su-exec wodby mkdir -p /home/wodby/.drush; \
+    drush_patchfile_url="https://bitbucket.org/davereid/drush-patchfile.git"; \
+    su-exec wodby git clone "${drush_patchfile_url}" /home/wodby/.drush/drush-patchfile; \
+    drush_rr_url="https://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.5.tar.gz"; \
+    wget -qO- "${drush_rr_url}" | su-exec wodby tar zx -C /home/wodby/.drush; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
     \
     # Clean up
-    su-exec www-data drush cc drush; \
-    su-exec www-data composer clear-cache
+    su-exec wodby drush cc drush; \
+    su-exec wodby composer clear-cache
 
-USER www-data
+USER wodby
 
 COPY templates /etc/gotpl/
 COPY actions /usr/local/bin
