@@ -1,6 +1,6 @@
 -include /usr/local/bin/php.mk
 
-.PHONY: drush-import files-import init-drupal cache-clear cache-rebuild
+.PHONY: git-checkout drush-import init-drupal cache-clear cache-rebuild
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -13,9 +13,9 @@ is_hash ?= 0
 target ?= all
 
 ifeq ("$(DOCROOT_SUBDIR)", "")
-	DRUPAL_ROOT=$(APP_ROOT)
+    DRUPAL_ROOT=$(APP_ROOT)
 else
-	DRUPAL_ROOT=$(APP_ROOT)/$(DOCROOT_SUBDIR)
+    DRUPAL_ROOT=$(APP_ROOT)/$(DOCROOT_SUBDIR)
 endif
 
 DRUPAL_SITE_DIR=$(DRUPAL_ROOT)/sites/$(DRUPAL_SITE)
@@ -29,11 +29,7 @@ git-checkout:
 
 drush-import:
 	$(call check_defined, source)
-	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) drush-import.sh $(source)
-
-files-import:
-	$(call check_defined, source)
-	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) files-import.sh $(source)
+	drush-import.sh $(source)
 
 init-drupal:
 	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) init-drupal.sh

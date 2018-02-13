@@ -26,14 +26,6 @@ echo -n "Checking drush... "
 drush version --format=yaml | grep -q "7.4.0"
 echo "OK"
 
-echo -n "Checking drush patchfile... "
-drush patch-add --help | grep -q "Aliases: pa"
-echo "OK"
-
-echo -n "Checking drush registry rebuild... "
-drush registry-rebuild --help | grep -q "Aliases: rr"
-echo "OK"
-
 echo -n "Checking environment variables... "
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
