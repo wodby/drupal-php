@@ -42,7 +42,7 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 | Tool                       | 7.1     | 7.0     | 5.6     | 
 | -------------------------- | ------- | ------- | ------- | 
 | [Drupal Console Launcher]  | latest  | latest  | -       | 
-| [Drush]                    | latest  | latest  | latest  | 
+| [Drush]                    | latest  | latest  | 8.x     | 
 | [Drush Launcher]           | 0.5.1   | 0.5.1   | 0.5.1   | 
 | [Drush Patchfile]          | latest  | latest  | latest  | 
 | [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 
