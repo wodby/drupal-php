@@ -17,7 +17,7 @@ env:
     - TAG=5.3-dev PHP_VER=5.3 PHP_DEV=1
 
 script:
-  - cd "${PHP_VER}" || cd "${PHP_VER:0:1}"
+  - cd "${PHP_VER}" |`| cd "${PHP_VER:0:1}"
   - make && make test
 
 after_success:
