@@ -37,8 +37,8 @@ build:
 	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
 
 test:
-	cd ./test/8 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./test/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+	IMAGE=$(REPO):$(TAG) ./test/8/run
+	IMAGE=$(REPO):$(TAG) ./test/7/run
 
 push:
 	docker push $(REPO):$(TAG)

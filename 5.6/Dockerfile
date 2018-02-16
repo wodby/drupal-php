@@ -43,5 +43,5 @@ RUN set -ex; \
 USER wodby
 
 COPY templates /etc/gotpl/
-COPY actions /usr/local/bin
+COPY bin /usr/local/bin
 COPY init /docker-entrypoint-init.d/

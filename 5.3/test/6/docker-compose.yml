@@ -2,7 +2,7 @@ version: "2"
 
 services:
   nginx:
-    image: $NGINX_DRUPAL6
+    image: wodby/drupal-nginx:6-1.13
     environment:
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html
@@ -14,7 +14,7 @@ services:
       - php
 
   mariadb:
-    image: $MARIADB
+    image: wodby/mariadb
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: drupal
@@ -22,7 +22,7 @@ services:
       MYSQL_DATABASE: drupal
 
   memcached:
-    image: $MEMCACHED
+    image: wodby/memcached
 
   php:
     image: $IMAGE
@@ -106,7 +106,7 @@ services:
       - codebase:/var/www/html
       - files:/mnt/files
       - ./make.yml:/var/www/html/make.yml
-      - ./tests.sh:/usr/local/bin/tests.sh
+      - ./tests:/usr/local/bin/tests
 
 volumes:
   codebase:

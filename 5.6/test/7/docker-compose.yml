@@ -2,7 +2,7 @@ version: "2"
 
 services:
   nginx:
-    image: $NGINX_DRUPAL7
+    image: wodby/drupal-nginx:7-1.13
     environment:
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/web
@@ -14,7 +14,7 @@ services:
       - php
 
   mariadb:
-    image: $MARIADB
+    image: wodby/mariadb
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: drupal
@@ -22,12 +22,12 @@ services:
       MYSQL_DATABASE: drupal
 
   redis:
-    image: $REDIS
+    image: wodby/redis
     environment:
       REDIS_PASSWORD: redis
 
   varnish:
-    image: $DRUPAL_VARNISH
+    image: wodby/varnish
     depends_on:
       - nginx
     environment:
@@ -120,7 +120,7 @@ services:
     volumes:
       - codebase:/var/www/html
       - files:/mnt/files
-      - ./tests.sh:/usr/local/bin/tests.sh
+      - ./tests:/usr/local/bin/tests
 
 volumes:
   codebase:

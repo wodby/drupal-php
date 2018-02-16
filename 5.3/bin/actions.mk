@@ -25,14 +25,14 @@ default: cache-clear
 git-checkout:
 	$(call check_defined, target)
 	chmod 755 $(DRUPAL_SITE_DIR) || true
-	git-checkout.sh $(target) $(is_hash)
+	git_checkout $(target) $(is_hash)
 
 drush-import:
 	$(call check_defined, source)
-	drush-import.sh $(source)
+	drush_import $(source)
 
 init-drupal:
-	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) init-drupal.sh
+	DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) init_drupal
 
 cache-clear:
 	drush -r $(DRUPAL_ROOT) cache-clear $(target)
