@@ -13,9 +13,9 @@ ifneq ($(BASE_IMAGE_STABILITY_TAG),)
 endif
 
 ifneq ($(STABILITY_TAG),)
-ifneq ($(TAG),latest)
-    override TAG := $(TAG)-$(STABILITY_TAG)
-endif
+    ifneq ($(TAG),latest)
+        override TAG := $(TAG)-$(STABILITY_TAG)
+    endif
 endif
 
 .PHONY: build test push shell run start stop logs clean release
@@ -26,7 +26,7 @@ build:
 	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
 
 test:
-	IMAGE=$(REPO):$(TAG) ./test/6/run
+	cd ./test/6 && IMAGE=$(REPO):$(TAG) ./run
 
 push:
 	docker push $(REPO):$(TAG)
