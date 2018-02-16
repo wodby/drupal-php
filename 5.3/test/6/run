@@ -6,8 +6,6 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-. ../../../test-images.env
-
 check_ready() {
     docker-compose exec "${1}" make check-ready "${@:2}" -f /usr/local/bin/actions.mk
 }
