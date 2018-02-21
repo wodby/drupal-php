@@ -13,8 +13,7 @@ if [[ -n "${DRUPAL_VERSION}" ]]; then
 
     gotpl "/etc/gotpl/drupal${DRUPAL_VERSION}.settings.php.tpl" > "${CONF_DIR}/wodby.settings.php"
 
-    if [[ "${DRUPAL_VERSION}" == 8 && ! -d "${FILES_DIR}/config" ]]; then
-        mkdir -p "${FILES_DIR}/config"
-        chmod 775 "${FILES_DIR}/config"
+    if [[ "${DRUPAL_VERSION}" == 8 ]]; then
+        sudo init_volumes "${FILES_DIR}/config"
     fi
 fi

@@ -36,7 +36,7 @@ RUN set -ex; \
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
     \
     mkdir -p "${FILES_DIR}/config"; \
-    chown wodby:wodby "${FILES_DIR}/config"; \
+    chown www-data:www-data "${FILES_DIR}/config"; \
     chmod 775 "${FILES_DIR}/config"; \
     \
     # Clean up
@@ -46,5 +46,5 @@ RUN set -ex; \
 USER wodby
 
 COPY templates /etc/gotpl/
-COPY actions /usr/local/bin
+COPY bin /usr/local/bin
 COPY init /docker-entrypoint-init.d/

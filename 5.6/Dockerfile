@@ -17,7 +17,7 @@ USER root
 
 RUN set -ex; \
     \
-    su-exec wodby composer global require drush/drush; \
+    su-exec wodby composer global require drush/drush:^8.0; \
     \
     # Drush launcher
     drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/${DRUSH_LAUNCHER_VER}/drush.phar"; \
@@ -43,5 +43,5 @@ RUN set -ex; \
 USER wodby
 
 COPY templates /etc/gotpl/
-COPY actions /usr/local/bin
+COPY bin /usr/local/bin
 COPY init /docker-entrypoint-init.d/
