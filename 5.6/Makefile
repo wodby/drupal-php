@@ -7,14 +7,19 @@ REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
 ifeq ($(TAG),)
-    ifeq ($(PHP_DEV),)
-        TAG ?= $(PHP_VER)
+    ifneq ($(PHP_DEV_MACOS),)
+    	TAG = $(PHP_VER)-dev-macos
+    else ifneq ($(PHP_DEV),)
+        TAG = $(PHP_VER)-dev
     else
-        TAG := $(PHP_VER)-dev
+        TAG = $(PHP_VER)
     endif
 endif
 
-ifneq ($(PHP_DEV),)
+ifneq ($(PHP_DEV_MACOS),)
+    NAME := $(NAME)-dev-macos
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev-macos
+else ifneq ($(PHP_DEV),)
     NAME := $(NAME)-dev
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev
 endif
