@@ -1,12 +1,28 @@
 -include env_make
 
 PHP_VER = 5.3
+
 BASE_IMAGE_TAG = $(PHP_VER)
-
-TAG ?= $(PHP_VER)
-
 REPO = wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
+
+ifeq ($(TAG),)
+    ifneq ($(PHP_DEV_MACOS),)
+    	TAG = $(PHP_VER)-dev-macos
+    else ifneq ($(PHP_DEV),)
+        TAG = $(PHP_VER)-dev
+    else
+        TAG = $(PHP_VER)
+    endif
+endif
+
+ifneq ($(PHP_DEV_MACOS),)
+    NAME := $(NAME)-dev-macos
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev-macos
+else ifneq ($(PHP_DEV),)
+    NAME := $(NAME)-dev
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev
+endif
 
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)

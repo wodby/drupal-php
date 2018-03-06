@@ -15,6 +15,10 @@ env:
     - TAG=7.0-dev PHP_VER=7.0 PHP_DEV=1
     - TAG=5.6-dev PHP_VER=5.6 PHP_DEV=1 EXTRA_TAG=5-dev
     - TAG=5.3-dev PHP_VER=5.3 PHP_DEV=1
+    - TAG=7.1-dev-macos PHP_VER=7.1 PHP_DEV_MACOS=1 EXTRA_TAG=7-dev-macos
+    - TAG=7.0-dev-macos PHP_VER=7.0 PHP_DEV_MACOS=1
+    - TAG=5.6-dev-macos PHP_VER=5.6 PHP_DEV_MACOS=1 EXTRA_TAG=5-dev-macos
+    - TAG=5.3-dev-macos PHP_VER=5.3 PHP_DEV_MACOS=1
 
 script:
   - cd "${PHP_VER}" || cd "${PHP_VER:0:1}"
@@ -22,9 +26,3 @@ script:
 
 after_success:
   - bash "${TRAVIS_BUILD_DIR}/travis_release"
-
-notifications:
-  on_failure: never
-  slack:
-    secure: |
-      HJ2TKUdsV+6Tgtf6wfiDj8wnPHU5a62Q98wyBDouV8L7hOw3b/QJclRsy7Xjdqa2AQlqfONaqxsbDdAIUM+yV51CLoS9ExWTuzzHbUplEE9aw+aUSu73ALf3IHDCPBk9HF5MZZ8lHua3P5V8/yUtfyfL3Iy8UHCyKjinzti7KMy+KyVeaG3hv99G74eQ0eiO8KwQNGt/lDannC6viu8O4oHdTSkM+wKWvnDkD90RoB2n3feABrQ1hG//Lk6gwg79DT5/IDpO9RfzVo3Nxmw010ZFrOugJqeWAsV8912nHGd8NyXIWW+wa5maasxQnGxCbOEfIJM5aoQ52iHgjnwtSDMjOxRCDhBzvXvFGNRrnVw07hfo10FkRi7/NsmR2IDG+xoFJjG90OtfjHnv8cn3aZEROkFpwjbUi2pyh0+OW7k8nOLKBZTVaZ9T795Lw3fG6kNFKTHByMAKqeduCHTsZI/+gHV+uuOyJ0w1uFG3tYU/RidYlOGOYQm285pF16F/lGHlLCnytyGCd5+Q1iFpZ5ZRTZnZ6ZRqu03msUemJfhR/CSGw6G0yFX3g2GuCyHLhGQotmEi0X8mnpzuvSAy/9cLAzIJDe2+FNC4QMJ3//OWkzb4PUAC8EBQ/3ct2ttpKbifBPhTAKMah59gA6J8uCMG2DebkagXBldVUEdIoso=
