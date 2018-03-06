@@ -43,13 +43,13 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 [Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
 [Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
 
-| Tool                       | 7.1     | 7.0     | 5.6     | 
-| -------------------------- | ------- | ------- | ------- | 
-| [Drupal Console Launcher]  | latest  | latest  | -       | 
-| [Drush]                    | latest  | latest  | 8.x     | 
-| [Drush Launcher]           | 0.5.1   | 0.5.1   | 0.5.1   | 
-| [Drush Patchfile]          | latest  | latest  | latest  | 
-| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 
+| Tool                       | 7.1     | 7.0     | 5.6     |
+| -------------------------- | ------- | ------- | ------- |
+| [Drupal Console Launcher]  | latest  | latest  | -       |
+| [Drush]                    | 8.x     | 8.x     | 8.x     |
+| [Drush Launcher]           | 0.5.1   | 0.5.1   | 0.5.1   |
+| [Drush Patchfile]          | latest  | latest  | latest  |
+| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     |
 
 ## Environment Variables
 
