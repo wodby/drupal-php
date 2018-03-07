@@ -3,6 +3,7 @@ ARG BASE_IMAGE_TAG
 FROM wodby/php:${BASE_IMAGE_TAG}
 
 ENV DRUSH_LAUNCHER_VER="0.5.1" \
+    DRUPAL_CONSOLE_LAUNCHER_VER="1.6.1" \
     \
     PHP_REALPATH_CACHE_TTL="3600" \
     PHP_OUTPUT_BUFFERING="16384"
@@ -27,7 +28,8 @@ RUN set -ex; \
     wget -qO- "${drush_rr_url}" | su-exec wodby tar zx -C /home/wodby/.drush; \
     \
     # Drupal console
-    curl https://drupalconsole.com/installer -L -o drupal.phar; \
+    console_url="https://github.com/hechoendrupal/drupal-console-launcher/releases/download/${DRUPAL_CONSOLE_LAUNCHER_VER}/drupal.phar"; \
+    curl "${console_url}" -L -o drupal.phar; \
     mv drupal.phar /usr/local/bin/drupal; \
     chmod +x /usr/local/bin/drupal; \
     \
