@@ -4,6 +4,7 @@ FROM wodby/php:${BASE_IMAGE_TAG}
 
 ENV DRUSH_LAUNCHER_VER="0.6.0" \
     DRUPAL_CONSOLE_LAUNCHER_VER="1.8.0" \
+    DRUSH_LAUNCHER_FALLBACK="/home/wodby/.composer/vendor/bin/drush" \
     \
     PHP_REALPATH_CACHE_TTL="3600" \
     PHP_OUTPUT_BUFFERING="16384"

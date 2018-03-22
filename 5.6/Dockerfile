@@ -3,6 +3,7 @@ ARG BASE_IMAGE_TAG
 FROM wodby/php:${BASE_IMAGE_TAG}
 
 ENV DRUSH_LAUNCHER_VER="0.6.0" \
+    DRUSH_LAUNCHER_FALLBACK="/home/wodby/.composer/vendor/bin/drush" \
     \
     PHP_ALWAYS_POPULATE_RAW_POST_DATA="-1" \
     PHP_MBSTRING_ENCODING_TRANSLATION="Off" \
