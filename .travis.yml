@@ -6,7 +6,7 @@ services:
 env:
   global:
     - LATEST_TAG=7.1
-    - BASE_IMAGE_STABILITY_TAG=4.2.2
+    - BASE_IMAGE_STABILITY_TAG=4.2.3
   matrix:
     - TAG=7.1 PHP_VER=7.1 EXTRA_TAG=7
     - TAG=7.0 PHP_VER=7.0
