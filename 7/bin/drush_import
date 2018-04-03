@@ -9,7 +9,7 @@ fi
 source=$1
 tmp_dir="/tmp/source"
 
-get-archive.sh "${source}" "${tmp_dir}" "tar.gz"
+get_archive "${source}" "${tmp_dir}" "tar.gz"
 
 # Check for root directory.
 if [[ ! -f "${tmp_dir}/MANIFEST.ini" ]]; then
