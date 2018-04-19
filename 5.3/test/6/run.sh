@@ -24,5 +24,5 @@ if [[ "${IMAGE}" =~ "-dev-macos" ]]; then
 fi
 
 docker-compose exec --user=0 php apk add --update jq
-docker-compose exec php tests
+docker-compose exec php tests.sh
 docker-compose down

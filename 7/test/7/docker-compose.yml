@@ -121,7 +121,7 @@ services:
     volumes:
       - codebase:/var/www/html
       - files:/mnt/files
-      - ./tests:/usr/local/bin/tests
+      - ./tests.sh:/usr/local/bin/tests.sh
 
 volumes:
   codebase:
