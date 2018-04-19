@@ -106,7 +106,7 @@ services:
       - codebase:/var/www/html
       - files:/mnt/files
       - ./make.yml:/var/www/html/make.yml
-      - ./tests:/usr/local/bin/tests
+      - ./tests.sh:/usr/local/bin/tests.sh
 
 volumes:
   codebase:
