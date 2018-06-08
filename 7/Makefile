@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER ?= 7.1
+PHP_VER ?= 7.2
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REPO = wodby/drupal-php
