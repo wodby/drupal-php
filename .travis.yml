@@ -4,10 +4,8 @@ services:
   - docker
 
 env:
-  global:
-    - LATEST_TAG=7.2
   matrix:
-    - PHP_VER=7.2 TAGS=7.2,7
+    - PHP_VER=7.2 TAGS=7.2,7,latest
     - PHP_VER=7.1 TAGS=7.1
     - PHP_VER=7.0 TAGS=7.0
     - PHP_VER=5.6 TAGS=5,5.6
