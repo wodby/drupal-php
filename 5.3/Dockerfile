@@ -19,6 +19,8 @@ RUN set -ex; \
     \
     # Drush
     su-exec wodby composer global require drush/drush:"${DRUSH_VER}"; \
+    # Drush ssh command in drush 7.x does not support $PATH override.
+    ln -s /home/wodby/.composer/vendor/bin/drush /usr/local/bin/drush; \
     \
     # Drush extensions
     su-exec wodby mkdir -p /home/wodby/.drush; \
