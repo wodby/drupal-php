@@ -43,7 +43,7 @@ build:
 
 test:
 	cd ./test/8 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./test/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+#	cd ./test/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
 	docker push $(REPO):$(TAG)
