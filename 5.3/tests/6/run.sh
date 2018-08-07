@@ -20,7 +20,7 @@ check_ready mariadb max_try=12 wait_seconds=5
 # Docker sets ephemeral shared volume ownership to default user (wodby) in nginx container (started after php)
 # In case of -dev-macos version of php images wodby owner uid/gid in php and nginx containers do not match
 if [[ "${IMAGE}" =~ "-dev-macos" ]]; then
-    docker-compose exec php sudo init_volumes
+    docker-compose exec php sudo init_container
 fi
 
 docker-compose exec --user=0 php apk add --update jq

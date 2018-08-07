@@ -7,5 +7,5 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 if [[ -n "${DRUPAL_VERSION}" ]]; then
-    gotpl "/etc/gotpl/drupal${DRUPAL_VERSION}.settings.php.tpl" > "${CONF_DIR}/wodby.settings.php"
+    gotpl "/etc/gotpl/drupal${DRUPAL_VERSION}.settings.php.tmpl" > "${CONF_DIR}/wodby.settings.php"
 fi
