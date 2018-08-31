@@ -18,33 +18,27 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.2`, `7`, `latest`  [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.1`  [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.0` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `5.6`, `5` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
-* `5.3` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
-* `7.2-dev`, `7-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.1-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.0-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `5.6-dev`, `5-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
-* `5.3-dev` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
-* `7.2-dev-macos`, `7-dev-macos` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.1-dev-macos` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `7.0-dev-macos` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/7/Dockerfile)
-* `5.6-dev-macos`, `5-dev-macos` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile)
-* `5.3-dev-macos` [_(Dockerfile)_](https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile)
+* `7.2`, `7`, `latest`  [_(7/Dockerfile)_]
+* `7.1` [_(7/Dockerfile)_]
+* `7.0` [_(7/Dockerfile)_]
+* `5.6`, `5` [_(5.6/Dockerfile)_]
+* `5.3` [_(5.3/Dockerfile)_]
+* `7.2-dev`, `7-dev` [_(7/Dockerfile)_]
+* `7.1-dev` [_(7/Dockerfile)_]
+* `7.0-dev` [_(7/Dockerfile)_]
+* `5.6-dev`, `5-dev` [_(5.6/Dockerfile)_]
+* `5.3-dev` [_(5.3/Dockerfile)_]
+* `7.2-dev-macos`, `7-dev-macos` [_(7/Dockerfile)_]
+* `7.1-dev-macos` [_(7/Dockerfile)_]
+* `7.0-dev-macos` [_(7/Dockerfile)_]
+* `5.6-dev-macos`, `5-dev-macos` [_(5.6/Dockerfile)_]
+* `5.3-dev-macos` [_(5.3/Dockerfile)_]
 
 > The 5.3 version is no longer supported by PHP team, we highly encourage switching to 5.6 
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 ## Tools
-
-[Drupal Console Launcher]: https://drupalconsole.com
-[Drush]: https://packagist.org/packages/drush/drush
-[Drush Launcher]: https://github.com/drush-ops/drush-launcher
-[Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
-[Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
 
 | Tool                       | 7.2     | 7.1     | 7.0     | 5.6     |
 | -------------------------- | ------- | ------- | ------- | ------- |
@@ -93,3 +87,13 @@ See [wodby/php](https://github.com/wodby/php) for all actions
 ## Complete Drupal Stack
 
 See [wodby/docker4drupal](https://github.com/wodby/docker4drupal)
+
+[_(7/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/7/Dockerfile
+[_(5.6/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile
+[_(5.3/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/5.3/Dockerfile
+
+[Drupal Console Launcher]: https://drupalconsole.com
+[Drush]: https://packagist.org/packages/drush/drush
+[Drush Launcher]: https://github.com/drush-ops/drush-launcher
+[Drush Patchfile]: https://bitbucket.org/davereid/drush-patchfile
+[Drush Registry Rebuild]: https://www.drupal.org/project/registry_rebuild
