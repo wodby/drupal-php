@@ -40,7 +40,3 @@ fi
 
 # Set up symlink for files dir.
 files_link "${DRUPAL_SITE_DIR}/files"
-
-if [[ "${DRUPAL_VERSION}" == "8" ]]; then
-    mkdir -p "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
-fi

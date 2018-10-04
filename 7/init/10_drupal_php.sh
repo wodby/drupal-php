@@ -14,6 +14,6 @@ if [[ -n "${DRUPAL_VERSION}" ]]; then
     gotpl "/etc/gotpl/drupal${DRUPAL_VERSION}.settings.php.tmpl" > "${CONF_DIR}/wodby.settings.php"
 
     if [[ "${DRUPAL_VERSION}" == 8 ]]; then
-        sudo init_container "${FILES_DIR}/config"
+        sudo init_container "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
     fi
 fi
