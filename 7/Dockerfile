@@ -2,7 +2,8 @@ ARG BASE_IMAGE_TAG
 
 FROM wodby/php:${BASE_IMAGE_TAG}
 
-ENV DRUSH_LAUNCHER_VER="0.6.0" \
+ENV TERM xterm-256color \
+    DRUSH_LAUNCHER_VER="0.6.0" \
     DRUPAL_CONSOLE_LAUNCHER_VER="1.8.0" \
     DRUSH_LAUNCHER_FALLBACK="/home/wodby/.composer/vendor/bin/drush" \
     \
