@@ -5,13 +5,16 @@ services:
 
 env:
   matrix:
-    - PHP_VER=7.2 TAGS=7.2,7,latest
+    - PHP_VER=7.3 TAGS=7.3,7,latest
+    - PHP_VER=7.2 TAGS=7.2
     - PHP_VER=7.1 TAGS=7.1
     - PHP_VER=5.6 TAGS=5.6,5
-    - PHP_VER=7.2 PHP_DEV=1 TAGS=7.2-dev,7-dev,dev
+    - PHP_VER=7.3 PHP_DEV=1 TAGS=7.3-dev,7-dev,dev
+    - PHP_VER=7.2 PHP_DEV=1 TAGS=7.2-dev
     - PHP_VER=7.1 PHP_DEV=1 TAGS=7.1-dev
     - PHP_VER=5.6 PHP_DEV=1 TAGS=5.6-dev,5-dev
-    - PHP_VER=7.2 PHP_DEV_MACOS=1 TAGS=7.2-dev-macos,7-dev-macos,dev-macos
+    - PHP_VER=7.3 PHP_DEV_MACOS=1 TAGS=7.3-dev-macos,7-dev-macos,dev-macos
+    - PHP_VER=7.2 PHP_DEV_MACOS=1 TAGS=7.2-dev-macos
     - PHP_VER=7.1 PHP_DEV_MACOS=1 TAGS=7.1-dev-macos
     - PHP_VER=5.6 PHP_DEV_MACOS=1 TAGS=5.6-dev-macos,5-dev-macos
 
