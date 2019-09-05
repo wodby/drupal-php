@@ -50,6 +50,9 @@ GIT_URL="https://github.com/drupal-composer/drupal-project.git"
 make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
 make git-checkout target=8.x -f /usr/local/bin/actions.mk
 
+# Temporary fix https://github.com/drupal-composer/drupal-project/issues/511.
+sed -i '/webmozart\/path-util/a \        "behat\/mink-selenium2-driver": "dev-master as 1.3.x-dev",' composer.json
+
 composer install
 composer require drupal/redis
 
