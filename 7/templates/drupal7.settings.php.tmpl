@@ -25,6 +25,50 @@ $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
 $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
 
+$conf['reverse_proxy_addresses'] = (function () {
+    $internalSubnet = '172.17.0.0';
+    $internalBits = 16;
+
+    $ips = array();
+
+    if (isset($_SERVER['REMOTE_ADDR'])) {
+        $ips[] = $_SERVER['REMOTE_ADDR'];
+    }
+
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ips = array_merge($ips, explode(',', (string)$_SERVER['HTTP_X_FORWARDED_FOR']));
+    }
+
+    $proxies = [];
+
+    foreach ($ips as $ip) {
+        $ip = trim($ip);
+        $ipLong = ip2long($ip);
+        $internalSubnetLong = ip2long($internalSubnet);
+        $mask = -1 << (32 - $internalBits);
+        $internalSubnetLong &= $mask;
+
+        if (($ipLong & $mask) == $internalSubnetLong) {
+            $proxies[] = $ip;
+        }
+    }
+
+    if (isset($_SERVER['DRUPAL_REVERSE_PROXY_ADDRESSES'])) {
+        $proxies = array_merge(
+            array_filter(
+                array_map(function ($item) {
+                    return trim($item);
+                }, explode(',', (string)$_SERVER['DRUPAL_REVERSE_PROXY_ADDRESSES']))
+            ),
+            $proxies
+        );
+    }
+
+    return array_unique($proxies);
+})();
+
+$conf['reverse_proxy'] = !empty($conf['reverse_proxy_addresses']);
+
 if (isset($_SERVER['HTTP_X_REAL_IP'])) {
   $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_REAL_IP'];
 }

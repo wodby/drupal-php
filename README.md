@@ -47,7 +47,7 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 | Variable                            | Default Value | Description |
 | ----------------------------------- | ------------- | ----------- |
-| `DRUPAL8_REVERSE_PROXY_ADDRESSES`   |               |             |
+| `DRUPAL_REVERSE_PROXY_ADDRESSES`    |               |             |
 | `PHP_ALWAYS_POPULATE_RAW_POST_DATA` | `-1`          | <= 5.6      |
 | `PHP_MBSTRING_ENCODING_TRANSLATION` | `Off`         | <= 5.6      |
 | `PHP_MBSTRING_HTTP_INPUT`           | `pass`        | <= 5.6      |
