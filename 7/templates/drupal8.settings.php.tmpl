@@ -56,7 +56,7 @@ $settings['reverse_proxy_addresses'] = (function () {
             array_filter(
                 array_map(function ($item) {
                     return trim($item);
-                }, explode(',', (string)$_SERVER['DRUPAL8_REVERSE_PROXY_ADDRESSES']))
+                }, explode(',', (string)$_SERVER['DRUPAL_REVERSE_PROXY_ADDRESSES']))
             ),
             $proxies
         );
