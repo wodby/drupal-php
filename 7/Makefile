@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER ?= 7.3
+PHP_VER ?= 7.4
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REPO = wodby/drupal-php
@@ -43,7 +43,11 @@ build:
 
 test:
 	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
+ifneq ($(PHP_VER),7.4)
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+else
+	Skipping Drupal 7 tests for PHP 7.4
+endif
 
 push:
 	docker push $(REPO):$(TAG)
