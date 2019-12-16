@@ -46,7 +46,7 @@ test:
 ifneq ($(PHP_VER),7.4)
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 else
-	Skipping Drupal 7 tests for PHP 7.4
+	@echo "Skipping Drupal 7 tests for PHP 7.4"
 endif
 
 push:
