@@ -21,44 +21,32 @@ Supported tags and respective `Dockerfile` links:
 * `7.4`, `7`, `latest`  [_(7/Dockerfile)_]
 * `7.3` [_(7/Dockerfile)_]
 * `7.2` [_(7/Dockerfile)_]
-* `7.1` [_(7/Dockerfile)_]
-* `5.6`, `5` [_(5.6/Dockerfile)_]
 * `7.4-dev`, `7-dev`, `dev` [_(7/Dockerfile)_]
 * `7.3-dev` [_(7/Dockerfile)_]
 * `7.2-dev` [_(7/Dockerfile)_]
-* `7.1-dev` [_(7/Dockerfile)_]
-* `5.6-dev`, `5-dev` [_(5.6/Dockerfile)_]
 * `7.4-dev-macos`, `7-dev-macos`, `dev-macos` [_(7/Dockerfile)_]
 * `7.3-dev-macos` [_(7/Dockerfile)_]
 * `7.2-dev-macos` [_(7/Dockerfile)_]
-* `7.1-dev-macos` [_(7/Dockerfile)_]
-* `5.6-dev-macos`, `5-dev-macos` [_(5.6/Dockerfile)_]
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 ## Tools
 
-| Tool                       | 7.4     | 7.3     | 7.2     | 7.1     | 5.6     |
-| -------------------------- | ------- | ------- | ------- | ------- | ------- |
-| [Drupal Console Launcher]  | 1.9.4   | 1.9.4   | 1.9.4   | 1.9.4   | -       |
-| [Drush]                    | 8.x     | 8.x     | 8.x     | 8.x     | 8.x     |
-| [Drush Launcher]           | 0.6.0   | 0.6.0   | 0.6.0   | 0.6.0   | 0.6.0   |
-| [Drush Patchfile]          | latest  | latest  | latest  | latest  | latest  |
-| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     | 7.x     | 7.x     |
+| Tool                       | 7.4     | 7.3     | 7.2     |
+| -------------------------- | ------- | ------- | ------- |
+| [Drupal Console Launcher]  | 1.9.4   | 1.9.4   | 1.9.4   |
+| [Drush]                    | 8.x     | 8.x     | 8.x     |
+| [Drush Launcher]           | 0.6.0   | 0.6.0   | 0.6.0   |
+| [Drush Patchfile]          | latest  | latest  | latest  |
+| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     |
 
 ## Environment Variables
 
 | Variable                            | Default Value | Description |
 | ----------------------------------- | ------------- | ----------- |
 | `DRUPAL_REVERSE_PROXY_ADDRESSES`    |               |             |
-| `PHP_ALWAYS_POPULATE_RAW_POST_DATA` | `-1`          | <= 5.6      |
-| `PHP_MBSTRING_ENCODING_TRANSLATION` | `Off`         | <= 5.6      |
-| `PHP_MBSTRING_HTTP_INPUT`           | `pass`        | <= 5.6      |
-| `PHP_MBSTRING_HTTP_OUTPUT`          | `pass`        | <= 5.6      |
 | `PHP_OUTPUT_BUFFERING`              | `16384`       |             |
-| `PHP_REALPATH_CACHE_SIZE`           | `64k`         | <= 5.6      |
 | `PHP_REALPATH_CACHE_TTL`            | `3600`        |             |
-| `PHP_SESSION_AUTO_START`            | `0`           | <= 5.6      |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
@@ -87,7 +75,6 @@ See [wodby/php](https://github.com/wodby/php) for all actions
 See [wodby/docker4drupal](https://github.com/wodby/docker4drupal)
 
 [_(7/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/7/Dockerfile
-[_(5.6/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/5.6/Dockerfile
 
 [Drupal Console Launcher]: https://drupalconsole.com
 [Drush]: https://packagist.org/packages/drush/drush
