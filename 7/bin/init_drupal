@@ -24,17 +24,14 @@ if [[ $( grep -ic "wodby.settings.php" "${settings_php}" ) -eq 0 ]]; then
     echo -e "include '${CONF_DIR}/wodby.settings.php';" >> "${settings_php}"
 fi
 
-# Include wodby.sites.php for Drupal 7 and 8.
 if [[ "${DRUPAL_SITE}" != "default" ]]; then
-    if [[ "${DRUPAL_VERSION}" == "8" || "${DRUPAL_VERSION}" == "7" ]]; then
-        if [[ ! -f "${sites_php}" ]]; then
-            echo -e "<?php\n\n" > "${sites_php}"
-        fi
+    if [[ ! -f "${sites_php}" ]]; then
+        echo -e "<?php\n\n" > "${sites_php}"
+    fi
 
-        if [[ $( grep -ic "wodby.sites.php" "${sites_php}" ) -eq 0 ]]; then
-            echo -e "${disclaimer}" >> "${sites_php}"
-            echo -e "include '${CONF_DIR}/wodby.sites.php';" >> "${sites_php}"
-        fi
+    if [[ $( grep -ic "wodby.sites.php" "${sites_php}" ) -eq 0 ]]; then
+        echo -e "${disclaimer}" >> "${sites_php}"
+        echo -e "include '${CONF_DIR}/wodby.sites.php';" >> "${sites_php}"
     fi
 fi
 
