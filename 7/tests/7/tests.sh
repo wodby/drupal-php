@@ -54,6 +54,8 @@ GIT_URL="https://github.com/drupal-composer/drupal-project.git"
 make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
 make git-checkout target=7.x -f /usr/local/bin/actions.mk
 
+# https://github.com/drupal-composer/preserve-paths/issues/28
+composer require drupal-composer/preserve-paths:dev-master
 composer install -n
 composer require drupal/varnish drupal/redis
 
