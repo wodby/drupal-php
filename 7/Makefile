@@ -43,9 +43,9 @@ build:
 
 test:
 ifneq ($(PHP_VER),7.2)
-	@echo "Skipping Drupal 9 tests for PHP 7.2"
-else
 	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
+else
+	@echo "Skipping Drupal 9 tests for PHP 7.2"
 endif
 	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
