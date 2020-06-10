@@ -1,0 +1,58 @@
+version: "2"
+
+services:
+  nginx:
+    image: wodby/nginx
+    environment:
+      NGINX_BACKEND_HOST: php
+      NGINX_VHOST_PRESET: drupal9
+      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_SERVER_NAME: drupal9.test
+    volumes:
+      - codebase:/var/www/html
+      - files:/mnt/files
+    depends_on:
+      - php
+
+  mariadb:
+    image: wodby/mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+
+  redis:
+    image: wodby/redis
+    environment:
+      REDIS_PASSWORD: redis
+
+  php:
+    image: $IMAGE
+    environment:
+      DOCROOT_SUBDIR: web
+      DRUPAL_VERSION: 9
+      DRUPAL_SITE: default
+      DRUPAL_HASH_SALT: drupal-bad-hash-salt
+      DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
+      WODBY_HOSTS: |-
+        ["drupal9.test", "drupal9.wodby.wod.by", "test.drupal9.wodby.wod.by"]
+      WODBY_HOST_PRIMARY: drupal9.test
+      WODBY_URL_PRIMARY: http://drupal9.test
+      DB_HOST: mariadb
+      DB_USER: drupal
+      DB_PASSWORD: drupal
+      DB_NAME: drupal
+      DB_DRIVER: mysql
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: redis
+      PHP_SENDMAIL_PATH: /bin/true
+    volumes:
+      - codebase:/var/www/html
+      - files:/mnt/files
+      - ./tests.sh:/usr/local/bin/tests.sh
+
+volumes:
+  codebase:
+  files:

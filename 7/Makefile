@@ -42,12 +42,13 @@ build:
 	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
 
 test:
-	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
-ifneq ($(PHP_VER),7.4)
-	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+ifneq ($(PHP_VER),7.2)
+	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
 else
-	@echo "Skipping Drupal 7 tests for PHP 7.4"
+	@echo "Skipping Drupal 9 tests for PHP 7.2"
 endif
+	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
 	docker push $(REPO):$(TAG)
