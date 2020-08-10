@@ -55,8 +55,8 @@ make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
 make git-checkout target=7.x -f /usr/local/bin/actions.mk
 
 # https://github.com/drupal-composer/preserve-paths/issues/28
-composer require drupal-composer/preserve-paths:dev-master
-composer install -n
+COMPOSER_MEMORY_LIMIT=-1 composer require drupal-composer/preserve-paths:dev-master
+COMPOSER_MEMORY_LIMIT=-1 composer install -n
 composer require drupal/varnish drupal/redis
 
 cd "${DRUPAL_ROOT}"
