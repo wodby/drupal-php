@@ -52,7 +52,7 @@ make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
 latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)9\.[0-9]+\.[0-9]+$' | sort -rV | head -n1)
 make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
-composer install -n
+COMPOSER_MEMORY_LIMIT=-1 composer install -n
 # currently in conflict with D9 https://github.com/hechoendrupal/drupal-console/issues/4220
 #composer require --dev drupal/console:@stable
 composer require drush/drush
