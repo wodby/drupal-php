@@ -86,7 +86,7 @@ check_status "temp" "/tmp"
 #check_status "drupal-settings-file" "sites/${DRUPAL_SITE}/settings.php"
 #check_status "config-sync" "${FILES_DIR}/config/sync_${DRUPAL_FILES_SYNC_SALT}"
 
-check_rq "Redis" "Connected, using the <em>PhpRedis</em> client"
+check_rq "Redis" "Connected, using the /PhpRedis/ client"
 check_rq "Trusted Host Settings" "Enabled"
 check_rq "File system" "Writable (<em>public</em> download method)"
 check_rq "Configuration files" "Protected"
