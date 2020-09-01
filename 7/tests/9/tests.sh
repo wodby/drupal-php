@@ -88,7 +88,7 @@ check_status "temp" "/tmp"
 
 check_rq "Redis" "Connected, using the /PhpRedis/ client"
 check_rq "Trusted Host Settings" "Enabled"
-check_rq "File system" "Writable (<em>public</em> download method)"
+check_rq "File system" "Writable (/public/ download method)"
 check_rq "Configuration files" "Protected"
 
 # Drush 9 no longer provides this info.
