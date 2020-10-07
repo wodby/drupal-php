@@ -11,7 +11,7 @@
 
 Overview:
 
-* All images are based on Alpine Linux
+* All images based on Alpine Linux
 * Base image: [wodby/php](https://github.com/wodby/php)
 * [Travis CI builds](https://travis-ci.org/wodby/drupal-php) 
 * [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
@@ -62,6 +62,8 @@ commands:
     init-drupal   
     cache-clear target
     cache-rebuild
+    drush8-alias
+    drush9-alias
     
 default params values:
     target all

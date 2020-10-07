@@ -1,6 +1,6 @@
 -include /usr/local/bin/php.mk
 
-.PHONY: git-checkout drush-import init-drupal cache-clear cache-rebuild
+.PHONY: git-checkout drush-import init-drupal cache-clear cache-rebuild drush8-alias drush9-alias
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -39,3 +39,9 @@ cache-clear:
 
 cache-rebuild:
 	drush -r $(DRUPAL_ROOT) cache-rebuild
+
+drush8-alias:
+	@DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) drush8_alias
+
+drush9-alias:
+	@DRUPAL_SITE_DIR=$(DRUPAL_SITE_DIR) DRUPAL_ROOT=$(DRUPAL_ROOT) drush9_alias

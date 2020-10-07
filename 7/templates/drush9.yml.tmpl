@@ -1,0 +1,12 @@
+prod:
+  host: {{ getenv "WODBY_CLUSTER_HOST" }}
+  user: wodby
+  root: {{ getenv "DRUPAL_ROOT" }}
+  uri: {{ getenv "WODBY_PRIMARY_HOST" }}
+  ssh:
+    options: '-p {{ getenv "WODBY_PORTS_SSHD_PUBLIC" }}'
+  wodby:
+    app_id: {{ getenv "WODBY_APP_ID" }}
+    app_name: {{ getenv "WODBY_APP_NAME" }}
+    instance_id: {{ getenv "WODBY_APP_INSTANCE_ID" }}
+    instance_name: {{ getenv "WODBY_APP_INSTANCE_NAME" }}
