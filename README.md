@@ -64,6 +64,7 @@ commands:
     cache-rebuild
     drush8-alias
     drush9-alias
+    user-login
     
 default params values:
     target all
