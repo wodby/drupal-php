@@ -1,0 +1,17 @@
+<?php
+
+$aliases['{{ getenv "WODBY_ORG_NAME" }}.{{ getenv "WODBY_APP_NAME" }}.{{ getenv "WODBY_APP_INSTANCE_NAME" }}'] = array (
+  'root' => '{{ getenv "DRUPAL_ROOT" }}',
+  'uri' => '{{ getenv "WODBY_PRIMARY_HOST" }}',
+  'remote-host' => '{{ getenv "WODBY_CLUSTER_HOST" }}',
+  'ssh-options' => '-p {{ getenv "WODBY_PORTS_SSHD_PUBLIC" }}',
+  'remote-user' => 'wodby',
+  'path-aliases' =>
+  array (
+    '%files' => '{{ getenv "DRUPAL_SITE_DIR" }}/files',
+  ),
+  '#env-vars' =>
+  array (
+    'PATH' => '/home/wodby/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  ),
+);
