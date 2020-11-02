@@ -45,12 +45,16 @@ else
 fi
 
 FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import-test/files.tar.gz"
-GIT_URL="https://github.com/drupal-composer/drupal-project.git"
+GIT_URL="https://github.com/drupal/recommended-project"
 
 make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
-make git-checkout target=8.x -f /usr/local/bin/actions.mk
+# Get latest stable drupal 8 tag.
+latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)8\.[0-9]+\.[0-9]+$' | sort -rV | head -n1)
+make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
+## currently doesn't yet support composer 2.0 https://github.com/hechoendrupal/drupal-console-extend-plugin/issues/23
+#composer require --dev drupal/console:@stable
 composer require drupal/redis
 
 cd "${DRUPAL_ROOT}"
