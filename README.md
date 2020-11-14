@@ -1,6 +1,6 @@
 # PHP (FPM) for Drupal Docker Container Image 
 
-[![Build Status](https://travis-ci.org/wodby/drupal-php.svg?branch=master)](https://travis-ci.org/wodby/drupal-php)
+[![Build Status](https://github.com/wodby/drupal-php/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/drupal-php/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/drupal-php.svg)](https://microbadger.com/images/wodby/drupal-php)
@@ -11,22 +11,22 @@
 
 Overview:
 
-* All images based on Alpine Linux
-* Base image: [wodby/php](https://github.com/wodby/php)
-* [Travis CI builds](https://travis-ci.org/wodby/drupal-php) 
-* [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
+- All images based on Alpine Linux
+- Base image: [wodby/php](https://github.com/wodby/php)
+- [GitHub actions builds](https://github.com/wodby/drupal-php/actions) 
+- [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.4`, `7`, `latest`  [_(7/Dockerfile)_]
-* `7.3` [_(7/Dockerfile)_]
-* `7.2` [_(7/Dockerfile)_]
-* `7.4-dev`, `7-dev`, `dev` [_(7/Dockerfile)_]
-* `7.3-dev` [_(7/Dockerfile)_]
-* `7.2-dev` [_(7/Dockerfile)_]
-* `7.4-dev-macos`, `7-dev-macos`, `dev-macos` [_(7/Dockerfile)_]
-* `7.3-dev-macos` [_(7/Dockerfile)_]
-* `7.2-dev-macos` [_(7/Dockerfile)_]
+- `7.4`, `7`, `latest`  [_(7/Dockerfile)_]
+- `7.3` [_(7/Dockerfile)_]
+- `7.2` [_(7/Dockerfile)_]
+- `7.4-dev`, `7-dev`, `dev` [_(7/Dockerfile)_]
+- `7.3-dev` [_(7/Dockerfile)_]
+- `7.2-dev` [_(7/Dockerfile)_]
+- `7.4-dev-macos`, `7-dev-macos`, `dev-macos` [_(7/Dockerfile)_]
+- `7.3-dev-macos` [_(7/Dockerfile)_]
+- `7.2-dev-macos` [_(7/Dockerfile)_]
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 

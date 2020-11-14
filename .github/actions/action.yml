@@ -1,0 +1,42 @@
+name: Build
+description: Build Drupal PHP image
+inputs:
+  version:
+    description: php version
+    required: true
+  workdir:
+    description: working directory
+    required: true
+  dev:
+    description: dev version of image
+    required: false
+  dev_macos:
+    description: dev macos version of image
+    required: false
+  tags:
+    description: image tags
+    required: true
+  username:
+    description: docker username
+    required: true
+  password:
+    description: docker password
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - name: Build image
+    env:
+      PHP_VER: ${{ inputs.version }}
+      PHP_DEV: ${{ inputs.dev }}
+      PHP_DEV_MACOS: ${{ inputs.dev_macos }}
+      DOCKER_USERNAME: ${{ inputs.username }}
+      DOCKER_PASSWORD: ${{ inputs.password }}
+      TAGS: ${{ inputs.tags }}
+    run: |
+      set -e
+      make
+      make test
+      . $GITHUB_ACTION_PATH/release.sh
+    shell: bash
+    working-directory: ${{ inputs.workdir }}
