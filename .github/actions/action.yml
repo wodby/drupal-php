@@ -22,6 +22,9 @@ inputs:
   password:
     description: docker password
     required: true
+  base_image_stability_tag:
+    description: base image stability tag
+    required: false
 runs:
   using: "composite"
   steps:
@@ -33,6 +36,7 @@ runs:
       DOCKER_USERNAME: ${{ inputs.username }}
       DOCKER_PASSWORD: ${{ inputs.password }}
       TAGS: ${{ inputs.tags }}
+      BASE_IMAGE_STABILITY_TAG: ${{ inputs.base_image_stability_tag }}
     run: |
       set -e
       make
