@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: '8.0'
+        version: 8.0
         tags: 8.0,8,latest
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
@@ -59,7 +59,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: '8.0'
+        version: 8.0
         dev: 1
         tags: 8.0-dev,8-dev,dev
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -104,7 +104,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: '8.0'
+        version: 8.0
         dev_macos: 1
         tags: 8.0-dev-macos,8-dev-macos,dev-macos
         username: ${{ secrets.DOCKER_USERNAME }}

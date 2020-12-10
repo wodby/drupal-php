@@ -27,7 +27,7 @@ runs:
   steps:
   - name: Build image
     env:
-      PHP_VER: ${{ inputs.version }}
+      PHP_VER: "${{ inputs.version }}"
       PHP_DEV: ${{ inputs.dev }}
       PHP_DEV_MACOS: ${{ inputs.dev_macos }}
       DOCKER_USERNAME: ${{ inputs.username }}
