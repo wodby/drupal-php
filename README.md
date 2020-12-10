@@ -7,7 +7,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/drupal-php:7.4-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/drupal-php:8.0-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We strongly recommend using images only with stability tags. 
 
 Overview:
 
@@ -18,25 +18,25 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `7.4`, `7`, `latest`  [_(7/Dockerfile)_]
-- `7.3` [_(7/Dockerfile)_]
-- `7.2` [_(7/Dockerfile)_]
-- `7.4-dev`, `7-dev`, `dev` [_(7/Dockerfile)_]
-- `7.3-dev` [_(7/Dockerfile)_]
-- `7.2-dev` [_(7/Dockerfile)_]
-- `7.4-dev-macos`, `7-dev-macos`, `dev-macos` [_(7/Dockerfile)_]
-- `7.3-dev-macos` [_(7/Dockerfile)_]
-- `7.2-dev-macos` [_(7/Dockerfile)_]
+- `8.0`, `8`, `latest`  [_(Dockerfile)_]
+- `7.4`, `7` [_(Dockerfile)_]
+- `7.3` [_(Dockerfile)_]
+- `8.0-dev`, `8-dev`, `dev` [_(Dockerfile)_]
+- `7.4-dev`, `7-dev` [_(Dockerfile)_]
+- `7.3-dev` [_(Dockerfile)_]
+- `8.0-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
+- `7.4-dev-macos`, `7-dev-macos` [_(Dockerfile)_]
+- `7.3-dev-macos` [_(Dockerfile)_]
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 ## Tools
 
-| Tool                       | 7.4     | 7.3     | 7.2     |
+| Tool                       | 8.0     | 7.4     | 7.3     |
 | -------------------------- | ------- | ------- | ------- |
 | [Drupal Console Launcher]  | 1.9.7   | 1.9.7   | 1.9.7   |
-| [Drush]                    | 8.x     | 8.x     | 8.x     |
-| [Drush Launcher]           | 0.8.0   | 0.8.0   | 0.8.0   |
+| [Drush]                    | latest  | 8.x     | 8.x     |
+| [Drush Launcher]           | -       | 0.8.0   | 0.8.0   |
 | [Drush Patchfile]          | latest  | latest  | latest  |
 | [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     |
 
@@ -77,7 +77,7 @@ See [wodby/php](https://github.com/wodby/php) for all actions
 
 See [wodby/docker4drupal](https://github.com/wodby/docker4drupal)
 
-[_(7/Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/7/Dockerfile
+[_(Dockerfile)_]: https://github.com/wodby/drupal-php/tree/master/Dockerfile
 
 [Drupal Console Launcher]: https://drupalconsole.com
 [Drush]: https://packagist.org/packages/drush/drush

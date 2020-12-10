@@ -12,6 +12,16 @@ on:
   pull_request:
 
 jobs:
+  php80:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: 8.0
+        tags: 8.0,8,latest
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
   php74:
     runs-on: ubuntu-latest
     steps:
@@ -19,10 +29,9 @@ jobs:
     - uses: ./.github/actions
       with:
         version: 7.4
-        tags: 7.4,7,latest
+        tags: 7.4,7
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php73:
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +42,6 @@ jobs:
         tags: 7.3
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php72:
     runs-on: ubuntu-latest
     steps:
@@ -44,8 +52,18 @@ jobs:
         tags: 7.2
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   ### dev
+  php80-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: 8.0
+        dev: 1
+        tags: 8.0-dev,8-dev,dev
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
   php74-dev:
     runs-on: ubuntu-latest
     steps:
@@ -54,10 +72,9 @@ jobs:
       with:
         version: 7.4
         dev: 1
-        tags: 7.4-dev,7-dev,dev
+        tags: 7.4-dev,7-dev
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php73-dev:
     runs-on: ubuntu-latest
     steps:
@@ -69,7 +86,6 @@ jobs:
         tags: 7.3-dev
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php72-dev:
     runs-on: ubuntu-latest
     steps:
@@ -81,8 +97,18 @@ jobs:
         tags: 7.2-dev
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   ### dev-macos
+  php80-dev-macos:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: 8.0
+        dev_macos: 1
+        tags: 8.0-dev-macos,8-dev-macos,dev-macos
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
   php74-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -91,10 +117,9 @@ jobs:
       with:
         version: 7.4
         dev_macos: 1
-        tags: 7.4-dev-macos,7-dev-macos,dev-macos
+        tags: 7.4-dev-macos,7-dev-macos
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php73-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -106,7 +131,6 @@ jobs:
         tags: 7.3-dev-macos
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7
   php72-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -118,4 +142,3 @@ jobs:
         tags: 7.2-dev-macos
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: 7

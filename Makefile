@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER ?= 7.4
+PHP_VER ?= 8.0
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REPO = wodby/drupal-php
@@ -47,10 +47,10 @@ ifneq ($(PHP_VER),7.2)
 else
 	@echo "Skipping Drupal 9 tests for PHP 7.2"
 endif
+ifneq ($(PHP_VER),8.0)
 	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
-## drupal-composer/preserve-paths does not support composer 2.0
-## https://github.com/drupal-composer/preserve-paths/pull/34
-#	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+endif
 
 push:
 	docker push $(REPO):$(TAG)
