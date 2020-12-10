@@ -45,11 +45,13 @@ test:
 ifneq ($(PHP_VER),7.2)
 	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
 else
-	@echo "Skipping Drupal 9 tests for PHP 7.2"
+	@echo "Drupal 9 doesn't support PHP 7.2. Skipping tests."
 endif
 ifneq ($(PHP_VER),8.0)
 	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+else
+	@echo "Drupal 7/8 don't support PHP 8.0. Skipping"
 endif
 
 push:
