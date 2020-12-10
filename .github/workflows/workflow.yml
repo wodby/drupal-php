@@ -81,7 +81,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 7.3
+        version: '7.3'
         dev: 1
         tags: 7.3-dev
         username: ${{ secrets.DOCKER_USERNAME }}
