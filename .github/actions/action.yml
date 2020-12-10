@@ -4,9 +4,6 @@ inputs:
   version:
     description: php version
     required: true
-  workdir:
-    description: working directory
-    required: true
   dev:
     description: dev version of image
     required: false
@@ -43,4 +40,3 @@ runs:
       make test
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash
-    working-directory: ${{ inputs.workdir }}

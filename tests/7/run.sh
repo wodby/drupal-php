@@ -25,4 +25,4 @@ fi
 
 docker-compose exec -T --user=0 php apk add --update jq
 docker-compose exec -T php tests.sh
-docker-compose down
+docker-compose down -v
