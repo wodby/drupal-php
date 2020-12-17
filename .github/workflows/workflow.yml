@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  BASE_IMAGE_STABILITY_TAG: 4.18.2
+  BASE_IMAGE_STABILITY_TAG: 4.18.4
 
 jobs:
   php80:
