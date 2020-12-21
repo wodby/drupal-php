@@ -14,6 +14,7 @@ $wodby['hash_salt'] = '{{ getenv "DRUPAL_HASH_SALT" "" }}';
 $wodby['sync_salt'] = '{{ getenv "DRUPAL_FILES_SYNC_SALT" "" }}';
 
 $wodby['db']['host'] = '{{ getenv "DB_HOST" "" }}';
+$wodby['db']['port'] = '{{ getenv "DB_PORT" "3306" }}';
 $wodby['db']['name'] = '{{ getenv "DB_NAME" "" }}';
 $wodby['db']['username'] = '{{ getenv "DB_USER" "" }}';
 $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
@@ -95,6 +96,7 @@ if (!empty($wodby['db']['host'])) {
     $databases['default']['default'],
     [
       'host' => $wodby['db']['host'],
+      'port' => $wodby['db']['port'],
       'database' => $wodby['db']['name'],
       'username' => $wodby['db']['username'],
       'password' => $wodby['db']['password'],
