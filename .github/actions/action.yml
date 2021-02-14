@@ -13,9 +13,6 @@ inputs:
   tags:
     description: image tags
     required: true
-  base_image_stability_tag:
-    description: base image stability tag
-    required: false
   platform:
     description: docker platform
     required: false
@@ -29,7 +26,6 @@ runs:
       PHP_DEV: ${{ inputs.dev }}
       PHP_DEV_MACOS: ${{ inputs.dev_macos }}
       TAGS: ${{ inputs.tags }}
-      BASE_IMAGE_STABILITY_TAG: ${{ inputs.base_image_stability_tag }}
       PLATFORM: ${{ inputs.platform }}
     run: |
       set -e

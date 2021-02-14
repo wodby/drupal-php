@@ -33,7 +33,6 @@ jobs:
       with:
         version: '7.4'
         tags: 7.4,7
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
   php73:
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +41,6 @@ jobs:
       with:
         version: '7.3'
         tags: '7.3'
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
   ### dev
   php80-dev:
     runs-on: ubuntu-latest
@@ -62,7 +60,6 @@ jobs:
         version: '7.4'
         dev: 1
         tags: 7.4-dev,7-dev
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
   php73-dev:
     runs-on: ubuntu-latest
     steps:
@@ -72,7 +69,6 @@ jobs:
         version: '7.3'
         dev: 1
         tags: 7.3-dev
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
   ### dev-macos
   php80-dev-macos:
     runs-on: ubuntu-latest
@@ -109,7 +105,6 @@ jobs:
         version: '7.4'
         dev_macos: 1
         tags: 7.4-dev-macos,7-dev-macos
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
         platform: linux/${{ matrix.platform }}
   php73-dev-macos:
     runs-on: ubuntu-latest
@@ -128,7 +123,6 @@ jobs:
         version: '7.3'
         dev_macos: 1
         tags: 7.3-dev-macos
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
   php72-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -138,5 +132,4 @@ jobs:
         version: '7.2'
         dev_macos: 1
         tags: 7.2-dev-macos
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
         platform: linux/${{ matrix.platform }}
