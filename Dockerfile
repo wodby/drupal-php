@@ -42,9 +42,7 @@ RUN set -ex; \
     \
     # Clean up
     su-exec wodby composer clear-cache; \
-    if [[ "${PHP_VERSION:0:1}" == "7" ]]; then \
-        su-exec wodby drush cc drush; \
-    fi
+    su-exec wodby drush cc drush
 
 USER wodby
 
