@@ -13,12 +13,6 @@ inputs:
   tags:
     description: image tags
     required: true
-  username:
-    description: docker username
-    required: true
-  password:
-    description: docker password
-    required: true
   base_image_stability_tag:
     description: base image stability tag
     required: false
