@@ -1,6 +1,6 @@
 ARG BASE_IMAGE_TAG
 
-FROM wodby/php:${BASE_IMAGE_TAG}
+FROM --platform=$BUILDPLATFORM wodby/php:${BASE_IMAGE_TAG}
 
 ENV DRUSH_LAUNCHER_FALLBACK="/home/wodby/.composer/vendor/bin/drush" \
     \
@@ -13,20 +13,11 @@ RUN set -ex; \
     \
     # We keep drush 8 as default for PHP 7.x because it's used for Drupal 7 as well.
     #####
-    # Drush launcher does not work on PHP 8.
-    # https://github.com/drush-ops/drush-launcher/issues/84
-    if [[ "${PHP_VERSION:0:1}" == "7" ]]; then \
-        su-exec wodby composer global require drush/drush:^8.0; \
-        \
-        # Temporary use 0.7.4 instead of 0.8.0 because of memory leaks
-        # https://github.com/drush-ops/drush-launcher/issues/82
-        drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.7.4/drush.phar"; \
-        wget -O drush.phar "${drush_launcher_url}"; \
-        chmod +x drush.phar; \
-        mv drush.phar /usr/local/bin/drush; \
-    else \
-        su-exec wodby composer global require drush/drush; \
-    fi; \
+    su-exec wodby composer global require drush/drush:^8.0; \
+    drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.9.0/drush.phar"; \
+    wget -O drush.phar "${drush_launcher_url}"; \
+    chmod +x drush.phar; \
+    mv drush.phar /usr/local/bin/drush; \
     \
     # Drush extensions
     su-exec wodby mkdir -p /home/wodby/.drush; \
@@ -51,9 +42,7 @@ RUN set -ex; \
     \
     # Clean up
     su-exec wodby composer clear-cache; \
-    if [[ "${PHP_VERSION:0:1}" == "7" ]]; then \
-        su-exec wodby drush cc drush; \
-    fi
+    su-exec wodby drush cc drush
 
 USER wodby
 
