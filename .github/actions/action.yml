@@ -22,6 +22,10 @@ inputs:
   base_image_stability_tag:
     description: base image stability tag
     required: false
+  platform:
+    description: docker platform
+    required: false
+    default: linux/amd64
 runs:
   using: "composite"
   steps:
@@ -30,13 +34,12 @@ runs:
       PHP_VER: ${{ inputs.version }}
       PHP_DEV: ${{ inputs.dev }}
       PHP_DEV_MACOS: ${{ inputs.dev_macos }}
-      DOCKER_USERNAME: ${{ inputs.username }}
-      DOCKER_PASSWORD: ${{ inputs.password }}
       TAGS: ${{ inputs.tags }}
       BASE_IMAGE_STABILITY_TAG: ${{ inputs.base_image_stability_tag }}
+      PLATFORM: ${{ inputs.platform }}
     run: |
       set -e
-      make
+      make buildx-build
       make test
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash
