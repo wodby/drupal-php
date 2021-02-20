@@ -49,8 +49,8 @@ buildx-build-amd64:
 	docker buildx build \
 		--platform $(PLATFORM) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
-		--cache-from "type=docker,src=/tmp/.buildx-cache" \
-		--cache-to "type=docker,dest=/tmp/.buildx-cache" \
+		--cache-from "type=local,src=/tmp/.buildx-cache" \
+		--cache-to "type=local,dest=/tmp/.buildx-cache" \
 		--load \
 		-t $(REPO):$(TAG) ./
 
