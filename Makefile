@@ -47,7 +47,7 @@ build:
 # we need to save cache to run tests first.
 buildx-build-amd64:
 	docker buildx build \
-		--platform $(PLATFORM) \
+		--platform linux/amd64 \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--cache-from "type=local,src=/tmp/.buildx-cache" \
 		--cache-to "type=local,dest=/tmp/.buildx-cache" \
