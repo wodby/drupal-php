@@ -36,18 +36,35 @@ ifneq ($(STABILITY_TAG),)
     endif
 endif
 
-.PHONY: build buildx-push buildx-build test push shell run start stop logs clean release
+.PHONY: build buildx-push buildx-build buildx-build-amd64 test push shell run start stop logs clean release
 
 default: build
 
 build:
 	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
 
+# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
+# we need to save cache to run tests first.
+buildx-build-amd64:
+	docker buildx build \
+		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--cache-from "type=local,src=/tmp/.buildx-cache" \
+		--cache-to "type=local,dest=/tmp/.buildx-cache" \
+		--load \
+		-t $(REPO):$(TAG) ./
+
 buildx-build:
-	docker buildx build --platform $(PLATFORM) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) -t $(REPO):$(TAG) ./
+	docker buildx build \
+		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		-t $(REPO):$(TAG) ./
 
 buildx-push:
-	docker buildx build --platform $(PLATFORM) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) --push -t $(REPO):$(TAG) ./
+	docker buildx build --push \
+		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		-t $(REPO):$(TAG) ./
 
 test:
 ifneq ($(PHP_VER),7.2)

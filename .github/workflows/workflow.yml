@@ -78,6 +78,12 @@ jobs:
         # building images for different platforms in parallel results in failure.
         platforms: amd64,arm64
     - uses: docker/setup-buildx-action@v1
+    - uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-step1-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
     - uses: ./.github/actions
       with:
         version: '8.0'
@@ -92,6 +98,12 @@ jobs:
       with:
         platforms: amd64,arm64
     - uses: docker/setup-buildx-action@v1
+    - uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-step1-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
     - uses: ./.github/actions
       with:
         version: '7.4'
@@ -106,6 +118,12 @@ jobs:
       with:
         platforms: amd64,arm64
     - uses: docker/setup-buildx-action@v1
+    - uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-step1-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
     - uses: ./.github/actions
       with:
         version: '7.3'
