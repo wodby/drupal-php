@@ -30,7 +30,7 @@ Supported tags and respective `Dockerfile` links:
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
-All images built for `linux/amd64`, `-dev-macos` images additionally built for `linux/arm64`
+All images built for `linux/amd64` and `linux/arm64`
 
 ## Tools
 
