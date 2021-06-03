@@ -14,4 +14,10 @@ if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]];
     for tag in "${tags[@]}"; do
         make buildx-push TAG="${tag}";
     done
+
+    docker login -u "${WODBY1_REGISTRY_USERNAME}" -p "${WODBY1_REGISTRY_PASSWORD}" registry.wodby.com
+
+    for tag in "${tags[@]}"; do
+        make buildx-push TAG="${tag}" REGISTRY="registry.wodby.com";
+    done
 fi
