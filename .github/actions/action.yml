@@ -20,7 +20,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - name: Build image
+  - name: Build and push image to docker hub
     env:
       PHP_VER: ${{ inputs.version }}
       PHP_DEV: ${{ inputs.dev }}
@@ -32,5 +32,18 @@ runs:
       make buildx-build-amd64
       make test
       make buildx-build
-      . $GITHUB_ACTION_PATH/release.sh
+      . $GITHUB_ACTION_PATH/release.sh "${DOCKER_USERNAME}" "${DOCKER_PASSWORD}"
+    shell: bash
+  - name: Build and push amd64 image for wodby registry
+    if: |
+      ${{ inputs.platform }} == 'linux/amd64' &&
+      ${{ inputs.dev }} == false &&
+      ${{ inputs.dev_macos }} == false
+    env:
+      PHP_VER: ${{ inputs.version }}
+      TAGS: ${{ inputs.tags }}
+      PLATFORM: ${{ inputs.platform }}
+    run: |
+      set -e
+      . $GITHUB_ACTION_PATH/release.sh "${WODBY1_REGISTRY_USERNAME}" "${WODBY1_REGISTRY_PASSWORD}" "registry.wodby.com"
     shell: bash
