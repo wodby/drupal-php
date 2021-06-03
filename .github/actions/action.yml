@@ -35,7 +35,7 @@ runs:
       make buildx-build
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash
-  - name: Build and push amd64 image for wodby registry
+  - name: Build and push amd64 image to wodby registry
     env:
       PHP_VER: ${{ inputs.version }}
       PHP_DEV: ${{ inputs.dev }}
@@ -44,12 +44,13 @@ runs:
       DOCKER_USERNAME: $WODBY1_REGISTRY_USERNAME
       DOCKER_PASSWORD: $WODBY1_REGISTRY_PASSWORD
       TAGS: ${{ inputs.tags }}
-      PLATFORM: ${{ inputs.platform }}
+      PLATFORM: linux/amd64
     run: |
       set -e
-      if [[ -z "${PHP_DEV}" && -z "${PHP_DEV_MACOS}" && "${PLATFORM}" == "linux/amd64" ]]; then
+      if [[ -z "${PHP_DEV}" && -z "${PHP_DEV_MACOS}" ]]; then
         . $GITHUB_ACTION_PATH/release.sh
       else
-        echo "Skipped"
+        echo ""
+        echo "Push to registry.wodby.com skipped"
       fi
     shell: bash
