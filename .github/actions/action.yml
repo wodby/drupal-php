@@ -41,14 +41,12 @@ runs:
       PHP_DEV: ${{ inputs.dev }}
       PHP_DEV_MACOS: ${{ inputs.dev_macos }}
       DOCKER_REGISTRY: registry.wodby.com
-      DOCKER_USERNAME: $WODBY1_REGISTRY_USERNAME
-      DOCKER_PASSWORD: $WODBY1_REGISTRY_PASSWORD
       TAGS: ${{ inputs.tags }}
       PLATFORM: linux/amd64
     run: |
       set -e
       if [[ -z "${PHP_DEV}" && -z "${PHP_DEV_MACOS}" ]]; then
-        . $GITHUB_ACTION_PATH/release.sh
+        DOCKER_USERNAME="${WODBY1_REGISTRY_USERNAME}" DOCKER_PASSWORD="${WODBY1_REGISTRY_PASSWORD}" . $GITHUB_ACTION_PATH/release.sh
       else
         echo ""
         echo "Push to registry.wodby.com skipped"
