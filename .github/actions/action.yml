@@ -32,18 +32,23 @@ runs:
       make buildx-build-amd64
       make test
       make buildx-build
-      . $GITHUB_ACTION_PATH/release.sh "${DOCKER_USERNAME}" "${DOCKER_PASSWORD}"
+      . $GITHUB_ACTION_PATH/release.sh
     shell: bash
   - name: Build and push amd64 image for wodby registry
-    if: |
-      ${{ inputs.platform }} == 'linux/amd64' &&
-      ${{ inputs.dev }} == false &&
-      ${{ inputs.dev_macos }} == false
     env:
       PHP_VER: ${{ inputs.version }}
+      PHP_DEV: ${{ inputs.dev }}
+      PHP_DEV_MACOS: ${{ inputs.dev_macos }}
+      DOCKER_REGISTRY: registry.wodby.com
+      DOCKER_USERNAME: $WODBY1_REGISTRY_USERNAME
+      DOCKER_PASSWORD: $WODBY1_REGISTRY_PASSWORD
       TAGS: ${{ inputs.tags }}
       PLATFORM: ${{ inputs.platform }}
     run: |
       set -e
-      . $GITHUB_ACTION_PATH/release.sh "${WODBY1_REGISTRY_USERNAME}" "${WODBY1_REGISTRY_PASSWORD}" "registry.wodby.com"
+      if [[ -z "${PHP_DEV}" && -z "${PHP_DEV_MACOS}" && "${PLATFORM}" == "linux/amd64" ]]; then
+        . $GITHUB_ACTION_PATH/release.sh
+      else
+        echo "Skipped"
+      fi
     shell: bash
