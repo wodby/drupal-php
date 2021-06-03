@@ -25,6 +25,7 @@ runs:
       PHP_VER: ${{ inputs.version }}
       PHP_DEV: ${{ inputs.dev }}
       PHP_DEV_MACOS: ${{ inputs.dev_macos }}
+      DOCKER_REGISTRY: docker.io
       TAGS: ${{ inputs.tags }}
       PLATFORM: ${{ inputs.platform }}
     run: |
