@@ -34,21 +34,21 @@ All images built for `linux/amd64` and `linux/arm64`
 
 ## Tools
 
-| Tool                       | 8.0     | 7.4     | 7.3     |
-| -------------------------- | ------- | ------- | ------- |
-| [Drupal Console Launcher]  | 1.9.7   | 1.9.7   | 1.9.7   |
-| [Drush]                    | latest  | 8.x     | 8.x     |
-| [Drush Launcher]           | 0.9.0   | 0.9.0   | 0.9.0   |
-| [Drush Patchfile]          | latest  | latest  | latest  |
-| [Drush Registry Rebuild]   | 7.x     | 7.x     | 7.x     |
+| Tool                      | 8.0    | 7.4    | 7.3    |
+|---------------------------|--------|--------|--------|
+| [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  |
+| [Drush]                   | latest | 8.x    | 8.x    |
+| [Drush Launcher]          | 0.9.3  | 0.9.3  | 0.9.3  |
+| [Drush Patchfile]         | latest | latest | latest |
+| [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    |
 
 ## Environment Variables
 
-| Variable                            | Default Value | Description |
-| ----------------------------------- | ------------- | ----------- |
-| `DRUPAL_REVERSE_PROXY_ADDRESSES`    |               |             |
-| `PHP_OUTPUT_BUFFERING`              | `16384`       |             |
-| `PHP_REALPATH_CACHE_TTL`            | `3600`        |             |
+| Variable                         | Default Value | Description |
+|----------------------------------|---------------|-------------|
+| `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |             |
+| `PHP_OUTPUT_BUFFERING`           | `16384`       |             |
+| `PHP_REALPATH_CACHE_TTL`         | `3600`        |             |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
