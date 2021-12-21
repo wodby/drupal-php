@@ -49,6 +49,7 @@ services:
       REDIS_PORT: 6379
       REDIS_PASSWORD: redis
       PHP_SENDMAIL_PATH: /bin/true
+      PHP_ERROR_REPORTING: E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED
     volumes:
       - codebase:/var/www/html
       - files:/mnt/files
