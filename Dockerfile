@@ -14,7 +14,7 @@ RUN set -ex; \
     # We keep drush 8 as default for PHP 7.x because it's used for Drupal 7 as well.
     #####
     su-exec wodby composer global require drush/drush:^8.0; \
-    drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.9.0/drush.phar"; \
+    drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.9.3/drush.phar"; \
     wget -O drush.phar "${drush_launcher_url}"; \
     chmod +x drush.phar; \
     mv drush.phar /usr/local/bin/drush; \

@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER ?= 8.0
+PHP_VER ?= 8.1
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REGISTRY ?= docker.io
@@ -66,16 +66,22 @@ buildx-push:
 		-t $(REPO):$(TAG) ./
 
 test:
-ifneq ($(PHP_VER),7.2)
+ifeq ($(PHP_VER),8.1)
 	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
-else
+	@echo "Drupal 8 doesn't support PHP 7.2. Skipping tests."
+	@echo "Drupal 7 doesn't support PHP 7.2. Skipping tests."
+else ifeq ($(PHP_VER),8.0)
+	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
+	@echo "Drupal 8 doesn't support PHP 8.0. Skipping"
+	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+else ifeq ($(PHP_VER),7.2)
 	@echo "Drupal 9 doesn't support PHP 7.2. Skipping tests."
-endif
-ifneq ($(PHP_VER),8.0)
 	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 else
-	@echo "Drupal 7/8 don't support PHP 8.0. Skipping"
+	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests/8 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 endif
 
 push:
