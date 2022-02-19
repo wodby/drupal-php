@@ -20,15 +20,12 @@ Supported tags and respective `Dockerfile` links:
 - `8.1`, `8`, `latest`  [_(Dockerfile)_]
 - `8.0` [_(Dockerfile)_]
 - `7.4`, `7` [_(Dockerfile)_]
-- `7.3` [_(Dockerfile)_]
 - `8.1-dev`, `8-dev`, `dev` [_(Dockerfile)_]
 - `8.0-dev` [_(Dockerfile)_]
 - `7.4-dev`, `7-dev` [_(Dockerfile)_]
-- `7.3-dev` [_(Dockerfile)_]
 - `8.1-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
 - `8.0-dev-macos` [_(Dockerfile)_]
 - `7.4-dev-macos`, `7-dev-macos` [_(Dockerfile)_]
-- `7.3-dev-macos` [_(Dockerfile)_]
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
@@ -36,13 +33,13 @@ All images built for `linux/amd64` and `linux/arm64`
 
 ## Tools
 
-| Tool                      | 8.1    | 8.0    | 7.4    | 7.3    |
-|---------------------------|--------|--------|--------|--------|
-| [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  | 1.9.7  |
-| [Drush]                   | latest | latest | 8.x    | 8.x    |
-| [Drush Launcher]          | 0.10.1 | 0.10.1 | 0.10.1 | 0.10.1 |
-| [Drush Patchfile]         | latest | latest | latest | latest |
-| [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    | 7.x    |
+| Tool                      | 8.1    | 8.0    | 7.4    |
+|---------------------------|--------|--------|--------|
+| [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  |
+| [Drush]                   | latest | latest | 8.x    |
+| [Drush Launcher]          | 0.10.1 | 0.10.1 | 0.10.1 |
+| [Drush Patchfile]         | latest | latest | latest |
+| [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    |
 
 ## Environment Variables
 
