@@ -1,6 +1,7 @@
 -include env_make
 
 PHP_VER ?= 8.1
+ALPINE_VER ?= 3.15
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REGISTRY ?= docker.io
@@ -30,6 +31,8 @@ endif
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
 endif
+
+BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-alpine$(ALPINE_VER)
 
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
