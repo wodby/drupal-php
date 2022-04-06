@@ -3,7 +3,7 @@
 PHP_VER ?= 8.1
 ALPINE_VER ?= 3.15
 
-BASE_IMAGE_TAG = $(PHP_VER)-alpine$(ALPINE_VER)
+BASE_IMAGE_TAG = $(PHP_VER)
 REGISTRY ?= docker.io
 REPO = $(REGISTRY)/wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
@@ -31,6 +31,8 @@ endif
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
 endif
+
+BASE_IMAGE_TAG = $(BASE_IMAGE_TAG)-alpine$(ALPINE_VER)
 
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
