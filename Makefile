@@ -1,8 +1,9 @@
 -include env_make
 
 PHP_VER ?= 8.1
+ALPINE_VER ?= 3.15
 
-BASE_IMAGE_TAG = $(PHP_VER)
+BASE_IMAGE_TAG = $(PHP_VER)-alpine$(ALPINE_VER)
 REGISTRY ?= docker.io
 REPO = $(REGISTRY)/wodby/drupal-php
 NAME = drupal-php-$(PHP_VER)
