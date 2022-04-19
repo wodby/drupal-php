@@ -27,9 +27,8 @@ jobs:
     - uses: ./.github/actions
       with:
         version: '8.1'
-        tags: 8.1-alpine3.15,8-alpine3.15,8.1,8,latest
+        tags: 8.1,8,latest
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php80:
     runs-on: ubuntu-latest
     steps:
@@ -41,9 +40,8 @@ jobs:
     - uses: ./.github/actions
       with:
         version: '8.0'
-        tags: 8.0-alpine3.15,8.0
+        tags: '8.0'
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php74:
     runs-on: ubuntu-latest
     steps:
@@ -55,9 +53,8 @@ jobs:
     - uses: ./.github/actions
       with:
         version: '7.4'
-        tags: 7.4-alpine3.15,7-alpine3.15,7.4,7
+        tags: 7.4,7
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   ### dev
   php81-dev:
     runs-on: ubuntu-latest
@@ -71,9 +68,8 @@ jobs:
       with:
         version: '8.1'
         dev: 1
-        tags: 8.1-dev-alpine3.15,8-dev-alpine3.15,dev-alpine3.15,8.1-dev,8-dev,dev
+        tags: 8.1-dev,8-dev,dev
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php80-dev:
     runs-on: ubuntu-latest
     steps:
@@ -86,9 +82,8 @@ jobs:
       with:
         version: '8.0'
         dev: 1
-        tags: 8.0-dev-alpine3.15,8.0-dev
+        tags: 8.0-dev
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php74-dev:
     runs-on: ubuntu-latest
     steps:
@@ -101,9 +96,8 @@ jobs:
       with:
         version: '7.4'
         dev: 1
-        tags: 7.4-dev-alpine3.15,7-dev-alpine3.15,7.4-dev,7-dev
+        tags: 7.4-dev,7-dev
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   ### dev-macos
   php81-dev-macos:
     runs-on: ubuntu-latest
@@ -117,9 +111,8 @@ jobs:
       with:
         version: '8.1'
         dev_macos: 1
-        tags: 8.1-dev-macos-alpine3.15,8-dev-macos-alpine3.15,dev-macos-alpine3.15,8.1-dev-macos,8-dev-macos,dev-macos
+        tags: 8.1-dev-macos,8-dev-macos,dev-macos
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php80-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -132,9 +125,8 @@ jobs:
       with:
         version: '8.0'
         dev_macos: 1
-        tags: 8.0-dev-macos-alpine3.15,8.0-dev-macos
+        tags: 8.0-dev-macos
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   php74-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -147,48 +139,5 @@ jobs:
       with:
         version: '7.4'
         dev_macos: 1
-        tags: 7.4-dev-macos-alpine3.15,7-dev-macos-alpine3.15,7.4-dev-macos,7-dev-macos
+        tags: 7.4-dev-macos,7-dev-macos
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
-  php81-alpine313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: '8.1'
-        tags: 8.1-alpine3.13,8-alpine3.13,alpine-3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13
-  php80-alpine313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: '8.0'
-        tags: 8.0-alpine3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13
-  php74-alpine313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: '7.4'
-        tags: 7.4-alpine3.13,7-alpine3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13

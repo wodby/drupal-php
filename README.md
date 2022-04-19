@@ -17,18 +17,15 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `8.1-alpine3.15`, `8-alpine3.15`, `8.1`, `8`, `alpine3.15`, `latest`  [_(Dockerfile)_]
-- `8.0-alpine3.15`, `8.0` [_(Dockerfile)_]
-- `7.4-alpine3.15`, `7-alpine3.15`, `7.4`, `7` [_(Dockerfile)_]
-- `8.1-dev-alpine3.15`, `8-dev-alpine3.15`, `dev-alpine3.15`, `8.1-dev`, `8-dev`, `dev` [_(Dockerfile)_]
-- `8.0-dev-alpine3.15`, `8.0-dev` [_(Dockerfile)_]
-- `7.4-dev-alpine3.15`, `7-dev-alpine3.15`, `7.4-dev`, `7-dev` [_(Dockerfile)_]
-- `8.1-dev-macos-alpine3.15`, `8-dev-macos-alpine3.15`, `dev-macos-alpine3.15`, `8.1-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
-- `8.0-dev-macos-alpine3.15`, `8.0-dev-macos` [_(Dockerfile)_]
-- `7.4-dev-macos-alpine3.15`, `7-dev-macos-alpine-alpine3.15`, `7.4-dev-macos`, `7-dev-macos` [_(Dockerfile)_]
-- `8.1-alpine3.13`, `8-alpine3.13`, `alpine3.13`  [_(Dockerfile)_]
-- `8.0-alpine3.13` [_(Dockerfile)_]
-- `7.4-alpine3.13`, `7-alpine3.13` [_(Dockerfile)_]
+- `8.1`, `8`, `8.1`, `8`, `latest`  [_(Dockerfile)_]
+- `8.0`, `8.0` [_(Dockerfile)_]
+- `7.4`, `7`, `7.4`, `7` [_(Dockerfile)_]
+- `8.1-dev`, `8-dev`, `dev`, `8.1-dev`, `8-dev`, `dev` [_(Dockerfile)_]
+- `8.0-dev`, `8.0-dev` [_(Dockerfile)_]
+- `7.4-dev`, `7-dev`, `7.4-dev`, `7-dev` [_(Dockerfile)_]
+- `8.1-dev-macos`, `8-dev-macos`, `dev-macos`, `8.1-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
+- `8.0-dev-macos`, `8.0-dev-macos` [_(Dockerfile)_]
+- `7.4-dev-macos`, `7-dev-macos-alpine`, `7.4-dev-macos`, `7-dev-macos` [_(Dockerfile)_]
 
 See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
