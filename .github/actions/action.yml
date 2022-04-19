@@ -7,9 +7,6 @@ inputs:
   tags:
     description: image tags
     required: true
-  alpine_ver:
-    description: alpine version
-    required: true
   dev:
     description: dev version of image
     required: false
@@ -31,7 +28,6 @@ runs:
       DOCKER_REGISTRY: docker.io
       TAGS: ${{ inputs.tags }}
       PLATFORM: ${{ inputs.platform }}
-      ALPINE_VER: ${{ inputs.alpine_ver }}
     run: |
       set -e
       make buildx-build-amd64
