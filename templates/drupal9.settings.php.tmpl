@@ -24,6 +24,9 @@ $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
 $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
 
+$wodby['solr_cloud']['password'] = '{{ getenv "SOLR_CLOUD_PASSWORD" }}';
+$wodby['solr_cloud']['server'] = '{{ getenv "SOLR_CLOUD_SERVER" "solr" }}';
+
 $settings['reverse_proxy_addresses'] = (function () {
     $internalSubnet = '172.17.0.0';
     $internalBits = 16;
@@ -143,4 +146,9 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
 
     $settings['container_yamls'][] = "$redis_module_path/example.services.yml";
   }
+}
+
+if (!empty($wodby['solr_cloud']['password'])) {
+    $server = $wodby['solr_cloud']['server'];
+    $config["search_api.server.${server}"]['backend_config']['connector_config']['password'] = $wodby['solr_cloud']['password'];
 }
