@@ -24,10 +24,6 @@ run_action() {
   make "${@}" -f /usr/local/bin/actions.mk
 }
 
-echo -n "Checking Drupal Console... "
-drupal | grep -q "Drupal Console"
-echo "OK"
-
 echo -n "Checking drush... "
 drush version --format=yaml
 echo "OK"
@@ -53,7 +49,6 @@ latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)9\.[0-9]+\.[0-9]+$
 make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
-composer require --dev drupal/console:@stable
 composer require drush/drush
 composer require drupal/redis
 
@@ -71,10 +66,6 @@ sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
 
 run_action cache-clear target=render
 run_action cache-rebuild
-
-echo -n "Checking drupal console launcher... "
-drupal -V --root=/var/www | grep -q "Launcher"
-echo "OK"
 
 check_status "root" "${DRUPAL_ROOT}"
 check_status "site" "sites/${DRUPAL_SITE}"
