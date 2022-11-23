@@ -32,7 +32,9 @@ $wodby['varnish']['version'] = '{{ getenv "VARNISH_VERSION" "4" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
 $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
-$wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
+{{- if getenv "REDIS_PASSWORD" }}
+$wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" }}';
+{{- end }}
 
 $conf['reverse_proxy_addresses'] = (function () {
     $internalSubnet = '172.17.0.0';
@@ -150,7 +152,9 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
   if (!empty($wodby['redis']['host']) && $redis_module_path) {
     $conf['redis_client_host'] = $wodby['redis']['host'];
     $conf['redis_client_port'] = $wodby['redis']['port'];
-    $conf['redis_client_password'] = $wodby['redis']['password'];
+    if(isset($wodby['redis']['password'])) {
+      $conf['redis_client_password'] = $wodby['redis']['password'];
+    }
     $conf['redis_client_base'] = 0;
     $conf['redis_client_interface'] = 'PhpRedis';
     $conf['cache_backends'][] = "$redis_module_path/redis.autoload.inc";

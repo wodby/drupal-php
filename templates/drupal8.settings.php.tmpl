@@ -30,7 +30,9 @@ $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
 $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
-$wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" "" }}';
+{{- if getenv "REDIS_PASSWORD" }}
+$wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" }}';
+{{- end }}
 
 $wodby['solr_cloud']['password'] = '{{ getenv "SOLR_CLOUD_PASSWORD" }}';
 $wodby['solr_cloud']['server'] = '{{ getenv "SOLR_CLOUD_SERVER" "solr" }}';
@@ -150,7 +152,9 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
   if (!empty($wodby['redis']['host']) && $redis_module_path) {
     $settings['redis.connection']['host'] = $wodby['redis']['host'];
     $settings['redis.connection']['port'] = $wodby['redis']['port'];
-    $settings['redis.connection']['password'] = $wodby['redis']['password'];
+    if(isset($wodby['redis']['password'])) {
+      $settings['redis.connection']['password'] = $wodby['redis']['password'];
+    }
     $settings['redis.connection']['base'] = 0;
     $settings['redis.connection']['interface'] = 'PhpRedis';
     $settings['cache']['default'] = 'cache.backend.redis';
