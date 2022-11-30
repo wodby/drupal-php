@@ -66,13 +66,8 @@ buildx-push:
 		-t $(REPO):$(TAG) ./
 
 test:
-ifeq ($(PHP_VER),8.1)
-	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
-	@echo "Drupal 7 doesn't support PHP 7.2. Skipping tests."
-else
 	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
-endif
 
 push:
 	docker push $(REPO):$(TAG)
