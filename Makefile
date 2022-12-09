@@ -67,7 +67,7 @@ buildx-push:
 
 test:
 ifeq ($(PHP_VER),8.2)
-	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
+	@echo "Skip Drupal 9 tests."
 	@echo "Drupal 7 doesn't support PHP 8.2. Skipping tests."
 else
 	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
