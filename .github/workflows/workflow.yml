@@ -16,6 +16,19 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
+  php82:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/setup-qemu-action@v1
+      with:
+        platforms: amd64,arm64
+    - uses: docker/setup-buildx-action@v1
+    - uses: ./.github/actions
+      with:
+        version: '8.2'
+        tags: 8.2,8,latest
+        platform: linux/amd64,linux/arm64
   php81:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +40,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: '8.1'
-        tags: 8.1,8,latest
+        tags: 8.1
         platform: linux/amd64,linux/arm64
   php80:
     runs-on: ubuntu-latest
@@ -42,7 +55,8 @@ jobs:
         version: '8.0'
         tags: '8.0'
         platform: linux/amd64,linux/arm64
-  php74:
+  ### dev
+  php82-dev:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -52,10 +66,10 @@ jobs:
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: '7.4'
-        tags: 7.4,7
+        version: '8.2'
+        dev: 1
+        tags: 8.2-dev,8-dev,dev
         platform: linux/amd64,linux/arm64
-  ### dev
   php81-dev:
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +82,7 @@ jobs:
       with:
         version: '8.1'
         dev: 1
-        tags: 8.1-dev,8-dev,dev
+        tags: 8.1-dev
         platform: linux/amd64,linux/arm64
   php80-dev:
     runs-on: ubuntu-latest
@@ -84,7 +98,8 @@ jobs:
         dev: 1
         tags: 8.0-dev
         platform: linux/amd64,linux/arm64
-  php74-dev:
+  ### dev-macos
+  php82-dev-macos:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -94,11 +109,10 @@ jobs:
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: '7.4'
-        dev: 1
-        tags: 7.4-dev,7-dev
+        version: '8.2'
+        dev_macos: 1
+        tags: 8.2-dev-macos,8-dev-macos,dev-macos
         platform: linux/amd64,linux/arm64
-  ### dev-macos
   php81-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +125,7 @@ jobs:
       with:
         version: '8.1'
         dev_macos: 1
-        tags: 8.1-dev-macos,8-dev-macos,dev-macos
+        tags: 8.1-dev-macos
         platform: linux/amd64,linux/arm64
   php80-dev-macos:
     runs-on: ubuntu-latest
@@ -126,18 +140,4 @@ jobs:
         version: '8.0'
         dev_macos: 1
         tags: 8.0-dev-macos
-        platform: linux/amd64,linux/arm64
-  php74-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: '7.4'
-        dev_macos: 1
-        tags: 7.4-dev-macos,7-dev-macos
         platform: linux/amd64,linux/arm64
