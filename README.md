@@ -15,7 +15,7 @@ Overview:
 - [GitHub actions builds](https://github.com/wodby/drupal-php/actions) 
 - [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
 
-Supported tags and respective `Dockerfile` links:
+Supported tags and respective `Dockerxfile` links:
 
 - `8.2`, `8`, `latest`  [_(Dockerfile)_]
 - `8.1` [_(Dockerfile)_]
@@ -36,9 +36,8 @@ All images built for `linux/amd64` and `linux/arm64`
 | Tool                      | 8.2    | 8.1    | 8.0    |
 |---------------------------|--------|--------|--------|
 | [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  |
-| [Drush]                   | latest | latest | latest |
+| [Drush]                   | 10     | 10     | 10     |
 | [Drush Launcher]          | 0.10.1 | 0.10.1 | 0.10.1 |
-| [Drush Patchfile]         | latest | latest | latest |
 | [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    |
 
 ## Environment Variables

@@ -44,8 +44,8 @@ FILES_ARCHIVE_URL="https://s3.amazonaws.com/wodby-sample-files/drupal-php-import
 GIT_URL="https://github.com/drupal/recommended-project"
 
 make git-clone url="${GIT_URL}" -f /usr/local/bin/actions.mk
-# Get latest stable drupal 9 tag.
-latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)9\.[0-9]+\.[0-9]+$' | sort -rV | head -n1)
+# Get latest stable drupal 10 tag.
+latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)10\.[0-9]+\.[0-9]+$' | sort -rV | head -n1)
 make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
