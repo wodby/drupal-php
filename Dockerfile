@@ -11,9 +11,8 @@ USER root
 
 RUN set -ex; \
     \
-    # We keep drush 8 as default for PHP 7.x because it's used for Drupal 7 as well.
-    #####
-    su-exec wodby composer global require drush/drush:^8.0; \
+    # Drush 11 global installation has issues https://github.com/drush-ops/drush/issues/5156.
+    su-exec wodby composer global require drush/drush:^10.0; \
     drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.10.1/drush.phar"; \
     wget -O drush.phar "${drush_launcher_url}"; \
     chmod +x drush.phar; \
@@ -21,8 +20,6 @@ RUN set -ex; \
     \
     # Drush extensions
     su-exec wodby mkdir -p /home/wodby/.drush; \
-    drush_patchfile_url="https://bitbucket.org/davereid/drush-patchfile.git"; \
-    su-exec wodby git clone "${drush_patchfile_url}" /home/wodby/.drush/drush-patchfile; \
     drush_rr_url="https://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.5.tar.gz"; \
     wget -qO- "${drush_rr_url}" | su-exec wodby tar zx -C /home/wodby/.drush; \
     \
