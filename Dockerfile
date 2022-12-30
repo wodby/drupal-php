@@ -11,8 +11,9 @@ USER root
 
 RUN set -ex; \
     \
-    # Drush 11 global installation has issues https://github.com/drush-ops/drush/issues/5156.
-    su-exec wodby composer global require drush/drush:^10.0; \
+    # We keep global drush version 8 because newer version do not support drupal 7 and  \
+    # mostly D7 projects are not composer-based and can't install newer drush as a part of their composer project.
+    su-exec wodby composer global require drush/drush:^8.0; \
     drush_launcher_url="https://github.com/drush-ops/drush-launcher/releases/download/0.10.1/drush.phar"; \
     wget -O drush.phar "${drush_launcher_url}"; \
     chmod +x drush.phar; \
