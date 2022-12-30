@@ -36,7 +36,7 @@ All images built for `linux/amd64` and `linux/arm64`
 | Tool                      | 8.2    | 8.1    | 8.0    |
 |---------------------------|--------|--------|--------|
 | [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  |
-| [Drush]                   | 10     | 10     | 10     |
+| [Drush]                   | 8      | 8      | 8      |
 | [Drush Launcher]          | 0.10.1 | 0.10.1 | 0.10.1 |
 | [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    |
 
