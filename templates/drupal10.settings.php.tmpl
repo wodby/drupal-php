@@ -37,6 +37,8 @@ $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" }}';
 $wodby['solr_cloud']['password'] = '{{ getenv "SOLR_CLOUD_PASSWORD" }}';
 $wodby['solr_cloud']['server'] = '{{ getenv "SOLR_CLOUD_SERVER" "solr" }}';
 
+$wodby['athenapdf']['password'] = '{{ getenv "ATHENAPDF_PASSWORD" }}';
+
 $settings['reverse_proxy_addresses'] = (function () {
     $internalSubnet = '172.17.0.0';
     $internalBits = 16;
@@ -163,4 +165,8 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
 if (!empty($wodby['solr_cloud']['password'])) {
     $server = $wodby['solr_cloud']['server'];
     $config["search_api.server.${server}"]['backend_config']['connector_config']['password'] = $wodby['solr_cloud']['password'];
+}
+
+if (!empty($wodby['athenapdf']['password'])) {
+    $config['athenapdf_api.settings']['auth_key'] = $wodby['athenapdf']['password'];
 }
