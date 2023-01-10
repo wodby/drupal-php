@@ -164,7 +164,7 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
 
 if (!empty($wodby['solr_cloud']['password'])) {
     $server = $wodby['solr_cloud']['server'];
-    $config["search_api.server.${server}"]['backend_config']['connector_config']['password'] = $wodby['solr_cloud']['password'];
+    $config["search_api.server.{$server}"]['backend_config']['connector_config']['password'] = $wodby['solr_cloud']['password'];
 }
 
 if (!empty($wodby['athenapdf']['password'])) {
