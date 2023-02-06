@@ -37,7 +37,7 @@ All images built for `linux/amd64` and `linux/arm64`
 |---------------------------|--------|--------|--------|
 | [Drupal Console Launcher] | 1.9.7  | 1.9.7  | 1.9.7  |
 | [Drush]                   | 8      | 8      | 8      |
-| [Drush Launcher]          | 0.10.1 | 0.10.1 | 0.10.1 |
+| [Drush Launcher]          | 0.10.2 | 0.10.2 | 0.10.2 |
 | [Drush Registry Rebuild]  | 7.x    | 7.x    | 7.x    |
 
 ## Environment Variables
