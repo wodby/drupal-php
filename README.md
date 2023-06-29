@@ -45,7 +45,7 @@ All images built for `linux/amd64` and `linux/arm64`
 | Variable                         | Default Value | Description                                                     |
 |----------------------------------|---------------|-----------------------------------------------------------------|
 | `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |                                                                 |
-| `DRUPAL_DRUPAL_PHP_STORAGE_DIR`  |               | Sets the default storage dir for generated PHP code (i.e. Twig) |
+| `DRUPAL_PHP_STORAGE_DIR`         |               | Sets the default storage dir for generated PHP code (i.e. Twig) |
 | `PHP_OUTPUT_BUFFERING`           | `16384`       |                                                                 |
 | `PHP_REALPATH_CACHE_TTL`         | `3600`        |                                                                 |
 
