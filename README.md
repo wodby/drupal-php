@@ -1,4 +1,4 @@
-# PHP (FPM) for Drupal Docker Container Image 
+# PHP (FPM) for Drupal Docker Container Image
 
 [![Build Status](https://github.com/wodby/drupal-php/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/drupal-php/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/drupal-php.svg)](https://hub.docker.com/r/wodby/drupal-php)
@@ -6,13 +6,13 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/drupal-php:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/drupal-php:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/drupal-php/releases). We strongly recommend using images only with stability tags.
 
 Overview:
 
 - All images based on Alpine Linux
 - Base image: [wodby/php](https://github.com/wodby/php)
-- [GitHub actions builds](https://github.com/wodby/drupal-php/actions) 
+- [GitHub actions builds](https://github.com/wodby/drupal-php/actions)
 - [Docker Hub](https://hub.docker.com/r/wodby/drupal-php)
 
 Supported tags and respective `Dockerxfile` links:
@@ -42,11 +42,12 @@ All images built for `linux/amd64` and `linux/arm64`
 
 ## Environment Variables
 
-| Variable                         | Default Value | Description |
-|----------------------------------|---------------|-------------|
-| `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |             |
-| `PHP_OUTPUT_BUFFERING`           | `16384`       |             |
-| `PHP_REALPATH_CACHE_TTL`         | `3600`        |             |
+| Variable                         | Default Value | Description                                                     |
+|----------------------------------|---------------|-----------------------------------------------------------------|
+| `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |                                                                 |
+| `DRUPAL_DRUPAL_PHP_STORAGE_DIR`  |               | Sets the default storage dir for generated PHP code (i.e. Twig) |
+| `PHP_OUTPUT_BUFFERING`           | `16384`       |                                                                 |
+| `PHP_REALPATH_CACHE_TTL`         | `3600`        |                                                                 |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
@@ -55,20 +56,20 @@ See [wodby/php](https://github.com/wodby/php) for all variables
 Usage:
 ```
 make COMMAND [params ...]
- 
+
 commands:
     git-checkout target [ is_hash]
     drush-import source
-    init-drupal   
+    init-drupal
     cache-clear target
     cache-rebuild
     drush8-alias
     drush9-alias
     user-login
-    
+
 default params values:
     target all
-    is_hash 0 
+    is_hash 0
 ```
 
 See [wodby/php](https://github.com/wodby/php) for all actions
