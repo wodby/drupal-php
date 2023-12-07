@@ -67,15 +67,10 @@ buildx-push:
 
 test:
 ifeq ($(PHP_VER),8.2)
-	@echo "Drupal 9 and 7 don't support PHP 8.2"
+	@echo "Drupal 7 doesn't support PHP 8.2"
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-else ifeq ($(PHP_VER),8.0)
-	@echo "Drupal 10 doesn't support PHP 8.0"
-	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 else
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./tests/9 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 endif
 
