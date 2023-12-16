@@ -4,7 +4,7 @@ PHP_VER ?= 8.2
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REGISTRY ?= docker.io
-REPO ?= $(REGISTRY)/wodby/drupal-php
+REPO ?= $(REGISTRY)/striderxfossility/drupal-php
 NAME = drupal-php-$(PHP_VER)
 
 PLATFORM ?= linux/amd64
