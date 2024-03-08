@@ -24,10 +24,6 @@ run_action() {
   make "${@}" -f /usr/local/bin/actions.mk
 }
 
-echo -n "Checking drush... "
-drush version --format=yaml
-echo "OK"
-
 echo -n "Checking environment variables... "
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
@@ -51,6 +47,10 @@ make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
 composer require drush/drush
 composer require drupal/redis
+
+echo -n "Checking drush... "
+drush version --format=yaml
+echo "OK"
 
 cd "${DRUPAL_ROOT}"
 

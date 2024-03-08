@@ -28,10 +28,6 @@ run_action() {
     make "${@}" -f /usr/local/bin/actions.mk
 }
 
-echo -n "Checking drush... "
-drush version --format=yaml
-echo "OK"
-
 echo -n "Checking environment variables... "
 env | grep -q ^DOCROOT_SUBDIR=
 env | grep -q ^DRUPAL_VERSION=
@@ -58,7 +54,11 @@ cd "${DRUPAL_ROOT}"
 run_action files-import source="${FILES_ARCHIVE_URL}"
 run_action init-drupal
 
-drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
+echo -n "Checking drush... "
+drush version --format=yaml
+echo "OK"
+
+drush si -vvv -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 drush en varnish redis -y --quiet
 
 run_action cache-clear
