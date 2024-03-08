@@ -24,8 +24,7 @@ RUN set -ex; \
     chmod 775 "${FILES_DIR}/config"; \
     \
     # Clean up
-    su-exec wodby composer clear-cache; \
-    su-exec wodby drush cc drush
+    su-exec wodby composer clear-cache
 
 USER wodby
 
