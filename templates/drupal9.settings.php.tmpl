@@ -35,6 +35,12 @@ $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" }}';
 {{- end }}
 
+$wodby['valkey']['host'] = '{{ getenv "VALKEY_HOST" "" }}';
+$wodby['valkey']['port'] = '{{ getenv "VALKEY_PORT" "6379" }}';
+{{- if getenv "VALKEY_PASSWORD" }}
+$wodby['valkey']['password'] = '{{ getenv "VALKEY_PASSWORD" }}';
+{{- end }}
+
 $wodby['solr_cloud']['password'] = '{{ getenv "SOLR_CLOUD_PASSWORD" }}';
 $wodby['solr_cloud']['server'] = '{{ getenv "SOLR_CLOUD_SERVER" "solr" }}';
 
@@ -155,6 +161,22 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $settings['redis.connection']['port'] = $wodby['redis']['port'];
     if(isset($wodby['redis']['password'])) {
       $settings['redis.connection']['password'] = $wodby['redis']['password'];
+    }
+    $settings['redis.connection']['base'] = 0;
+    $settings['redis.connection']['interface'] = 'PhpRedis';
+    $settings['cache']['default'] = 'cache.backend.redis';
+    $settings['cache']['bins']['bootstrap'] = 'cache.backend.chainedfast';
+    $settings['cache']['bins']['discovery'] = 'cache.backend.chainedfast';
+    $settings['cache']['bins']['config'] = 'cache.backend.chainedfast';
+
+    $settings['container_yamls'][] = "$redis_module_path/example.services.yml";
+  }
+
+  if (!empty($wodby['valkey']['host']) && $redis_module_path) {
+    $settings['redis.connection']['host'] = $wodby['valkey']['host'];
+    $settings['redis.connection']['port'] = $wodby['valkey']['port'];
+    if(isset($wodby['valkey']['password'])) {
+      $settings['redis.connection']['password'] = $wodby['valkey']['password'];
     }
     $settings['redis.connection']['base'] = 0;
     $settings['redis.connection']['interface'] = 'PhpRedis';
