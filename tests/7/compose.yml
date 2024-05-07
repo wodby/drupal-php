@@ -22,10 +22,10 @@ services:
       MYSQL_PASSWORD: drupal
       MYSQL_DATABASE: drupal
 
-  redis:
-    image: wodby/redis
+  valkey:
+    image: wodby/valkey
     environment:
-      REDIS_PASSWORD: redis
+      VALKEY_PASSWORD: valkey
 
   varnish:
     image: wodby/varnish:4
@@ -63,9 +63,9 @@ services:
       VARNISH_TERMINAL_PORT: 6082
       VARNISH_SECRET: secret
       VARNISH_VERSION: 4
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: redis
+      VALKEY_HOST: valkey
+      VALKEY_PORT: 6379
+      VALKEY_PASSWORD: valkey
       PHP_SENDMAIL_PATH: /bin/true
     volumes:
       - codebase:/var/www/html

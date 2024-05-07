@@ -36,6 +36,12 @@ $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
 $wodby['redis']['password'] = '{{ getenv "REDIS_PASSWORD" }}';
 {{- end }}
 
+$wodby['valkey']['host'] = '{{ getenv "VALKEY_HOST" "" }}';
+$wodby['valkey']['port'] = '{{ getenv "VALKEY_PORT" "6379" }}';
+{{- if getenv "VALKEY_PASSWORD" }}
+$wodby['valkey']['password'] = '{{ getenv "VALKEY_PASSWORD" }}';
+{{- end }}
+
 $conf['reverse_proxy_addresses'] = (function () {
     $internalSubnet = '172.17.0.0';
     $internalBits = 16;
@@ -154,6 +160,21 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $conf['redis_client_port'] = $wodby['redis']['port'];
     if(isset($wodby['redis']['password'])) {
       $conf['redis_client_password'] = $wodby['redis']['password'];
+    }
+    $conf['redis_client_base'] = 0;
+    $conf['redis_client_interface'] = 'PhpRedis';
+    $conf['cache_backends'][] = "$redis_module_path/redis.autoload.inc";
+    $conf['cache_default_class'] = 'Redis_Cache';
+    $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+    $conf['lock_inc'] = "$redis_module_path/redis.lock.inc";
+    $conf['path_inc'] = "$redis_module_path/redis.path.inc";
+  }
+
+  if (!empty($wodby['valkey']['host']) && $redis_module_path) {
+    $conf['redis_client_host'] = $wodby['valkey']['host'];
+    $conf['redis_client_port'] = $wodby['valkey']['port'];
+    if(isset($wodby['valkey']['password'])) {
+      $conf['redis_client_password'] = $wodby['valkey']['password'];
     }
     $conf['redis_client_base'] = 0;
     $conf['redis_client_interface'] = 'PhpRedis';
