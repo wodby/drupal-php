@@ -136,11 +136,11 @@ $config['system.file']['path']['temporary'] = '/tmp';
 
 // For Drupal < 8.8.0
 // @see https://www.drupal.org/docs/8/configuration-management/changing-the-storage-location-of-the-sync-directory
-if (empty($config_directories['sync'])) {
+if (!empty($wodby['sync_salt']) && empty($config_directories['sync'])) {
   $config_directories['sync'] = $wodby['files_dir'] . '/config/sync_' . $wodby['sync_salt'];
 }
 // For Drupal >= 8.8.0
-if (empty($settings['config_sync_directory'])) {
+if (!empty($wodby['sync_salt']) && empty($settings['config_sync_directory'])) {
   $settings['config_sync_directory'] = $wodby['files_dir'] . '/config/sync_' . $wodby['sync_salt'];
 }
 

@@ -131,7 +131,7 @@ $settings['file_public_path'] = "sites/{$wodby['site']}/files";
 $settings['file_private_path'] = $wodby['files_dir'] . '/private';
 $settings['file_temp_path'] = '/tmp';
 
-if (empty($settings['config_sync_directory'])) {
+if (!empty($wodby['sync_salt']) && empty($settings['config_sync_directory'])) {
   $settings['config_sync_directory'] = $wodby['files_dir'] . '/config/sync_' . $wodby['sync_salt'];
 }
 
