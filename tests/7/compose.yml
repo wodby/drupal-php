@@ -46,6 +46,7 @@ services:
       PHP_SESSION_GC_DIVISOR: 100
       PHP_SESSION_GC_MAXLIFETIME: 200000
       DOCROOT_SUBDIR: web
+      DRUPAL_ENABLE_REDIS_CACHE: 1
       DRUPAL_VERSION: 7
       DRUPAL_SITE: default
       DRUPAL_HASH_SALT: drupal-bad-hash-salt
