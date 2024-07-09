@@ -59,10 +59,10 @@ run_action init-drupal
 
 drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 
-# Comment out valkey settings before enabling the module.
-sed -i "s#^\$wodby\['valkey'\]#//&#" "${CONF_DIR}/wodby.settings.php"
+# Comment out redis settings before enabling the module.
+sed -i "s#^\$wodby\['redis'\]#//&#" "${CONF_DIR}/wodby.settings.php"
 drush en redis -y --quiet
-sed -i "s#^//\(\$wodby\['valkey'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
+sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
 
 run_action cache-clear target=render
 run_action cache-rebuild
