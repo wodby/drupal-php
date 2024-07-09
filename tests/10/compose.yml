@@ -46,9 +46,9 @@ services:
       DB_PASSWORD: drupal
       DB_NAME: drupal
       DB_DRIVER: mysql
-      VALKEY_HOST: valkey
-      VALKEY_PORT: 6379
-      VALKEY_PASSWORD: valkey
+      REDIS_HOST: valkey
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: valkey
       PHP_SENDMAIL_PATH: /bin/true
       PHP_ERROR_REPORTING: E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED
     volumes:
