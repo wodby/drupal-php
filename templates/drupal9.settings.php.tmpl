@@ -155,7 +155,7 @@ if (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'install') {
     $redis_module_path = "$contrib_path_site/redis";
   }
 
-  if (!empty($wodby['redis']['host']) && $redis_module_path) {
+  if (!empty($wodby['redis']['host']) && $redis_module_path && (empty($wodby['2']) || !empty($wodby['enable_redis']))) {
     $settings['redis.connection']['host'] = $wodby['redis']['host'];
     $settings['redis.connection']['port'] = $wodby['redis']['port'];
     if(isset($wodby['redis']['password'])) {
