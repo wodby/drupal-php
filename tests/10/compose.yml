@@ -36,6 +36,7 @@ services:
       DRUPAL_SITE: default
       DRUPAL_HASH_SALT: drupal-bad-hash-salt
       DRUPAL_FILES_SYNC_SALT: drupal-files-sync-bad-salt
+      DRUPAL_ENABLE_REDIS_CACHE: 1
       WODBY_HOSTS: |-
         ["drupal10.test", "drupal10.wodby.wod.by", "test.drupal10.wodby.wod.by"]
       WODBY_HOST_PRIMARY: drupal10.test
@@ -45,9 +46,9 @@ services:
       DB_PASSWORD: drupal
       DB_NAME: drupal
       DB_DRIVER: mysql
-      VALKEY_HOST: valkey
-      VALKEY_PORT: 6379
-      VALKEY_PASSWORD: valkey
+      REDIS_HOST: valkey
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: valkey
       PHP_SENDMAIL_PATH: /bin/true
       PHP_ERROR_REPORTING: E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED
     volumes:
