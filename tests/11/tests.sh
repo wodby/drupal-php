@@ -46,7 +46,7 @@ make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
 composer require drush/drush
-#composer require drupal/redis
+composer require drupal/redis
 
 echo -n "Checking drush... "
 drush version --format=yaml
@@ -60,9 +60,9 @@ run_action init-drupal
 drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}"
 
 # Comment out redis settings before enabling the module.
-#sed -i "s#^\$wodby\['redis'\]#//&#" "${CONF_DIR}/wodby.settings.php"
-#drush en redis -y --quiet
-#sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
+sed -i "s#^\$wodby\['redis'\]#//&#" "${CONF_DIR}/wodby.settings.php"
+drush en redis -y --quiet
+sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
 
 run_action cache-clear target=render
 run_action cache-rebuild
