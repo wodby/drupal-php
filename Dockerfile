@@ -16,6 +16,12 @@ RUN set -ex; \
     mv drupal.phar /usr/local/bin/drupal; \
     chmod +x /usr/local/bin/drupal; \
     \
+    # Drupal code generator
+    dcg_url="https://github.com/Chi-teck/drupal-code-generator/releases/download/2.0.0/dcg.phar"; \
+    curl "${dcg_url}" -L -o dcg.phar; \
+    mv dcg.phar /usr/local/bin/dcg; \
+    chmod +x /usr/local/bin/dcg; \
+    \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
