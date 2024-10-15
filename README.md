@@ -31,20 +31,16 @@ See [wodby/php](https://github.com/wodby/php) for the exact PHP version
 
 All images built for `linux/amd64` and `linux/arm64`
 
-## Tools
-
-| Tool                      | 8.2    | 8.1    |
-|---------------------------|--------|--------|
-| [Drupal Console Launcher] | 1.9.7  | 1.9.7  |
-
 ## Environment Variables
 
-| Variable                         | Default Value | Description                                                     |
-|----------------------------------|---------------|-----------------------------------------------------------------|
-| `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |                                                                 |
-| `DRUPAL_PHP_STORAGE_DIR`         |               | Sets the default storage dir for generated PHP code (i.e. Twig) |
-| `PHP_OUTPUT_BUFFERING`           | `16384`       |                                                                 |
-| `PHP_REALPATH_CACHE_TTL`         | `3600`        |                                                                 |
+| Variable                         | Default Value | Description                                                                     |
+|----------------------------------|---------------|---------------------------------------------------------------------------------|
+| `DRUPAL_REVERSE_PROXY_ADDRESSES` |               |                                                                                 |
+| `DRUPAL_PHP_STORAGE_DIR`         |               | Sets the default storage dir for generated PHP code (i.e. Twig)                 |
+| `PHP_OUTPUT_BUFFERING`           | `16384`       |                                                                                 |
+| `PHP_REALPATH_CACHE_TTL`         | `3600`        |                                                                                 |
+| `DRUPAL_VERSION`                 |               |                                                                                 |
+| `DRUPAL7_INSTALL_GLOBAL_DRUSH`   |               | Installs global drush 7.* during entrypoint, works only with `DRUPAL_VERSION=7` |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
