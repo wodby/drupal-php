@@ -7,5 +7,5 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 if [[ -n "${DRUPAL_VERSION}" && "${DRUPAL_VERSION}" == "7" && -n "${DRUPAL7_INSTALL_GLOBAL_DRUSH}" ]]; then
-    composer global require "drush/drush:7.*"
+    composer global require "drush/drush:8.*"
 fi
