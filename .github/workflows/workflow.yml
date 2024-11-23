@@ -16,6 +16,19 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
+  php84:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64,arm64
+      - uses: docker/setup-buildx-action@v3
+      - uses: ./.github/actions
+        with:
+          version: '8.4'
+          tags: 8.4,8,latest
+          platform: linux/amd64,linux/arm64  
   php83:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +40,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: '8.3'
-        tags: 8.3,8,latest
+        tags: 8.3
         platform: linux/amd64,linux/arm64
   php82:
     runs-on: ubuntu-latest
@@ -56,6 +69,20 @@ jobs:
         tags: 8.1
         platform: linux/amd64,linux/arm64
   ### dev
+  php84-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64,arm64
+      - uses: docker/setup-buildx-action@v3
+      - uses: ./.github/actions
+        with:
+          version: '8.4'
+          dev: 1
+          tags: 8.4-dev,8-dev,dev
+          platform: linux/amd64,linux/arm64
   php83-dev:
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +95,7 @@ jobs:
       with:
         version: '8.3'
         dev: 1
-        tags: 8.3-dev,8-dev,dev
+        tags: 8.3-dev
         platform: linux/amd64,linux/arm64
   php82-dev:
     runs-on: ubuntu-latest
@@ -99,6 +126,20 @@ jobs:
         tags: 8.1-dev
         platform: linux/amd64,linux/arm64
   ### dev-macos
+  php84-dev-macos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64,arm64
+      - uses: docker/setup-buildx-action@v3
+      - uses: ./.github/actions
+        with:
+          version: '8.4'
+          dev_macos: 1
+          tags: 8.4-dev-macos,8-dev-macos,dev-macos
+          platform: linux/amd64,linux/arm64  
   php83-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +152,7 @@ jobs:
       with:
         version: '8.3'
         dev_macos: 1
-        tags: 8.3-dev-macos,8-dev-macos,dev-macos
+        tags: 8.3-dev-macos
         platform: linux/amd64,linux/arm64
   php82-dev-macos:
     runs-on: ubuntu-latest

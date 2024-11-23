@@ -17,13 +17,16 @@ Overview:
 
 Supported tags and respective `Dockerxfile` links:
 
-- `8.3`, `8`, `latest`  [_(Dockerfile)_]
+- `8.4`, `8`, `latest`  [_(Dockerfile)_]
+- `8.3` [_(Dockerfile)_]
 - `8.2` [_(Dockerfile)_]
 - `8.1` [_(Dockerfile)_]
-- `8.3-dev`, `8-dev`, `dev` [_(Dockerfile)_]
+- `8.4-dev`, `8-dev`, `dev` [_(Dockerfile)_]
+- `8.3-dev` [_(Dockerfile)_]
 - `8.2-dev` [_(Dockerfile)_]
 - `8.1-dev` [_(Dockerfile)_]
-- `8.3-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
+- `8.4-dev-macos`, `8-dev-macos`, `dev-macos` [_(Dockerfile)_]
+- `8.3-dev-macos` [_(Dockerfile)_]
 - `8.2-dev-macos` [_(Dockerfile)_]
 - `8.1-dev-macos` [_(Dockerfile)_]
 
