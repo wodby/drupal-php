@@ -15,7 +15,7 @@ services:
       - php
 
   mariadb:
-    image: wodby/mariadb:10.5
+    image: wodby/mariadb
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: drupal
