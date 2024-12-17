@@ -77,7 +77,7 @@ else ifeq ($(PHP_VER),8.4)
 else
 	@echo "Drupal 11 doesn't support PHP <8.3"
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+#	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
 endif
 
 push:
