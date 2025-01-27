@@ -61,9 +61,9 @@ drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_N
 
 # Comment out redis settings before enabling the module.
 sed -i "s#^\$wodby\['redis'\]#//&#" "${CONF_DIR}/wodby.settings.php"
-#drush en redis -y --quiet
-#sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
-#check_rq "Redis" "Connected"
+drush en redis -y --quiet
+sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
+check_rq "Redis" "Connected"
 
 run_action cache-clear target=render
 run_action cache-rebuild
