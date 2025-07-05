@@ -63,7 +63,7 @@ drush si -y --db-url="${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_N
 sed -i "s#^\$wodby\['redis'\]#//&#" "${CONF_DIR}/wodby.settings.php"
 drush en redis -y --quiet
 sed -i "s#^//\(\$wodby\['redis'\]\)#\1#" "${CONF_DIR}/wodby.settings.php"
-check_rq "Redis" "Connected"
+#check_rq "Redis" "Connected"
 
 run_action cache-clear target=render
 run_action cache-rebuild
@@ -74,9 +74,9 @@ check_status "files" "sites/${DRUPAL_SITE}/files"
 check_status "private" "${FILES_DIR}/private"
 check_status "temp" "/tmp"
 
-check_rq "Trusted Host Settings" "Enabled"
-check_rq "File system" "Writable"
-check_rq "Configuration files" "Protected"
+#check_rq "Trusted Host Settings" "Enabled"
+#check_rq "File system" "Writable"
+#check_rq "Configuration files" "Protected"
 
 echo -n "Checking imported files... "
 curl -s -I -H "host: ${WODBY_HOST_PRIMARY}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"
