@@ -1,54 +1,30 @@
-name: Build
-description: Build Drupal PHP image
+name: push
+description: combine multi-arch image and push
 inputs:
   version:
-    description: php version
+    description: version
     required: true
-  tags:
-    description: image tags
-    required: true
+  latest:
+    description: if tag latest
+    required: false
+  latest_major:
+    description: if tag latest major version
+    required: false
   dev:
-    description: dev version of image
-    required: false
+    description: if set then it's a dev version
   dev_macos:
-    description: dev macos version of image
-    required: false
-  platform:
-    description: docker platform
-    required: false
-    default: linux/amd64
+    description: if set then it's a dev macos version
 runs:
   using: "composite"
   steps:
-  - name: Build and push image to docker hub
-    env:
-      PHP_VER: ${{ inputs.version }}
-      PHP_DEV: ${{ inputs.dev }}
-      PHP_DEV_MACOS: ${{ inputs.dev_macos }}
-      DOCKER_REGISTRY: docker.io
-      TAGS: ${{ inputs.tags }}
-      PLATFORM: ${{ inputs.platform }}
-    run: |
-      set -e
-      make buildx-build-amd64
-      make test
-      make buildx-build
-      . $GITHUB_ACTION_PATH/release.sh
-    shell: bash
-#  - name: Build and push amd64 image to wodby registry
-#    env:
-#      PHP_VER: ${{ inputs.version }}
-#      PHP_DEV: ${{ inputs.dev }}
-#      PHP_DEV_MACOS: ${{ inputs.dev_macos }}
-#      DOCKER_REGISTRY: registry.wodby.com
-#      TAGS: ${{ inputs.tags }}
-#      PLATFORM: linux/amd64
-#    run: |
-#      set -e
-#      if [[ -z "${PHP_DEV}" && -z "${PHP_DEV_MACOS}" ]]; then
-#        DOCKER_USERNAME="${WODBY1_REGISTRY_USERNAME}" DOCKER_PASSWORD="${WODBY1_REGISTRY_PASSWORD}" . $GITHUB_ACTION_PATH/release.sh
-#      else
-#        echo ""
-#        echo "Push to registry.wodby.com skipped"
-#      fi
-#    shell: bash
+    - name: Build image
+      env:
+        PHP_VER: ${{ inputs.version }}
+        PHP_DEV: ${{ inputs.dev }}
+        PHP_DEV_MACOS: ${{ inputs.dev_macos }}
+        LATEST: ${{ inputs.latest }}
+        LATEST_MAJOR: ${{ inputs.latest_major }}
+      run: |
+        . $GITHUB_ACTION_PATH/release.sh
+      shell: bash
+      working-directory: ${{ inputs.workdir }}

@@ -1,6 +1,6 @@
 -include env_make
 
-PHP_VER ?= 8.4
+PHP_VER ?= 8.5
 
 BASE_IMAGE_TAG = $(PHP_VER)
 REGISTRY ?= docker.io
@@ -31,27 +31,18 @@ ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
 endif
 
-ifneq ($(STABILITY_TAG),)
-    ifneq ($(TAG),latest)
-        override TAG := $(TAG)-$(STABILITY_TAG)
-    endif
+IMAGETOOLS_TAG ?= $(TAG)
+
+ifneq ($(ARCH),)
+	override TAG := $(TAG)-$(ARCH)
 endif
 
-.PHONY: build buildx-push buildx-build buildx-build-amd64 test push shell run start stop logs clean release
+.PHONY: build buildx-push buildx-build test push shell run start stop logs clean release
 
 default: build
 
 build:
 	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
-
-# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
-# we need to save cache to run tests first.
-buildx-build-amd64:
-	docker buildx build \
-		--platform linux/amd64 \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
-		--load \
-		-t $(REPO):$(TAG) ./
 
 buildx-build:
 	docker buildx build \
@@ -65,6 +56,12 @@ buildx-push:
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		-t $(REPO):$(TAG) ./
 
+buildx-imagetools-create:
+	docker buildx imagetools create -t $(REPO):$(IMAGETOOLS_TAG) \
+				  $(REPO):$(TAG)-amd64 \
+				  $(REPO):$(TAG)-arm64
+.PHONY: buildx-imagetools-create 
+
 test:
 ifeq ($(PHP_VER),8.3)
 	@echo "Drupal 7 doesn't support PHP 8.3"
@@ -74,6 +71,8 @@ else ifeq ($(PHP_VER),8.4)
 	@echo "Drupal 7 doesn't support PHP 8.4"
 	cd ./tests/11 && IMAGE=$(REPO):$(TAG) ./run.sh
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
+else ifeq ($(PHP_VER),8.5)
+	@echo "No PHP 8.5 support"
 else
 	@echo "Drupal 11 doesn't support PHP <8.3"
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
