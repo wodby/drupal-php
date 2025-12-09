@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  BASE_IMAGE_STABILITY_TAG: 4.61.1
+  BASE_IMAGE_STABILITY_TAG: 4.62.0
 
 jobs:
   build:
