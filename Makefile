@@ -63,20 +63,15 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
-ifeq ($(PHP_VER),8.3)
-	@echo "Drupal 7 doesn't support PHP 8.3"
-	cd ./tests/11 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-else ifeq ($(PHP_VER),8.4)
-	@echo "Drupal 7 doesn't support PHP 8.4"
-	cd ./tests/11 && IMAGE=$(REPO):$(TAG) ./run.sh
-	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-else ifeq ($(PHP_VER),8.5)
-	@echo "No PHP 8.5 support"
-else
+ifneq (,$(filter $(PHP_VER),8.1 8.2))
 	@echo "Drupal 11 doesn't support PHP <8.3"
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
-#	cd ./tests/7 && IMAGE=$(REPO):$(TAG) ./run.sh
+else ifeq ($(PHP_VER),8.5)
+	@echo "Drupal 10 doesn't support PHP 8.5"
+	cd ./tests/11 && IMAGE=$(REPO):$(TAG) ./run.sh
+else	
+	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests/11 && IMAGE=$(REPO):$(TAG) ./run.sh
 endif
 
 push:
