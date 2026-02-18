@@ -18,7 +18,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php: [ '8.5', '8.4', '8.3', '8.2', '8.1' ]
+        php: [ '8.5', '8.4', '8.3', '8.2' ]
         arch:
           - amd64
           - arm64
@@ -55,7 +55,7 @@ jobs:
       - build
     strategy:
       matrix:
-        php: [ '8.5', '8.4', '8.3', '8.2', '8.1' ]
+        php: [ '8.5', '8.4', '8.3', '8.2' ]
         variant:
           - { dev: '', dev_macos: '' }
           - { dev: 'dev', dev_macos: '' }
