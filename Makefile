@@ -63,6 +63,9 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
+	docker run --rm --network none --user root \
+		-v "$(CURDIR)/tests/asset-permissions.sh:/tmp/asset-permissions.sh:ro" \
+		$(REPO):$(TAG) bash /tmp/asset-permissions.sh
 ifeq ($(PHP_VER),8.2)
 	@echo "Drupal 11 doesn't support PHP <8.3"
 	cd ./tests/10 && IMAGE=$(REPO):$(TAG) ./run.sh

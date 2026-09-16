@@ -70,6 +70,18 @@ default params values:
 
 See [wodby/php](https://github.com/wodby/php) for all actions
 
+## Aggregate file permissions
+
+At startup and after files imports, the image prepares `${FILES_DIR}/public/css` and
+`${FILES_DIR}/public/js` with ownership `www-data:www-data` and mode `0775`. This allows
+PHP-FPM to create aggregates and the `wodby` user running Drush to delete them during
+cache rebuilds, including when an import supplied directories with mode `0755`.
+
+Only these two directories are adjusted; existing files and other upload directories
+retain their permissions. Custom symlinked directories and a separately configured
+Drupal `file_assets_path` remain the application's responsibility. Explicit Drupal
+permission overrides can still affect directories recreated by Drupal.
+
 ## Complete Drupal Stack
 
 See [wodby/docker4drupal](https://github.com/wodby/docker4drupal)

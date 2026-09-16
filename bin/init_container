@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Preserve PHP initialization, including its optional additional files directory.
+php_init_container "$@"
+
+# This also runs after files_sync, whose preserved archive modes can leave asset
+# directories writable by PHP-FPM but not by the wodby user running Drush.
+for type in css js; do
+    dir="${FILES_DIR}/public/${type}"
+    # Leave custom symlinked asset storage unchanged.
+    if [[ -L "${dir}" ]]; then
+        continue
+    fi
+    mkdir -p "${dir}"
+    chown www-data:www-data "${dir}"
+    chmod 775 "${dir}"
+done
