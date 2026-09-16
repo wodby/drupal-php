@@ -11,6 +11,7 @@ USER root
 RUN set -ex; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/php.mk; \
+    mv /usr/local/bin/init_container /usr/local/bin/php_init_container; \
     # Change overridden target name to avoid warnings.
     sed -i 's/git-checkout:/php-git-checkout:/' /usr/local/bin/php.mk; \
     \
