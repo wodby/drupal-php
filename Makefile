@@ -42,21 +42,22 @@ endif
 
 .PHONY: build buildx-push buildx-build test push shell run start stop logs clean release
 
+# Resolve the same pinned base image for every local and CI build target.
+include base-images.mk
+
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
+	docker build --build-arg BASE_IMAGE="$(BASE_IMAGE)" -t $(REPO):$(TAG) ./
 
 buildx-build:
-	docker buildx build \
+	docker buildx build --build-arg BASE_IMAGE="$(BASE_IMAGE)" \
 		--platform $(PLATFORM) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		-t $(REPO):$(TAG) ./
 
 buildx-push:
-	docker buildx build --push \
+	docker buildx build --build-arg BASE_IMAGE="$(BASE_IMAGE)" --push \
 		--platform $(PLATFORM) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		-t $(REPO):$(TAG) ./
 
 buildx-imagetools-create:

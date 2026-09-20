@@ -4,13 +4,15 @@ on:
   push:
     branches:
       - master
-      - 4.x
 
     tags:
       - '*'
       - '!*-r[0-9]*'
 
   pull_request:
+
+env:
+  BASE_IMAGE_REVISION: 4.71.5
 
 jobs:
   build:
