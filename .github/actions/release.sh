@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Version aliases identify published releases; only primary tags publish images.
+if [[ "${GITHUB_REF:-}" =~ ^refs/tags/.+-r[0-9]+$ ]]; then
+    exit 0
+fi
+
 set -e
 
 if [[ -n "${DEBUG}" ]]; then
