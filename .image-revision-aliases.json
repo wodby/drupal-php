@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "image": "wodby/drupal-php",
+  "versions": [
+    {
+      "version": {
+        "repository": "wodby/php",
+        "parent_env": "PHP85"
+      },
+      "variants": [
+        {
+          "short": [
+            "{minor}",
+            "{major}"
+          ],
+          "full": "{version}"
+        },
+        {
+          "short": [
+            "{minor}-dev",
+            "{major}-dev"
+          ],
+          "full": "{version}-dev"
+        },
+        {
+          "short": [
+            "{minor}-dev-macos",
+            "{major}-dev-macos"
+          ],
+          "full": "{version}-dev-macos"
+        }
+      ]
+    },
+    {
+      "version": {
+        "repository": "wodby/php",
+        "parent_env": "PHP84"
+      },
+      "variants": [
+        {
+          "short": [
+            "{minor}"
+          ],
+          "full": "{version}"
+        },
+        {
+          "short": [
+            "{minor}-dev"
+          ],
+          "full": "{version}-dev"
+        },
+        {
+          "short": [
+            "{minor}-dev-macos"
+          ],
+          "full": "{version}-dev-macos"
+        }
+      ]
+    },
+    {
+      "version": {
+        "repository": "wodby/php",
+        "parent_env": "PHP83"
+      },
+      "variants": [
+        {
+          "short": [
+            "{minor}"
+          ],
+          "full": "{version}"
+        },
+        {
+          "short": [
+            "{minor}-dev"
+          ],
+          "full": "{version}-dev"
+        },
+        {
+          "short": [
+            "{minor}-dev-macos"
+          ],
+          "full": "{version}-dev-macos"
+        }
+      ]
+    },
+    {
+      "version": {
+        "repository": "wodby/php",
+        "parent_env": "PHP82"
+      },
+      "variants": [
+        {
+          "short": [
+            "{minor}"
+          ],
+          "full": "{version}"
+        },
+        {
+          "short": [
+            "{minor}-dev"
+          ],
+          "full": "{version}-dev"
+        },
+        {
+          "short": [
+            "{minor}-dev-macos"
+          ],
+          "full": "{version}-dev-macos"
+        }
+      ]
+    }
+  ]
+}

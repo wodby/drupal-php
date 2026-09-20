@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - master
-      - 4.x
 
     tags:
       - '*'
+      - '!*-r[0-9]*'
 
   pull_request:
+
+env:
+  BASE_IMAGE_REVISION: 4.71.5
 
 jobs:
   build:
@@ -83,3 +86,18 @@ jobs:
           dev_macos: ${{ matrix.variant.dev_macos }}
           latest: ${{ matrix.latest }}
           latest_major: ${{ matrix.latest_major }}
+
+  image-revision-aliases:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/r')
+    needs: [ push ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: image-revision-aliases-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: wodby/images/.github/actions/image-revision-aliases@6a3956567002e48847338be97b4d955ee40ae7cb
+        with:
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
