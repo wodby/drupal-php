@@ -1,5 +1,8 @@
 -include env_make
 
+# Accept legacy build arguments during the image revision transition.
+BASE_IMAGE_REVISION ?= $(BASE_IMAGE_STABILITY_TAG)
+
 PHP_VER ?= 8.5
 
 BASE_IMAGE_TAG = $(PHP_VER)
@@ -27,8 +30,8 @@ else ifneq ($(PHP_DEV),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev
 endif
 
-ifneq ($(BASE_IMAGE_STABILITY_TAG),)
-    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
+ifneq ($(BASE_IMAGE_REVISION),)
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_REVISION)
 endif
 
 IMAGETOOLS_TAG ?= $(TAG)
