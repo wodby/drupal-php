@@ -68,6 +68,8 @@ buildx-imagetools-create:
 
 test:
 	bash tests/runtime-configuration.sh
+	bash tests/workspace-checkout.sh
+	docker run --rm --network none --entrypoint /docker-entrypoint.sh -e DRUPAL_VERSION=11 $(REPO):$(TAG) --configure-runtime
 	docker run --rm --network none --user root \
 		-v "$(CURDIR)/tests/asset-permissions.sh:/tmp/asset-permissions.sh:ro" \
 		$(REPO):$(TAG) bash /tmp/asset-permissions.sh

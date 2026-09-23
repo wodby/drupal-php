@@ -11,6 +11,34 @@ settings_php="${DRUPAL_SITE_DIR}/settings.php"
 default_settings_php="${DRUPAL_SITE_DIR}/default.settings.php"
 sites_php="${DRUPAL_ROOT}/sites/sites.php"
 
+# A workspace checkout belongs to the developer. Preflight every generated path
+# before making any changes; only ignored, untracked paths may be generated.
+if [[ "${WODBY_WORKSPACE:-}" == 1 ]]; then
+    root=$(git -C "${APP_ROOT}" rev-parse --show-toplevel) || exit 1
+    workspace_generated_path() {
+        local target relative tracked
+        target="$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")" || return 1
+        if [[ -L "$1" ]]; then target=$(realpath "$1") || return 1; fi
+        case "$target" in "$root"/*) relative="${target#"$root"/}" ;; *)
+            echo "Workspace setup refuses to modify a path outside the checkout: $1" >&2; return 1 ;;
+        esac
+        tracked=$(git -C "$root" ls-files -- "$relative") || return 1
+        if [[ -n "$tracked" ]] || ! git -C "$root" check-ignore -q -- "$relative"; then
+            echo "Workspace setup would change $relative. Add the required Wodby settings include explicitly, or ignore this generated path and remove it from Git tracking before retrying preparation." >&2
+            return 1
+        fi
+    }
+    if [[ ! -f "$settings_php" ]] || ! grep -qi 'wodby.settings.php' "$settings_php"; then
+        workspace_generated_path "$settings_php"
+    fi
+    if [[ "${DRUPAL_SITE}" != default ]] && { [[ ! -f "$sites_php" ]] || ! grep -qi 'wodby.sites.php' "$sites_php"; }; then
+        workspace_generated_path "$sites_php"
+    fi
+    if [[ ! -L "${DRUPAL_SITE_DIR}/files" ]]; then
+        workspace_generated_path "${DRUPAL_SITE_DIR}/files"
+    fi
+fi
+
 mkdir -p "${DRUPAL_SITE_DIR}"
 chmod 755 "${DRUPAL_SITE_DIR}" || true
 
