@@ -67,6 +67,7 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
+	bash tests/runtime-configuration.sh
 	docker run --rm --network none --user root \
 		-v "$(CURDIR)/tests/asset-permissions.sh:/tmp/asset-permissions.sh:ro" \
 		$(REPO):$(TAG) bash /tmp/asset-permissions.sh
