@@ -1,7 +1,7 @@
 -include env_make
 
 # Accept legacy build arguments during the image revision transition.
-BASE_IMAGE_REVISION ?= $(BASE_IMAGE_STABILITY_TAG)
+BASE_IMAGE_REVISION ?= $(if $(BASE_IMAGE_STABILITY_TAG),$(BASE_IMAGE_STABILITY_TAG),r4)
 
 PHP_VER ?= 8.5
 
@@ -67,7 +67,11 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
+	IMAGE=$(REPO):$(TAG) bash tests/workspace-contract.sh
+	docker run --rm --network none --entrypoint /bin/bash -e DRUPAL_VERSION=11 -v "$(CURDIR)/tests/workspace-image-runtime.sh:/tmp/workspace-image-runtime.sh:ro" $(REPO):$(TAG) /tmp/workspace-image-runtime.sh
 	bash tests/runtime-configuration.sh
+	bash tests/workspace-checkout.sh
+	docker run --rm --network none --entrypoint /docker-entrypoint.sh -e DRUPAL_VERSION=11 $(REPO):$(TAG) --configure-runtime
 	docker run --rm --network none --user root \
 		-v "$(CURDIR)/tests/asset-permissions.sh:/tmp/asset-permissions.sh:ro" \
 		$(REPO):$(TAG) bash /tmp/asset-permissions.sh

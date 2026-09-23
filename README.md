@@ -105,3 +105,27 @@ image. A version without a pin fails before the build starts.
 When adding a supported base version or variant, add its image index digest to
 `base-images.mk`. For a custom build, override `BASE_IMAGE` with a complete
 `repository:tag@sha256:...` reference.
+
+### Workspace preparation and Git
+
+With `WODBY_WORKSPACE=1`, initialization preflights settings and upload paths before
+changing the checkout. It refuses to append configuration to tracked settings or
+replace tracked upload files. Generated settings must be ignored and untracked;
+ignoring an already tracked file alone is insufficient.
+
+For tracked settings, add the bootstrap include deliberately and commit it with
+application configuration. For example, in `settings.php`:
+
+```php
+$wodbyConfig = (getenv('CONF_DIR') ?: '/var/www/conf') . '/wodby.settings.php';
+if (is_file($wodbyConfig)) {
+    include $wodbyConfig;
+}
+```
+
+Multisite projects need the equivalent `wodby.sites.php` include in `sites/sites.php`.
+Keep uploaded files and generated local settings out of Git. Retry preparation after
+fixing the reported paths. Standard initialization retains its existing behavior.
+Dependency managers and project scripts can still change source files; inspect the
+Git diff before committing. Inherited workspace support requires a PHP base image
+that declares workspace contract version 1.
