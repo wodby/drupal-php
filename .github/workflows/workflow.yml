@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  BASE_IMAGE_REVISION: r4
+  BASE_IMAGE_REVISION: r5
 
 jobs:
   build:
