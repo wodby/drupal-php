@@ -108,13 +108,10 @@ When adding a supported base version or variant, add its image index digest to
 
 ### Workspace preparation and Git
 
-With `WODBY_WORKSPACE=1`, initialization preflights settings and upload paths before
-changing the checkout. It refuses to append configuration to tracked settings or
-replace tracked upload files. Generated settings must be ignored and untracked;
-ignoring an already tracked file alone is insufficient.
-
-For tracked settings, add the bootstrap include deliberately and commit it with
-application configuration. For example, in `settings.php`:
+With `WODBY_WORKSPACE=1`, initialization creates `settings.php` from
+`default.settings.php` when it's missing, and appends the Wodby include when the file
+doesn't have one. The include is skipped when Wodby's settings file doesn't exist,
+so the file keeps working elsewhere and you can commit it:
 
 ```php
 $wodbyConfig = (getenv('CONF_DIR') ?: '/var/www/conf') . '/wodby.settings.php';
@@ -123,9 +120,15 @@ if (is_file($wodbyConfig)) {
 }
 ```
 
-Multisite projects need the equivalent `wodby.sites.php` include in `sites/sites.php`.
-Keep uploaded files and generated local settings out of Git. Retry preparation after
-fixing the reported paths. Standard initialization retains its existing behavior.
-Dependency managers and project scripts can still change source files; inspect the
-Git diff before committing. Inherited workspace support requires a PHP base image
-that declares workspace contract version 1.
+A tracked `settings.php` shows the include as a change to commit. Settings that
+already mention `wodby.settings.php` are left unchanged. Multisite projects get the
+equivalent `wodby.sites.php` include in `sites/sites.php`.
+
+Initialization checks every path before changing the checkout. It never changes
+files outside the checkout. It replaces the site's `files` directory with a link to
+the files volume, so that directory must be ignored by Git and not tracked; ignoring
+an already tracked path alone is insufficient. Retry preparation after fixing the
+reported path. Standard initialization retains its existing behavior. Dependency
+managers and project scripts can still change source files; inspect the Git diff
+before committing. Inherited workspace support requires a PHP base image that
+declares workspace contract version 1.
