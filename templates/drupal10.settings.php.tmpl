@@ -28,6 +28,7 @@ $wodby['db']['username'] = '';
 {{- end }}
 $wodby['db']['password'] = '{{ getenv "DB_PASSWORD" "" }}';
 $wodby['db']['driver'] = '{{ getenv "DB_DRIVER" "mysql" }}';
+$wodby['db']['ssl_ca'] = '{{ getenv "DB_SSL_CA" "" }}';
 
 $wodby['redis']['host'] = '{{ getenv "REDIS_HOST" "" }}';
 $wodby['redis']['port'] = '{{ getenv "REDIS_PORT" "6379" }}';
@@ -122,6 +123,12 @@ if (!empty($wodby['db']['host'])) {
       'driver' => $wodby['db']['driver'],
     ]
   );
+
+  // Wodby mounts the CA certificate of a managed database server, such as an Amazon RDS server that accepts only TLS
+  // connections, and sets its path: connect with TLS and verify the server then.
+  if (!empty($wodby['db']['ssl_ca']) && in_array($wodby['db']['driver'], ['mysql', 'mariadb'], TRUE)) {
+    $databases['default']['default']['pdo'][class_exists('Pdo\Mysql') ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA] = $wodby['db']['ssl_ca'];
+  }
 }
 
 $settings['file_public_path'] = "sites/{$wodby['site']}/files";
