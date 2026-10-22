@@ -76,6 +76,17 @@ default params values:
 
 See [wodby/php](https://github.com/wodby/php) for all actions
 
+## HTML5 form validation
+
+For Drupal 11, generated settings explicitly enable HTML5 form validation unless
+the application already sets `enable_html5_validation`. To test with browser
+validation disabled before upgrading, set `$settings['enable_html5_validation'] = FALSE;`
+in `settings.php`.
+
+Drupal still reports an upgrade warning when this setting is `TRUE`. Test custom
+forms and conditionally required fields before disabling it. See the
+[Drupal change record](https://www.drupal.org/node/3537128).
+
 ## Aggregate file permissions
 
 At startup and after files imports, the image prepares `${FILES_DIR}/public/css` and

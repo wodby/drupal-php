@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Wodby environment configuration for Drupal 10.
+ * Wodby environment configuration for Drupal 11.
  */
 
 {{ if getenv "WODBY_HOSTS" }}{{ range jsonArray (getenv "WODBY_HOSTS") }}
@@ -98,6 +98,11 @@ if (!array_key_exists('update_free_access', $settings)) {
 
 if (empty($settings['hash_salt'])) {
   $settings['hash_salt'] = $wodby['hash_salt'];
+}
+
+// Preserve Drupal 11 form behavior unless the application opts out.
+if (!array_key_exists('enable_html5_validation', $settings)) {
+  $settings['enable_html5_validation'] = TRUE;
 }
 
 if (!array_key_exists('file_scan_ignore_directories', $settings)) {
