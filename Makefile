@@ -108,8 +108,3 @@ clean:
 	-docker rm -f $(NAME)
 
 release: build push
-
-# Expose the exact tag built with the current version, variant and architecture.
-.PHONY: image-ref
-image-ref:
-	@printf '%s\n' "$(REPO):$(TAG)"
