@@ -136,6 +136,46 @@ if (!empty($wodby['db']['host'])) {
   }
 }
 
+// While the web installer runs, it keeps its caches in memory, so it neither sees nor clears what another request stores
+// in the database. A request that boots Drupal then leaves caches built from a half-installed site, and the site stays
+// broken until a cache rebuild (https://www.drupal.org/i/2350711). Until the installation has finished, only the
+// installer, update.php and the command line may boot Drupal; anything else gets a 503 that Drupal never sees.
+if (!empty($wodby['db']['host']) && PHP_SAPI !== 'cli' && !defined('MAINTENANCE_MODE')) {
+  (function (array $db) {
+    $key = "wodby_drupal_installed:{$db['host']}:{$db['database']}";
+    $apcu = function_exists('apcu_enabled') && apcu_enabled();
+    if ($apcu && apcu_fetch($key)) {
+      return;
+    }
+    try {
+      $dsn = $db['driver'] === 'pgsql' ? 'pgsql:host=%s;port=%s;dbname=%s' : 'mysql:host=%s;port=%s;dbname=%s';
+      $pdo = new \PDO(sprintf($dsn, $db['host'], $db['port'], $db['database']), $db['username'], $db['password'], ($db['pdo'] ?? []) + [\PDO::ATTR_TIMEOUT => 2, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+      $table = (is_string($db['prefix'] ?? NULL) ? $db['prefix'] : '') . 'key_value';
+      $state = [];
+      foreach ($pdo->query("SELECT name, value FROM {$table} WHERE collection = 'state' AND name IN ('install_task', 'install_time')") as $row) {
+        // PostgreSQL returns this column as a stream.
+        $state[$row['name']] = is_resource($row['value']) ? stream_get_contents($row['value']) : $row['value'];
+      }
+    }
+    catch (\Throwable) {
+      // No database or no tables yet: Drupal itself sends the visitor to the installer.
+      return;
+    }
+    if (($state['install_task'] ?? NULL) === serialize('done') || (!isset($state['install_task']) && isset($state['install_time']))) {
+      if ($apcu) {
+        apcu_store($key, TRUE);
+      }
+      return;
+    }
+    http_response_code(503);
+    header('Retry-After: 30');
+    header('Cache-Control: no-store');
+    header('Content-Type: text/plain');
+    echo "Drupal is being installed. To continue, open /core/install.php.\n";
+    exit;
+  })($databases['default']['default']);
+}
+
 $settings['file_public_path'] = "sites/{$wodby['site']}/files";
 $settings['file_private_path'] = $wodby['files_dir'] . '/private';
 $settings['file_temp_path'] = '/tmp';
