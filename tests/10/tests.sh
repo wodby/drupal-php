@@ -82,6 +82,13 @@ echo -n "Checking imported files... "
 curl -s -I -H "host: ${WODBY_HOST_PRIMARY}" "nginx/sites/default/files/logo.png" | grep -q "200 OK"
 echo "OK"
 
+echo -n "Checking requests wait for the installation to finish... "
+drush sql:query "UPDATE key_value SET value = 's:5:\"batch\";' WHERE collection = 'state' AND name = 'install_task'"
+curl -s -o /dev/null -w '%{http_code}' -H "host: ${WODBY_HOST_PRIMARY}" "nginx" | grep -q 503
+[[ "$(curl -s -o /dev/null -w '%{http_code}' -H "host: ${WODBY_HOST_PRIMARY}" "nginx/core/install.php")" != 503 ]]
+drush sql:query "UPDATE key_value SET value = 's:4:\"done\";' WHERE collection = 'state' AND name = 'install_task'"
+echo "OK"
+
 echo -n "Checking Drupal homepage... "
 curl -s -H "host: ${WODBY_HOST_PRIMARY}" "nginx" | grep -q "Drupal ${DRUPAL_VERSION} (https://www.drupal.org)"
 echo "OK"
