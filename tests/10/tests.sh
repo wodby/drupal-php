@@ -45,7 +45,9 @@ latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)10\.[0-9]+\.[0-9]+
 make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
-composer require drush/drush
+# Temporary: Robo 5.2.3 calls addCommand(), which needs Symfony Console 7.4+.
+# Drupal 10 ships Console 6.4. Drop this exclusion once Robo 5.2.4 is released.
+composer require drush/drush "consolidation/robo:!=5.2.3"
 composer require drupal/redis
 
 echo -n "Checking drush... "
