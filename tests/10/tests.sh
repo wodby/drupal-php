@@ -45,10 +45,10 @@ latest_ver=$(git show-ref --tags | grep -P -o '(?<=refs/tags/)10\.[0-9]+\.[0-9]+
 make git-checkout target="${latest_ver}" -f /usr/local/bin/actions.mk
 
 COMPOSER_MEMORY_LIMIT=-1 composer install -n
-# Temporary: Robo 5.2.2 shipped with a merge conflict marker in Robo.php, and
-# 5.2.3 calls addCommand(), which needs Symfony Console 7.4+ (Drupal 10 ships 6.4).
+# Temporary: Robo 5.2.1-5.2.3 call addCommand(), which needs Symfony Console 7.4+
+# (Drupal 10 ships 6.4), and 5.2.2 also has a merge conflict marker in Robo.php.
 # Drop this constraint once Robo 5.2.4 is released.
-composer require drush/drush "consolidation/robo:<5.2.2 || >=5.2.4"
+composer require drush/drush "consolidation/robo:<5.2.1 || >=5.2.4"
 composer require drupal/redis
 
 echo -n "Checking drush... "
