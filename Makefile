@@ -60,10 +60,15 @@ buildx-push:
 		--platform $(PLATFORM) \
 		-t $(REPO):$(TAG) ./
 
+# CI combines the exact architecture images this workflow run pushed; see
+# wodby/images arch-image-pins. Per-architecture tags are shared by every run,
+# so an overlapping run may already have replaced one of them.
+arch-image = $(if $(ARCH_IMAGE_PINS),$(or $(shell cat '$(ARCH_IMAGE_PINS)/$(subst :,_,$(subst /,_,$(1)))' 2>/dev/null),$(error No digest of $(1) was pushed by this workflow run)),$(1))
+
 buildx-imagetools-create:
 	docker buildx imagetools create -t $(REPO):$(IMAGETOOLS_TAG) \
-				  $(REPO):$(TAG)-amd64 \
-				  $(REPO):$(TAG)-arm64
+				  $(call arch-image,$(REPO):$(TAG)-amd64) \
+				  $(call arch-image,$(REPO):$(TAG)-arm64)
 .PHONY: buildx-imagetools-create 
 
 test:
@@ -108,3 +113,8 @@ clean:
 	-docker rm -f $(NAME)
 
 release: build push
+
+# Print the image make builds and pushes; CI pushes exactly this reference.
+.PHONY: image-ref
+image-ref:
+	@printf '%s\n' '$(REPO):$(TAG)'
