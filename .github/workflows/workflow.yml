@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  BASE_IMAGE_REVISION: r16
+  BASE_IMAGE_REVISION: r17
 
 jobs:
   build:
